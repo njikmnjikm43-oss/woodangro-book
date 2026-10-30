@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주먹 쥔 손으로 쓰다듬지 못해서</title>
+<meta name="description" content="우당로의 첫 소설 『주먹 쥔 손으로 쓰다듬지 못해서』. 연초 카드 열두 장과 두 편의 낭독.">
+<meta name="theme-color" content="#f5f4f1">
+<meta property="og:title" content="주먹 쥔 손으로 쓰다듬지 못해서">
+<meta property="og:description" content="우당로의 첫 소설 · 연초 카드 열두 장과 두 편의 낭독">
+<meta property="og:image" content="img/cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Song+Myung&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* 레이아웃: 손에 쥔 물건 하나(책 → 연초 카드 묶음 → 낭독 화면)가 화면 가운데 고정된 채 스크롤에 따라 바뀌고, 아래 알약 메뉴가 지금 단계를 알려준다 */
+  --paper:#f5f4f1;
+  --card:#fffefc;
+  --ink:#1b1a18;
+  --smoke:#7d7972;
+  --rule:#d9d5cd;
+  --cobalt:#1f4ea3;
+  --night:#0b1633;
+  --gold:#b39256;
+  --display:"Song Myung","Noto Serif KR","Nanum Myeongjo",serif;
+  --body:"Gowun Batang","Noto Serif KR","Nanum Myeongjo",serif;
+  --ui:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --gutter:clamp(16px,5vw,48px);
+  --dock-h:56px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:84px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ───────── 상단 바 ───────── */
+.top{position:fixed;z-index:40;top:12px;left:12px;right:12px;max-width:1080px;margin:0 auto;height:56px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 18px;border-radius:999px;
+  background:rgba(255,255,255,.72);border:1px solid rgba(27,26,24,.07);
+  -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+  transition:background .4s,border-color .4s}
+.top .seal{height:22px;width:auto}
+.top .buy{font-family:var(--ui);font-size:14px;font-weight:600;text-decoration:none;padding:10px 16px;border-radius:999px;background:var(--ink);color:#fff;transition:background .3s,color .3s}
+body.is-night .top{background:rgba(11,22,51,.55);border-color:rgba(255,255,255,.1)}
+body.is-night .top .seal{filter:invert(1)}
+body.is-night .top .buy{background:#fff;color:var(--night)}
+
+/* ───────── 스크롤 무대 ───────── */
+.story{position:relative;height:560vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--stage-bg,var(--paper));color:var(--stage-ink,var(--ink))}
+.ghosts{position:absolute;inset:0;pointer-events:none}
+.ghost{position:absolute;will-change:transform,opacity}
+.tags{position:absolute;inset:0;pointer-events:none}
+.tag{position:absolute;left:0;top:0;font-family:var(--body);font-size:clamp(13px,1.1vw,15px);line-height:1;padding:10px 15px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid rgba(27,26,24,.08);color:var(--ink);white-space:nowrap;box-shadow:0 10px 24px -12px rgba(16,30,70,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);will-change:transform,opacity}
+.tag::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin-right:8px;vertical-align:middle;transform:translateY(-1px)}
+.ghost.mini{width:clamp(70px,11vw,120px);aspect-ratio:74.25/105;background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:5%;filter:blur(1.6px);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.ghost.mini img{width:100%;aspect-ratio:.9335;object-fit:cover}
+.ghost.line{font-family:var(--display);color:#fff;font-size:clamp(20px,3.4vw,40px);white-space:nowrap;filter:blur(1.2px)}
+
+.captions{position:absolute;left:0;right:0;top:calc(84px + 1.5vh);text-align:center;padding:0 var(--gutter);height:170px}
+.cap{position:absolute;left:var(--gutter);right:var(--gutter);top:0;will-change:opacity,transform}
+.eyebrow{margin:0 0 6px;font-family:var(--ui);font-size:13px;letter-spacing:.08em;color:var(--stage-sub,var(--smoke))}
+.cap h1,.cap h2{margin:0;font-family:var(--display);font-weight:400;line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
+.cap h1{font-size:clamp(34px,8.4vw,64px)}
+.cap h2{font-size:clamp(30px,7.4vw,56px)}
+.cap .sub{margin:10px 0 0;font-family:var(--ui);font-size:14px;color:var(--stage-sub,var(--smoke));font-variant-numeric:tabular-nums}
+
+.object{position:absolute;left:50%;top:58%;width:var(--ow,240px);height:var(--oh,340px);transform:translate(-50%,-50%);perspective:1400px}
+.cover-face,.deck,.screen{position:absolute;inset:0}
+.cover-face{transform-style:preserve-3d;will-change:transform,opacity}
+.cover-face img{width:100%;height:100%;object-fit:cover;border-radius:3px 6px 6px 3px;box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 30px 60px -20px rgba(16,30,70,.45),0 12px 24px -12px rgba(0,0,0,.3)}
+.cover-face::after{content:"";position:absolute;left:0;top:0;bottom:0;width:7%;border-radius:3px 0 0 3px;background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(255,255,255,.12) 40%,rgba(0,0,0,0))}
+.deck{will-change:transform,opacity}
+.deck .cf{position:absolute;inset:0;will-change:transform,opacity;box-shadow:0 18px 40px -18px rgba(0,0,0,.35)}
+.screen{border-radius:18px;overflow:hidden;background:#000;box-shadow:0 0 0 6px #10131c,0 0 0 7px rgba(255,255,255,.12),0 40px 80px -30px rgba(0,0,0,.7);will-change:opacity,transform}
+.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s}
+.screen .play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(11,22,51,.82);display:grid;place-items:center}
+.screen .play svg{width:22px;height:22px;margin-left:4px;fill:#fff}
+.screen .tag{position:absolute;left:14px;bottom:12px;font-family:var(--ui);font-size:12px;font-weight:600;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--night)}
+.scroll-hint{position:absolute;left:0;right:0;bottom:calc(var(--dock-h) + 30px);text-align:center;font-family:var(--ui);font-size:12px;color:var(--smoke);letter-spacing:.06em;will-change:opacity}
+
+@media (min-width:960px){
+  .captions{left:max(32px,7vw);right:auto;top:50%;width:min(560px,40vw);text-align:left;transform:translateY(-50%);padding:0;height:260px}
+  .cap h1{font-size:clamp(40px,4.2vw,62px)}
+  .cap h2{font-size:clamp(36px,3.8vw,56px)}
+  .cap{left:0;right:0;top:20px}
+  .object{left:63%;top:52%}
+}
+
+/* ───────── 연초 카드 (앞면·뒷면) ───────── */
+.cf{container-type:inline-size;aspect-ratio:74.25/105;background:var(--card);border-radius:3px;color:var(--ink);position:relative;overflow:hidden}
+.cf .frame{position:absolute;inset:6.7cqw;border:max(1px,.4cqw) solid var(--ink);display:flex;flex-direction:column;padding:3.6cqw 4.2cqw 3.4cqw}
+.cf .frame::before{content:"";position:absolute;inset:.9cqw;border:max(.5px,.16cqw) solid var(--ink);pointer-events:none}
+.cf .head{display:flex;justify-content:space-between;align-items:baseline;gap:2cqw;margin-bottom:2.6cqw;position:relative}
+.cf .no{font-family:var(--body);font-weight:700;font-size:4.2cqw;letter-spacing:.02em;white-space:nowrap}
+.cf .ch{font-family:var(--ui);font-size:2.9cqw;color:var(--smoke);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cf .art{width:100%;aspect-ratio:.9335;object-fit:cover;position:relative}
+.cf .line{flex:1;display:grid;place-items:center;text-align:center;font-family:var(--body);font-size:4.3cqw;line-height:1.5;padding:2cqw 1cqw;text-wrap:balance;position:relative}
+.cf .mark{display:flex;justify-content:center;align-items:center;gap:2.4cqw;position:relative}
+.cf .mark img{height:4cqw;width:auto}
+.cf .mark i{width:1.3cqw;height:1.3cqw;border-radius:50%;background:var(--gold)}
+.cf.back .frame{padding-bottom:3cqw}
+.cf .ex{flex:1;overflow:hidden;font-size:3.85cqw;line-height:1.72;position:relative;-webkit-mask-image:linear-gradient(#000 82%,transparent);mask-image:linear-gradient(#000 82%,transparent)}
+.cf .ex p{margin:0 0 .5em;text-indent:1em;word-break:keep-all}
+.cf .ex p.d{text-indent:0}
+.msg{display:block;margin:.4em 0 .7em;padding:.55em .8em;border:1px solid var(--rule);border-radius:.8em;font-family:var(--ui);font-size:.86em;line-height:1.5;text-indent:0;background:#f7f6f3}
+.msg b{font-weight:600;margin-right:.5em}
+.msg small{float:right;color:var(--smoke);margin-left:.6em}
+.cf .more{position:relative;margin-top:2cqw;align-self:center;font-family:var(--ui);font-size:3.2cqw;font-weight:600;padding:1.6cqw 3.4cqw;border-radius:999px;border:1px solid var(--ink);background:var(--card);cursor:pointer}
+
+/* ───────── 섹션 공통 ───────── */
+.sec{padding:clamp(72px,12vw,140px) var(--gutter)}
+.wrap{max-width:1180px;margin:0 auto}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(28px,5vw,48px);max-width:640px}
+.sec-head .eyebrow{color:var(--smoke)}
+.sec-head h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(32px,6vw,52px);line-height:1.15;text-wrap:balance}
+.sec-head p{margin:0;font-size:17px;color:#45423d;max-width:34em}
+.sec-head .tagline{font-family:var(--display);font-size:clamp(20px,2.6vw,24px);line-height:1.5;color:var(--ink)}
+
+/* 카드 갤러리 */
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(78vw,340px);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px var(--gutter) 28px;margin:0 calc(var(--gutter) * -1);scrollbar-width:none;overscroll-behavior-x:contain}
+.rail::-webkit-scrollbar{display:none}
+.flip{scroll-snap-align:center;perspective:1600px;border:0;padding:0;background:none;cursor:pointer;text-align:left}
+.flip .in{position:relative;display:block;aspect-ratio:74.25/105;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.flip[aria-pressed="true"] .in{transform:rotateY(180deg)}
+.flip .cf{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 1px 2px rgba(0,0,0,.06),0 22px 40px -24px rgba(0,0,0,.35)}
+.flip .cf.back{transform:rotateY(180deg)}
+.flip:hover .cf.front{box-shadow:0 1px 2px rgba(0,0,0,.06),0 30px 50px -24px rgba(0,0,0,.4)}
+.rail-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--ui);font-size:14px;color:var(--smoke)}
+.rail-bar .count{font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.rail-bar .count b{color:var(--ink);font-weight:600}
+.arrows{display:flex;gap:8px}
+.arrows button{width:44px;height:44px;border-radius:50%;border:1px solid var(--rule);background:var(--card);cursor:pointer;display:grid;place-items:center}
+.arrows svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.6}
+.legend{display:flex;flex-wrap:wrap;gap:8px 10px;margin:0 0 22px;padding:0;list-style:none;font-family:var(--ui);font-size:13px}
+.legend button{border:1px solid var(--rule);background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer;color:#45423d}
+.legend button:hover{border-color:var(--ink)}
+@media (min-width:960px){
+  .rail{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);grid-auto-columns:auto;overflow:visible;margin:0;padding:6px 0 0;gap:28px 24px}
+  .rail-bar{display:none}
+}
+
+/* 낭독 */
+.night{background:radial-gradient(120% 80% at 70% 0%,#1a3a86 0%,var(--night) 58%);color:#eef1f8}
+.night .sec-head .eyebrow{color:#9fb0d6}
+.night .sec-head p{color:#c5cee4}
+.readings{display:grid;gap:clamp(36px,6vw,56px)}
+@media (min-width:960px){.readings{grid-template-columns:1fr 1fr}}
+.reading{scroll-margin-top:90px}
+.player{position:relative;width:100%;aspect-ratio:16/9;border:0;padding:0;border-radius:14px;overflow:hidden;background:#000;cursor:pointer;display:block;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+.player img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.player:hover img{transform:scale(1.02)}
+.player .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:rgba(11,22,51,.85);display:grid;place-items:center;transition:transform .3s}
+.player:hover .play{transform:scale(1.06)}
+.player .play svg{width:24px;height:24px;margin-left:4px;fill:#fff}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player .soon{position:absolute;left:16px;bottom:14px;font-family:var(--ui);font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--night)}
+.reading h3{margin:18px 0 4px;font-family:var(--display);font-weight:400;font-size:clamp(24px,4vw,30px);line-height:1.3}
+.reading .meta{margin:0;font-family:var(--ui);font-size:14px;color:#aebbdb}
+.reading .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--ui);font-size:14px;font-weight:500;text-decoration:none;padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#fff;background:transparent;cursor:pointer}
+.pill:hover{border-color:#fff}
+.pill[aria-disabled="true"]{opacity:.5;pointer-events:none}
+.reading.is-target .player{box-shadow:0 0 0 2px var(--gold),0 30px 60px -30px rgba(0,0,0,.7)}
+
+/* 구매 */
+.buy-grid{display:grid;gap:clamp(32px,6vw,72px);align-items:center}
+@media (min-width:860px){.buy-grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
+.book{width:min(64%,380px);margin:0 auto;position:relative}
+@media (min-width:860px){.book{width:min(100%,380px)}}
+.book img{border-radius:3px 6px 6px 3px;box-shadow:0 40px 70px -30px rgba(16,30,70,.5),0 14px 26px -14px rgba(0,0,0,.35)}
+.book::after{content:"";position:absolute;left:0;top:0;bottom:0;width:6%;background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(255,255,255,.12) 40%,transparent);border-radius:3px 0 0 3px}
+.spec{margin:0 0 28px;display:grid;grid-template-columns:auto 1fr;gap:10px 20px;font-family:var(--ui);font-size:15px;border-top:1px solid var(--rule);padding-top:20px}
+.spec dt{color:var(--smoke)}
+.spec dd{margin:0;font-variant-numeric:tabular-nums}
+.stores{display:grid;gap:10px}
+@media (min-width:520px){.stores{grid-template-columns:repeat(3,1fr)}}
+.store{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;border-radius:14px;background:var(--ink);color:#fff;text-decoration:none;font-family:var(--ui);font-weight:600;font-size:15px}
+.store span{font-weight:400;opacity:.7;font-size:13px}
+.store[aria-disabled="true"]{background:#e8e5df;color:#6b675f;pointer-events:none}
+.note{margin:14px 0 0;font-family:var(--ui);font-size:13px;color:var(--smoke)}
+
+footer{padding:56px var(--gutter) calc(var(--dock-h) + 64px);border-top:1px solid var(--rule)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between;font-family:var(--ui);font-size:14px;color:var(--smoke)}
+footer img{height:26px;width:auto}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+/* ───────── 하단 알약 메뉴 ───────── */
+.dock{position:fixed;z-index:50;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(17,17,19,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 14px 40px -10px rgba(0,0,0,.45)}
+.dock a{position:relative;display:flex;align-items:center;gap:8px;height:44px;padding:0 13px;border-radius:999px;color:#e9e7e2;text-decoration:none;font-family:var(--ui);font-size:14px;font-weight:600;white-space:nowrap;transition:background .35s,color .35s,padding .35s}
+.dock a svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dock a .lbl{display:inline-block;max-width:0;overflow:hidden;opacity:0;transition:max-width .45s cubic-bezier(.2,.7,.2,1),opacity .3s}
+.dock a.on{background:var(--gold);color:#1b1a18;padding:0 16px}
+.dock a.on .lbl{max-width:7em;opacity:1}
+.dock a.cta .lbl{max-width:7em;opacity:1}
+.dock a.cta{color:#fff;margin-left:4px;padding:0 16px;background:rgba(255,255,255,.08)}
+.dock a.cta.on{background:var(--gold);color:#1b1a18}
+
+/* 크게 읽기 */
+dialog.reader{width:min(640px,100% - 24px);max-height:min(88vh,900px);padding:0;border:0;border-radius:18px;background:var(--card);color:var(--ink);box-shadow:0 40px 100px -20px rgba(0,0,0,.5)}
+dialog.reader::backdrop{background:rgba(11,22,51,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.reader .bar{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 14px 24px;background:var(--card);border-bottom:1px solid var(--rule);font-family:var(--ui);font-size:14px}
+.reader .bar b{font-family:var(--body);font-size:16px}
+.reader .bar .ctl{display:flex;gap:6px}
+.reader .bar button{width:40px;height:40px;border-radius:50%;border:1px solid var(--rule);background:var(--card);cursor:pointer;display:grid;place-items:center}
+.reader .bar svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.7}
+.reader .body{padding:28px clamp(22px,5vw,44px) 40px;overflow:auto}
+.reader .quote{margin:0 0 6px;font-family:var(--display);font-size:clamp(24px,5vw,32px);line-height:1.35;text-wrap:balance}
+.reader .who{margin:0 0 26px;font-family:var(--ui);font-size:13px;color:var(--smoke)}
+.reader .text p{margin:0 0 .8em;font-size:17px;line-height:1.9;text-indent:1em;word-break:keep-all}
+.reader .text p.d{text-indent:0}
+
+@media (prefers-reduced-motion:reduce){
+  .flip .in,.dock a,.dock a .lbl,.player img{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a href="#story" aria-label="처음으로"><img class="seal" src="img/logo.png" alt="遇當路 우당로" width="73" height="22"></a>
+  <a class="buy" href="#buy">책 구매</a>
+</header>
+
+<main>
+<section class="story" id="story" aria-label="책 소개">
+  <div class="stage" id="stage">
+    <div class="ghosts" id="ghosts" aria-hidden="true"></div>
+
+    <div class="captions">
+      <div class="cap" id="cap1">
+        <p class="eyebrow">우당로의 첫 소설</p>
+        <h1>주먹 쥔 손으로<br>쓰다듬지 못해서</h1>
+        <p class="sub">2026년 11월 13일 출간 · 인디펍</p>
+      </div>
+      <div class="cap" id="cap2" aria-hidden="true">
+        <p class="eyebrow">책 속 열두 장면</p>
+        <h2>열두 장의<br>연초 카드</h2>
+        <p class="sub" id="capCard">No.01 · 1장 배부른 줄도 모르고</p>
+      </div>
+      <div class="cap" id="cap3" aria-hidden="true">
+        <p class="eyebrow">우당로 안지우 낭독</p>
+        <h2>두 편의 낭독</h2>
+        <p class="sub">카드 속 장면을 목소리로 들어보세요</p>
+      </div>
+    </div>
+
+    <div class="object" id="object" aria-hidden="true">
+      <div class="cover-face" id="coverFace"><img src="img/cover.jpg" alt="" width="900" height="1280"></div>
+      <div class="deck" id="deck"></div>
+      <div class="screen" id="screen">
+        <img src="img/reading-1.jpg" alt="" id="scr1">
+        <img src="img/reading-2.jpg" alt="" id="scr2" style="opacity:0">
+        <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+        <span class="tag" id="scrTag">낭독 1편</span>
+      </div>
+    </div>
+    <div class="tags" id="tags"></div>
+    <p class="scroll-hint" id="hint">아래로 넘기면 카드가 펼쳐져요</p>
+  </div>
+</section>
+
+<section class="sec" id="cards" aria-labelledby="cards-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">CIGARETTE CARDS · 12</p>
+      <h2 id="cards-title">연초 카드</h2>
+      <p>옛 담뱃갑에 한 장씩 들어 있던 카드처럼, 책 속 열두 장면을 카드에 옮겼어요. 카드를 누르면 뒷면에 적힌 장면을 읽을 수 있어요.</p>
+    </div>
+    <ul class="legend" id="legend" aria-label="장으로 이동"></ul>
+    <div class="rail" id="rail"></div>
+    <div class="rail-bar">
+      <span class="count" id="count"><b>01</b> / 12</span>
+      <span class="arrows">
+        <button type="button" id="prev" aria-label="이전 카드"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" id="next" aria-label="다음 카드"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </span>
+    </div>
+  </div>
+</section>
+
+<section class="sec night" id="readings" aria-labelledby="readings-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">READING · 2</p>
+      <h2 id="readings-title">낭독</h2>
+      <p>우당로와 안지우가 책의 두 장면을 소리 내어 읽었어요.</p>
+    </div>
+    <div class="readings" id="readingList"></div>
+  </div>
+</section>
+
+<section class="sec" id="buy" aria-labelledby="buy-title">
+  <div class="wrap buy-grid">
+    <div class="book"><img src="img/cover.jpg" alt="『주먹 쥔 손으로 쓰다듬지 못해서』 표지" width="900" height="1280" loading="lazy"></div>
+    <div>
+      <div class="sec-head">
+        <p class="eyebrow">THE BOOK</p>
+        <h2 id="buy-title">주먹 쥔 손으로<br>쓰다듬지 못해서</h2>
+        <p class="tagline">사랑은 증거를 남기지만,<br>증거는 사랑을 증명하지 못한다.</p>
+        <p>엇갈리는 네 사람의 시점을 따라 ‘함께 산다는 것’이 무엇인지 묻는 우당로의 첫 소설.</p>
+      </div>
+      <dl class="spec">
+        <dt>지은이</dt><dd>안원빈(우당로)</dd>
+        <dt>출판사</dt><dd>인디펍</dd>
+        <dt>출간일</dt><dd>2026년 11월 13일</dd>
+        <dt>정가</dt><dd>17,000원</dd>
+        <dt>ISBN</dt><dd>979-11-6756-820-5</dd>
+      </dl>
+      <div class="stores" id="stores"></div>
+      <p class="note" id="storeNote"></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="img/logo.png" alt="遇當路 우당로" width="86" height="26">
+    <nav aria-label="우당로 링크">
+      <a href="https://www.instagram.com/woodang_ro/">Instagram @woodang_ro</a>
+      <a href="https://litt.ly/woodang_ro">litt.ly/woodang_ro</a>
+    </nav>
+    <span>© 안원빈(우당로)</span>
+  </div>
+</footer>
+
+<nav class="dock" id="dock" aria-label="단계 이동">
+  <a href="#story" data-k="book" class="on" aria-label="책">
+    <svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.6 4 5v13c3-.4 6 0 8 1.5 2-1.5 5-1.9 8-1.5V5c-3-.4-6 0-8 1.5zM12 6.5v13"/></svg><span class="lbl">책</span></a>
+  <a href="#cards" data-k="cards" aria-label="연초 카드">
+    <svg viewBox="0 0 24 24"><rect x="7" y="3.5" width="11" height="15" rx="1.2"/><path d="M5 7v12.5a1.2 1.2 0 0 0 1.2 1.2H15"/></svg><span class="lbl">연초 카드</span></a>
+  <a href="#readings" data-k="readings" aria-label="낭독">
+    <svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg><span class="lbl">낭독</span></a>
+  <a href="#buy" data-k="buy" class="cta"><span class="lbl">구매하기</span></a>
+</nav>
+
+<dialog class="reader" id="reader" aria-labelledby="readerNo">
+  <div class="bar">
+    <span><b id="readerNo">No.01</b> <span id="readerCh"></span></span>
+    <span class="ctl">
+      <button type="button" data-step="-1" aria-label="이전 카드"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" data-step="1" aria-label="다음 카드"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button type="button" id="readerClose" aria-label="닫기"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </span>
+  </div>
+  <div class="body">
+    <p class="quote" id="readerQuote"></p>
+    <p class="who" id="readerWho"></p>
+    <div class="text" id="readerText"></div>
+  </div>
+</dialog>
+
+<script>
+/* ═════════ 여기만 고치면 됩니다 ═════════
+   youtube: 유튜브 영상 주소(전체 URL 또는 ID). 비워두면 '곧 공개' 상태로 보여요.
+   stores: 서점 링크. 비워두면 출간 전 안내가 보여요.                       */
+const SITE = {
+  readings: [
+    { id: "reading-1", title: "낭독 1편", note: "우당로 안지우 낭독", youtube: "", poster: "img/reading-1.jpg" },
+    { id: "reading-2", title: "낭독 2편", note: "우당로 안지우 낭독", youtube: "", poster: "img/reading-2.jpg" }
+  ],
+  stores: [
+    { name: "교보문고", url: "" },
+    { name: "YES24", url: "" },
+    { name: "알라딘", url: "" }
+  ]
+};
+/* ═══════════════════════════════════════ */
+
+const CHAPTERS = ["배부른 줄도 모르고","어딘가 익숙해서","식어버려서","김치찌개가 나오는 꿈을 꿨어","더 할 수 있던 게 없어서","함께 산다는 것은","알지 못하는 약속을"];
+const CARDS = [{"no": 1, "ch": 1, "who": "류", "line": "사랑하는 사람과 살고 있다.", "paras": ["자리에서 일어나 쓰레기를 버리고 돌아오니, 앞자리는 비어 있었다. 대신 안방 쪽의 화장실 문이 닫히는 소리가 울렸고, 이어서 샤워기 물이 나오는 소리가 들렸다. 식탁 위에는 서로 다른 파스타 두 접시만 남겨져 있었다. 이럴 거면 청소 당번을 왜 정했는지. 나는 접시를 치우고, 식탁을 닦았다. 수지가 앉아 있던 자리에서는 연한 생화 향이 맡아졌다.", "나는 식탁으로 노트북을 가져와 앉았다. 메모장을 켜고 타자를 한 자씩 신중히 눌러 적었다. ‘사랑하는 사람과 살고 있다.’ 다음 문장은 손이 굳어서 써지지 않았다. 깜빡이는 커서를 바라보고 있다가 소름이 끼쳐서 노트북을 덮으려는데 수지가 화장실에서 나왔다. 문틈으로 김이 흘러나와 천장으로 올라가고, 짙은 생화 향이 맡아졌다. 수지는 곧바로 방에 들어갔고, 나는 다시 노트북으로 고개를 돌렸다. 커서는 여전히 느리게 깜빡이고 있었다."]}, {"no": 2, "ch": 1, "who": "류", "line": "주먹으로는 다독일 수도 쓰다듬을 수도 없는데.", "paras": ["“남동생이 있거든. 걔는 예쁨을 많이 받았어. 그런데 왤까, 나는 미움을 받았어. 어릴 때 기억이 하나 있는데, 엄마가 동생을 토닥거리면서 안아주고 있었어. 나는 문틈으로 그걸 보면서 스스로를 토닥거렸어. 그렇게 아끼는 아들이면 잘 키워야 할 텐데. 매일 바쁘다고만... 결국 동생을 내가 업어 키웠어.”", "술맛이 너무 쓰게 느껴졌다. 나는 어느새 주먹을 쥐고 있었다. 주먹으로는 다독일 수도 쓰다듬을 수도 없는데.", "“미국에 간 친구가 이제 내겐 마지막이야. 죽은 친구랑 우리는 셋이서 친구였어. 서로가 서로를 많이 아끼는 관계였는데. 그런데 이제는 미국에 가서 볼 수 없어. 금방 돌아오겠다고 했는데, 여자의 직감이라는 게 있잖아. 기약이 없는 기다림이 될 것 같아. 왜 이렇게 애처로운 걸까, 그냥 평범하면 좋겠는데.”"]}, {"no": 3, "ch": 2, "who": "류", "line": "어딘가 익숙한 베이비 파우더 향이 났다.", "paras": ["“왜 그렇게 뚱한 표정인데. 카메라 돌려달라고 해서 그래?”", "네가 매고 온 빨간 목도리. 그게 어딘가 익숙해서 그러는 건데. 수지는 지갑을 내 앞에 던지면서 말했다.", "마지막까지 말을 그렇게 해야 할까. 나는 카메라를 꺼내려고 가방에 넣었던 손을 그대로 꺼냈다. 그리고 테이블 위의 목도리를 들어서 냄새를 맡아봤다. 네게서 나던 생화 향과는 달랐다. 대신 어딘가 익숙한 베이비 파우더 향이 났다. 지연의 냄새.", "“향수 바꿨나 보네.”", "“뭐라는 거야. 이리 줘.”", "나는 조용히 목도리를 건넸다. 수지는 눈살을 찌푸렸고, 나는 자리에서 일어났다. 지갑을 손에 쥐고 가방을 챙겼다. 나는 카페를 나가기 위해 뒤로 돌았다. 드르륵. 뒤에서 의자 끄는 소리가 크게 울렸고, 얇은 손이 내 팔을 잡았다."]}, {"no": 4, "ch": 2, "who": "류", "line": "세상은 발과 손끝부터 얼어붙었다.", "paras": ["메시지를 확인하자마자 가게에 불이 꺼지고 지연이 나왔다. 지연은 가게 앞에 봉투를 하나 내려두고는 곧장 뒤로 돌아 골목으로 향해 걸었다. 나는 손을 흔들어봤지만 보지 못했는지 그냥 돌아섰다. 물어보고 싶어졌다. 주머니에서 전화기를 꺼내려고 손을 집어넣었다가, 그대로 굳어버렸다. 검은 코트를 입은 남자와 지연이 비슷한 코트를 입고 있었다. 그 남자는 지연에게 빨간 목도리를 둘러 주고 있었다. 나는 가로등 뒤로 몸을 숨겼다. 그리고 손에 쥐고 있던 곰인형마저 뒤로 숨겨야만 했다. 뒷모습 두 개가 사라질 때까지 골목 쪽을 바라봤다. 빨간색이 보이지 않을 때까지. 세상은 발과 손끝부터 얼어붙었다. 나는 담배를 하나 꺼내 물었다. 입에서 흘러나오는 연기는 꽤나 오래 골목을 맴돌다 사라졌다."]}, {"no": 5, "ch": 3, "who": "지연", "line": "서른 살의 사랑은 참 불안해.", "paras": ["“서른 살의 사랑은 참 불안해.”", "“응?”", "“다들 불안하거든, 이십 대에는 사랑만 하면 그만이었는데. 지금은 잘 맞으면 결혼까지 해야만 하니까. 사랑도, 사람도 참 많은 세상인데, 내 집 하나 없으니까 말이야.”", "아까부터 류가 술을 빨리 마시는 것 같긴 했는데, 이렇게 취한 줄은 몰랐다. 류는 말을 마치고 술잔을 탁 소리가 나게 내려놨다. 약불 위에서 끓지 않을 만큼만 데워지던 어묵탕의 국물이 내 손에 튀었고, 나는 그만 비명을 질렀다.", "“악!”", "주위의 시선이 한꺼번에 쏠렸다. 부끄러워 몸을 움츠리고 류를 쳐다봤지만, 류는 태평하게 숟가락을 거울 삼아 자신의 얼굴을 바라보고 있었다.", "“입에 넣었다가 뺀 숟가락에서는 특유의 비린내가 나. 멀쩡하던 두 개가 만나니까 더러워지는 것처럼, 서른 살에는 아무나 만나서는 안 되는 거야.”"]}, {"no": 6, "ch": 4, "who": "지연", "line": "아니, 쓰레기 달라고 내민 손이었어.", "paras": ["“네가 또리한테 츄르 줄래?”", "나는 류의 손에서 츄르를 넘겨받아 또리의 입 앞으로 가져다 대었다. 또리는 츄르보다 내 손을 먼저 핥고, 이어서 츄르를 핥았다. 혓바닥 돌기가 비닐을 핥는 소리만 들렸다. 너무 조용해서 뒤를 돌아보니 류가 나와 또리를 바라보고 있었다. 나는 다시 고개를 돌려 츄르를 먹는 또리의 머리를 긁어줬다. 츄르를 다 먹은 또리는 내 다리에 머리를 몇 번 비비고는 옷방으로 들어갔다. 또리의 꼬리를 마지막까지 눈으로 따라가던 내 앞으로 류의 손이 내밀어졌다. 손바닥에는 유독 핏줄이 많이 보였다. 무언가 달라고 내민 손이라면 무언가 줘야 했다. 그래서 나는 류의 손 위에 내 손을 포개었다. 류는 웃으면서 주저앉았다.", "“아니, 쓰레기 달라고 내민 손이었어.”"]}, {"no": 7, "ch": 4, "who": "류", "line": "세상은 손끝부터 따듯해지고 있었다.", "paras": ["그날도 비가 왔었다. 집 가는 길에 내 뒤를 자꾸만 따라오는 쫄딱 젖은 검은색 고양이. 지나가면서 자주 보던 고양이에게 이름을 붙여준 날이었다. 온통 젖은 채로 비를 피해 우산 아래로 들어오는 또리를 두고 갈 수 없었다. 혼자 살기에 집도 넓어졌겠다, 나는 또리를 그대로 안고 왔다. 새로운 가족을 데리고 돌아온 집은 조용해서, 빗방울이 창문을 두드리는 소리만 들렸다. 나는 안방 문을 닫고 담배를 챙겨 베란다로 나왔다. 문을 열었더니 비가 조금 그친 게 보였다. 나는 연초 한 대를 꺼내서 불을 붙였다. 한 모금 하고 나서는 가만히 있었다. 그저 연초가 타는 것만 지켜봤다. 토독토독. 세상은 손끝부터 따듯해지고 있었다. 담배가 다 타기도 전에 연초의 불이 꺼졌다. 하늘은 아까보다 더 밝아져 있었다."]}, {"no": 8, "ch": 5, "who": "연우", "line": "언니의 손이 무척이나 따듯해서 고개가 내려갔다.", "paras": ["언니가 아니었다면, 무준 오빠가 없었다면 내가 어떤 꼴을 당했을지. 조용히 상상해봤다. 언니는 그런 나를 뚫어져라 쳐다보며 한참 동안 입을 우물거렸다. 입안에 고인 침 소리가 방 안에 울릴 정도로 조용해지자, 언니는 침을 삼키고는 입을 열었다.", "“연우야, 그냥 나랑 같이 살래?”", "언니는 앞에 앉으며 내 손을 쥐었다.", "“어차피 이사도 갈 예정이었고, 둘이 같이 살면 더 큰 집에서 살 수 있잖아. 연우가 나랑 같이 살겠다면 관리비는 내가 낼게. 그래도 집값은 반반이다?”", "따듯했다. 언니의 손이 무척이나 따듯해서 고개가 내려갔다. 언니는 나를 안아줬다. 역시나 따듯했다."]}, {"no": 9, "ch": 6, "who": "류", "line": "그냥, 그냥 잘했다고.", "paras": ["지연이 들어오고서야 문이 닫혔다. 방 안으로 베이비 파우더 향기가 퍼졌다. 지연은 신발을 벗어 신발장에 넣고는 두 손을 꼭 쥔 채로 들어왔다. 또리는 어느새 지연의 종아리에 얼굴을 비비고 있었다. 캐리어를 거실 벽면에 두고 돌아봤을 때 또리는 지연의 발아래에 배를 까고 누워 있었다. 나는 식탁에 앉아 둘이 함께 있는 모습을 보면서 숨소리를 낮췄다. 집 안에는 또리의 그르릉 소리와 손톱으로 털을 긁어주는 소리만 들렸다. 한참을 그렇게 있었다. 얼마나 지났을까 지연은 고개를 들지 않은 채로 말했다.", "“연우랑 싸웠어.”", "“잘했어.”", "“무슨 일인지 알고 잘했다고 하는 거야.”", "“그냥, 그냥 잘했다고.”"]}, {"no": 10, "ch": 6, "who": "류", "line": "함께 산다는 것은.", "paras": ["“뭐 보고 있어?”", "지연은 대답 없이 고개만 저었다. 노트북 화면에는 ‘사랑하는 사람과 살고 있다.’라고 떠 있었다. 저건 일 년 전쯤 쓴 글이었는데. 지연은 더 말이 없었고, 나도 말이 없었다. 물컵을 쥔 손이 흔들렸다. 또리는 어디선가 자고 있는지 거실이 조용해졌다.", "“이 사람 누구야?”", "한참 동안 말이 없던 지연은 내 핸드폰을 손가락으로 가리키며 말했다. 나는 핸드폰을 집어 들었다.", {"from": "예나", "time": "15분 전", "msg": "오빠 오늘 뭐 해?"}, "“아는 동생이야.”", "우리는 함께 나가서 산호로 향했다. 지연은 커피 머신을 켰고, 나는 계단을 빗자루로 쓸었다. 돌아오면 지연이 타놓은 커피가 있다. 나는 그걸 들고 글을 쓰러 자리로 돌아온다. 나는 노트북을 켰다. ‘사랑하는 사람과 살고 있다.’라고 적혀 있던 문장을 지우고 새로 적기 시작했다. ‘함께 산다는 것은.’"]}, {"no": 11, "ch": 7, "who": "지연", "line": "약속해.", "paras": ["연우는 숨을 크게 내쉬더니 나를 꽉 껴안았다. 숨이 막혔다. 한참을 안고 있던 연우는 내 어깨에 양손을 짚고 앞에 섰다. 연우의 두 눈이 붉었다. 눈부터 턱까지 물길이 길게 이어져 있었다. 연우는 말없이 나를 쳐다보다 내게 새끼손가락을 내밀며 말했다.", "“약속해.”", "연우의 손가락이 무척 하얗게 보였다. 나도 새끼손가락을 가져다 대어 엮었다. 그리고 서로의 엄지를 맞대고 나서야 연우는 미소를 지었다. 연우는 내 손을 끌고 소파로 가서 나를 앉게 했다. 잘 돌아왔다고 말하는 연우를 팔에 힘을 줘서 꽉 끌어안았다. 숨이 막힐 정도로. 탁. 탁. 연우가 내 등을 손바닥으로 내리치며 풀어달라고 말했다. 그제야 우리는 서로를 마주 보고 웃을 수 있었다.", "“돌아왔어.”", "“돌아와줘서 고마워.”"]}, {"no": 12, "ch": 7, "who": "류", "line": "연기가 꽤나 오랫동안 골목을 맴돌았다.", "paras": ["공연이 끝났다. 나가는 사람이 몰리기 전에 미리 나와서 클럽 입구 옆에 있는 골목으로 들어갔다. 담배를 하나 꺼내 물고 불을 붙였다. 연기가 꽤나 오랫동안 골목을 맴돌았다. 공연장에서 사람들이 하나둘씩 나오기 시작했다. 밴드 멤버들은 각자 사람들에게 둘러싸여 인사를 하고 있었다. 수국을 들고 있던 여자는 지연에게 꽃을 쥐어주더니 무리를 떠났다. 그렇게 갈 사람들이 모두 가고, 남은 사람들끼리 이야기를 하는데 뒤풀이라는 말이 들렸다. 단체로 술을 마시러 가는 게 아닐까 싶었다. 나는 지연에게 인사를 하고 집으로 가려고 했다. 그때 반짝이는 시계를 가진 남자와 지연이 이야기를 나누고 있었다. 지연의 눈이 보였다. 동그랗고, 크게 뜬 두 눈이."]}];
+
+const $ = (s, r = document) => r.querySelector(s);
+const pad = n => String(n).padStart(2, "0");
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const chLabel = c => `${c.ch}장 ${CHAPTERS[c.ch - 1]} · ${c.who}`;
+
+function paraHTML(p) {
+  if (typeof p === "object") {
+    return `<span class="msg">${p.from ? `<b>${esc(p.from)}</b>` : ""}<small>${esc(p.time || "")}</small>${esc(p.msg)}</span>`;
+  }
+  const dialog = /^[“‘"]/.test(p);
+  return `<p${dialog ? ' class="d"' : ""}>${esc(p)}</p>`;
+}
+function frontHTML(c, lazy) {
+  return `<div class="cf front"><div class="frame">
+    <div class="head"><span class="no">No.${pad(c.no)}</span><span class="ch">${esc(chLabel(c))}</span></div>
+    <img class="art" src="img/card-${pad(c.no)}.jpg" alt="" width="720" height="771"${lazy ? ' loading="lazy"' : ""}>
+    <div class="line">${esc(c.line)}</div>
+    <div class="mark"><i></i><img src="img/logo.png" alt="遇當路"><i></i></div>
+  </div></div>`;
+}
+function backHTML(c) {
+  return `<div class="cf back"><div class="frame">
+    <div class="head"><span class="no">No.${pad(c.no)}</span><span class="ch">${esc(chLabel(c))}</span></div>
+    <div class="ex">${c.paras.map(paraHTML).join("")}</div>
+    <button type="button" class="more" tabindex="-1" data-read="${c.no}">크게 읽기</button>
+  </div></div>`;
+}
+
+/* ───── 갤러리 ───── */
+const rail = $("#rail");
+rail.innerHTML = CARDS.map(c => `
+  <div class="flip" role="button" tabindex="0" id="card-${pad(c.no)}" aria-pressed="false"
+    aria-label="No.${pad(c.no)} ${esc(c.line)} (눌러서 뒷면 보기)">
+    <div class="in">${frontHTML(c, true)}${backHTML(c)}</div>
+  </div>`).join("");
+
+rail.addEventListener("click", e => {
+  const more = e.target.closest("[data-read]");
+  if (more) { e.stopPropagation(); openReader(+more.dataset.read); return; }
+  const b = e.target.closest(".flip");
+  if (b) flipCard(b);
+});
+rail.addEventListener("keydown", e => {
+  const b = e.target.closest(".flip");
+  if (!b || (e.key !== "Enter" && e.key !== " ")) return;
+  e.preventDefault();
+  if (b.getAttribute("aria-pressed") === "true" && e.key === "Enter") openReader(+b.id.slice(5));
+  else flipCard(b);
+});
+function flipCard(b) { b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true"); }
+
+const legend = $("#legend");
+legend.innerHTML = CHAPTERS.map((t, i) => {
+  const first = CARDS.find(c => c.ch === i + 1);
+  return first ? `<li><button type="button" data-go="${first.no}">${i + 1}장 ${t}</button></li>` : "";
+}).join("");
+legend.addEventListener("click", e => {
+  const b = e.target.closest("[data-go]"); if (!b) return;
+  goCard(+b.dataset.go);
+});
+function goCard(no) {
+  const el = $("#card-" + pad(no));
+  if (!el) return;
+  if (getComputedStyle(rail).overflowX === "auto") {
+    rail.scrollTo({ left: el.offsetLeft - (rail.clientWidth - el.clientWidth) / 2, behavior: "smooth" });
+  } else {
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  el.animate([{ transform: "translateY(0)" }, { transform: "translateY(-10px)" }, { transform: "translateY(0)" }], { duration: 600, delay: 350 });
+}
+let curCard = 1;
+function railIndex() {
+  const mid = rail.scrollLeft + rail.clientWidth / 2;
+  let best = 1, bd = Infinity;
+  rail.querySelectorAll(".flip").forEach((el, i) => {
+    const d = Math.abs(el.offsetLeft + el.clientWidth / 2 - mid);
+    if (d < bd) { bd = d; best = i + 1; }
+  });
+  return best;
+}
+rail.addEventListener("scroll", () => {
+  curCard = railIndex();
+  $("#count").innerHTML = `<b>${pad(curCard)}</b> / 12`;
+}, { passive: true });
+$("#prev").onclick = () => goCard(Math.max(1, railIndex() - 1));
+$("#next").onclick = () => goCard(Math.min(12, railIndex() + 1));
+
+/* ───── 크게 읽기 ───── */
+const reader = $("#reader");
+let readerNo = 1;
+function fillReader(no) {
+  const c = CARDS[no - 1]; readerNo = no;
+  $("#readerNo").textContent = "No." + pad(no);
+  $("#readerCh").textContent = `${c.ch}장 ${CHAPTERS[c.ch - 1]}`;
+  $("#readerQuote").textContent = c.line;
+  $("#readerWho").textContent = `${c.who}의 이야기`;
+  $("#readerText").innerHTML = c.paras.map(paraHTML).join("");
+  reader.querySelector(".body").scrollTop = 0;
+}
+function openReader(no) {
+  fillReader(no);
+  if (typeof reader.showModal === "function") reader.showModal(); else reader.setAttribute("open", "");
+}
+reader.addEventListener("click", e => {
+  const s = e.target.closest("[data-step]");
+  if (s) fillReader(((readerNo - 1 + +s.dataset.step + 12) % 12) + 1);
+  if (e.target === reader) reader.close();
+});
+$("#readerClose").onclick = () => reader.close();
+
+/* ───── 낭독 ───── */
+const ytId = v => {
+  if (!v) return "";
+  const m = String(v).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
+  return m ? m[1] : (/^[\w-]{11}$/.test(v) ? v : "");
+};
+$("#readingList").innerHTML = SITE.readings.map(r => {
+  const id = ytId(r.youtube);
+  return `<article class="reading" id="${r.id}">
+    <button type="button" class="player" data-yt="${id}" aria-label="${esc(r.title)} ${id ? "재생" : "곧 공개"}">
+      <img src="${r.poster}" alt="" width="1280" height="720" loading="lazy">
+      <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+      ${id ? "" : '<span class="soon">곧 공개돼요</span>'}
+    </button>
+    <h3>${esc(r.title)}</h3>
+    <p class="meta">${esc(r.note)}</p>
+    <div class="links">
+      <a class="pill" href="${id ? "https://www.youtube.com/watch?v=" + id : "#"}" ${id ? "" : 'aria-disabled="true"'}>유튜브에서 보기 ↗</a>
+      <a class="pill" href="#cards">연초 카드 보기</a>
+    </div>
+  </article>`;
+}).join("");
+document.addEventListener("click", e => {
+  const p = e.target.closest(".player"); if (!p) return;
+  const id = p.dataset.yt;
+  if (!id) { p.querySelector(".soon").animate([{ transform: "scale(1)" }, { transform: "scale(1.08)" }, { transform: "scale(1)" }], { duration: 400 }); return; }
+  p.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="낭독 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+});
+
+/* ───── 서점 ───── */
+const anyStore = SITE.stores.some(s => s.url);
+$("#stores").innerHTML = SITE.stores.map(s => s.url
+  ? `<a class="store" href="${s.url}">${esc(s.name)}<span>↗</span></a>`
+  : `<a class="store" aria-disabled="true">${esc(s.name)}<span>준비 중</span></a>`).join("");
+$("#storeNote").textContent = anyStore ? "링크를 누르면 서점 페이지로 이동해요." : "11월 13일 출간과 함께 서점 링크가 열려요.";
+
+/* ───── 스크롤 무대 ───── */
+const story = $("#story"), stage = $("#stage"), object = $("#object");
+const deck = $("#deck"), coverFace = $("#coverFace"), screen = $("#screen");
+deck.innerHTML = CARDS.map(c => frontHTML(c, false)).join("");
+const deckCards = [...deck.children];
+
+const ghosts = $("#ghosts");
+const G = [
+  // 카드 단계: 흐린 카드
+  { k: "mini", s: 2, x: 4, y: 26, d: .8, n: 7 },
+  { k: "mini", s: 2, x: 80, y: 22, d: 1.2, n: 5 },
+  { k: "mini", s: 2, x: 2, y: 64, d: 1.0, n: 2 },
+  { k: "mini", s: 2, x: 84, y: 60, d: .6, n: 12 },
+  { k: "mini", s: 2, x: 20, y: 86, d: 1.3, n: 9 },
+  { k: "mini", s: 2, x: 66, y: 88, d: .9, n: 3 },
+  // 낭독 단계: 흐린 문장
+  { k: "line", s: 3, x: -6, y: 22, d: 1.0, t: "주먹으로는 다독일 수도 쓰다듬을 수도 없는데." },
+  { k: "line", s: 3, x: 40, y: 34, d: .7, t: "세상은 손끝부터 따듯해지고 있었다." },
+  { k: "line", s: 3, x: -10, y: 72, d: 1.2, t: "함께 산다는 것은." },
+  { k: "line", s: 3, x: 46, y: 84, d: .8, t: "연기가 꽤나 오랫동안 골목을 맴돌았다." }
+];
+G.forEach(g => {
+  const el = document.createElement("div");
+  el.className = "ghost " + g.k;
+  el.style.left = g.x + "%"; el.style.top = g.y + "%";
+  if (g.k === "mini") el.innerHTML = `<img src="img/card-${pad(g.n)}.jpg" alt="">`;
+  else el.textContent = g.t;
+  ghosts.appendChild(el); g.el = el;
+});
+
+/* 첫 화면 표지 위 문구 */
+const TAGS = [
+  // m: 휴대폰, dk: 넓은 화면 — side는 표지의 왼쪽/오른쪽, y는 표지 높이 기준 위치(0~1)
+  { t: "사랑을 증명하는 방법", m: ["r", .14], dk: ["l", .06], d: .5 },
+  { t: "왜 내게 불행이 넘치는지", m: ["r", .38], dk: ["r", .24, .04], d: .8 },
+  { t: "함께 산다는 것", m: ["l", .84], dk: ["l", .9], d: 1.0 },
+  { t: "주먹을 펴는 일", m: ["r", .62], dk: ["r", .58, 0], d: .6 },
+  { t: "서른 살의 사랑", dk: ["r", .41, .2], d: .9 },
+  { t: "옷깃에 밴 냄새", dk: ["r", .76, .14], d: .7 }
+];
+const tagBox = document.getElementById("tags");
+TAGS.forEach(g => { const el = document.createElement("span"); el.className = "tag"; el.textContent = g.t; tagBox.appendChild(el); g.el = el; });
+function layoutTags() {
+  const desk = innerWidth >= 960, w = innerWidth, h = stage.clientHeight || innerHeight;
+  const cx = w * (desk ? .63 : .5), cy = h * (desk ? .52 : .58);
+  const L = cx - S.cw / 2, R = cx + S.cw / 2, T = cy - S.ch / 2;
+  let minX = 12;
+  TAGS.forEach(g => {
+    const pos = desk ? g.dk : g.m;
+    g.el.style.display = pos ? "" : "none";
+    if (!pos) { g.base = null; return; }
+    const tw = g.el.offsetWidth, overlap = pos[2] != null ? S.cw * pos[2] : Math.min(tw * .35, S.cw * .08);
+    const x = pos[0] === "l" ? Math.max(minX, L + overlap - tw) : Math.min(w - 12 - tw, R - overlap);
+    g.x = x; g.base = T + pos[1] * S.ch - g.el.offsetHeight / 2;
+  });
+}
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ramp = (a, b, v) => clamp((v - a) / (b - a));
+const ease = t => t * t * (3 - 2 * t);
+const mix = (a, b, t) => a + (b - a) * t;
+const mixRGB = (a, b, t) => `rgb(${a.map((v, i) => Math.round(mix(v, b[i], t))).join(",")})`;
+const PAPER = [245, 244, 241], TABLE = [233, 230, 224], NIGHT = [11, 22, 51];
+
+let vw = innerWidth, vh = innerHeight;
+function size() {
+  vw = innerWidth; vh = stage.clientHeight || innerHeight;
+  const desk = vw >= 960;
+  const ch = Math.min(desk ? vh * 0.62 : vh * 0.46, 520);
+  const cw = ch * (74.25 / 105);
+  const sw = Math.min(desk ? vw * 0.5 : vw - 32, 720);
+  return { cw, ch, sw, sh: sw * 9 / 16 };
+}
+let S = size();
+layoutTags();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { layoutTags(); req(); });
+
+let ticking = false, lastStage = 0;
+function update() {
+  ticking = false;
+  const total = story.offsetHeight - vh;
+  const top = story.getBoundingClientRect().top;
+  const p = clamp(-top / total);
+
+  const toCards = ease(ramp(.13, .24, p));    // 책 → 카드
+  const toScreen = ease(ramp(.72, .82, p));   // 카드 → 낭독
+  const idx = clamp(ramp(.26, .70, p) * 11.999, 0, 11.999);
+
+  // 크기: 카드 비율 → 16:9 화면
+  object.style.setProperty("--ow", mix(S.cw, S.sw, toScreen) + "px");
+  object.style.setProperty("--oh", mix(S.ch, S.sh, toScreen) + "px");
+
+  // 표지가 넘어가며 카드가 나타남
+  const a = clamp(toCards * 2), b = clamp(toCards * 2 - 1);
+  coverFace.style.transform = `rotateY(${-a * 90}deg)`;
+  coverFace.style.opacity = toCards < .5 ? 1 : 0;
+  deck.style.transform = `rotateY(${(1 - b) * 90}deg)`;
+  deck.style.opacity = toCards < .5 ? 0 : 1 - toScreen;
+
+  // 카드 넘기기
+  deckCards.forEach((el, i) => {
+    const d = i - idx;
+    if (d < 0) {
+      const o = clamp(-d);
+      el.style.transform = `translate(${-o * 125}%, ${o * 8}%) rotate(${-o * 16}deg)`;
+      el.style.opacity = o > .85 ? 0 : 1;
+    } else {
+      const k = Math.min(d, 4);
+      el.style.transform = `translateY(${-k * 2.6}%) scale(${1 - k * .045})`;
+      el.style.opacity = d > 4 ? 0 : 1;
+    }
+    el.style.zIndex = 100 - i;
+  });
+
+  // 낭독 화면
+  screen.style.opacity = toScreen;
+  screen.style.transform = `scale(${mix(.92, 1, toScreen)})`;
+  const second = p > .91;
+  $("#scr2").style.opacity = second ? 1 : 0;
+  $("#scrTag").textContent = second ? "낭독 2편" : "낭독 1편";
+
+  // 배경과 글자색
+  const bg = toScreen > 0 ? mixRGB(TABLE, NIGHT, toScreen) : mixRGB(PAPER, TABLE, toCards);
+  stage.style.setProperty("--stage-bg", bg);
+  const night = toScreen > .5;
+  stage.style.setProperty("--stage-ink", night ? "#f2f4fa" : "#1b1a18");
+  stage.style.setProperty("--stage-sub", night ? "#aebbdb" : "#7d7972");
+
+  // 캡션
+  const c1 = 1 - clamp(toCards * 2), c2 = clamp(toCards * 2 - 1) * (1 - clamp(toScreen * 2)), c3 = clamp(toScreen * 2 - 1);
+  [["#cap1", c1], ["#cap2", c2], ["#cap3", c3]].forEach(([s, v]) => {
+    const el = $(s); el.style.opacity = v; el.style.transform = `translateY(${(1 - v) * 14}px)`;
+    el.setAttribute("aria-hidden", v < .5);
+  });
+  const cur = CARDS[Math.min(11, Math.floor(idx + .5))];
+  $("#capCard").textContent = `No.${pad(cur.no)} · ${cur.ch}장 ${CHAPTERS[cur.ch - 1]}`;
+  $("#hint").style.opacity = 1 - ramp(.02, .08, p);
+
+  // 흐린 조각들
+  const vis = { 1: 1 - toCards, 2: toCards * (1 - toScreen), 3: toScreen };
+  G.forEach(g => {
+    g.el.style.opacity = vis[g.s] * (g.k === "line" ? .16 : g.k === "mini" ? .55 : .9);
+    g.el.style.transform = `translateY(${(p - .5) * -160 * g.d}px)`;
+  });
+
+  // 표지 위 문구
+  const tv = 1 - clamp(toCards * 2.2);
+  TAGS.forEach(g => {
+    if (g.base == null) return;
+    g.el.style.opacity = tv;
+    g.el.style.transform = `translate(${g.x}px, ${g.base + (p * -260 * g.d)}px)`;
+  });
+
+  // 상단 바 · 메뉴
+  const inStory = top <= 0 && top > -total;
+  document.body.classList.toggle("is-night", inStory && night);
+  let k;
+  if (top > -total + vh * .2) k = toScreen > .5 ? "readings" : toCards > .5 ? "cards" : "book";
+  else k = sectionKey();
+  setDock(k);
+}
+function sectionKey() {
+  const ids = ["cards", "readings", "buy"];
+  let k = "cards";
+  ids.forEach(id => { if ($("#" + id).getBoundingClientRect().top < vh * .5) k = id; });
+  return k;
+}
+const dockLinks = [...document.querySelectorAll(".dock a")];
+let lastK = "";
+function setDock(k) {
+  if (k === lastK) return; lastK = k;
+  dockLinks.forEach(a => {
+    const on = a.dataset.k === k;
+    a.classList.toggle("on", on);
+    if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+  });
+}
+function req() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+addEventListener("scroll", req, { passive: true });
+addEventListener("resize", () => { S = size(); layoutTags(); req(); });
+update();
+
+/* 메뉴 '책'은 무대 맨 처음으로 */
+$('.dock a[data-k="book"]').addEventListener("click", e => {
+  e.preventDefault(); scrollTo({ top: story.offsetTop, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+});
+
+/* NFC 키링: #reading-1, #reading-2 로 들어오면 바로 그 낭독으로 */
+function landing() {
+  const h = location.hash.slice(1);
+  const r = h && document.getElementById(h);
+  if (r && r.classList.contains("reading")) {
+    r.classList.add("is-target");
+    r.scrollIntoView({ block: "start" });
+  } else if (/^card-\d\d$/.test(h) && r) {
+    goCard(+h.slice(5));
+  }
+}
+addEventListener("hashchange", landing);
+if (location.hash) requestAnimationFrame(() => setTimeout(landing, 60));
+</script>
+</body>
+</html>
