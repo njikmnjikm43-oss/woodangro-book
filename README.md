@@ -4,6 +4,6 @@
 책 표지, 연초 카드 열두 장, 낭독 두 편을 한 화면에서 볼 수 있어요.
 
 - 낭독 영상과 서점 링크는 `index.html` 안의 `SITE` 설정에서 바꿉니다.
-- NFC 키링 주소: `#reading-1`, `#reading-2`
+- NFC 키링 주소: https://woodangro.kr/#reading-1 , https://woodangro.kr/#reading-2
 
-https://njikmnjikm43-oss.github.io/woodangro-book/
+https://woodangro.kr/
