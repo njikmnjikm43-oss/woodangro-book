@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>주먹 쥔 손으로 쓰다듬지 못해서 — 1장 미리 읽기</title>
+<meta name="description" content="안원빈(우당로) 장편소설 『주먹 쥔 손으로 쓰다듬지 못해서』 1장을 스크롤로 읽는 페이지.">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="gated">
+
+<div id="stage">
+  <!-- 1장 표지 -->
+  <div id="chapter" class="layer"><img src="img/chapter.jpg" alt=""></div>
+
+  <!-- 오월 햇살 그림자 -->
+  <div id="dapple" class="layer"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+  <!-- 생화 향 -->
+  <div id="scent" class="layer">
+    <img class="tl" src="img/scent-tl.png" alt="">
+    <img class="tr" src="img/scent-tr.png" alt="">
+    <img class="bl" src="img/scent-bl.png" alt="">
+    <img class="br" src="img/scent-br.png" alt="">
+  </div>
+
+  <!-- 식탁 (위에서 내려다본 그림) -->
+  <div id="table" class="layer"></div>
+
+  <!-- 젖은 자국 -->
+  <div id="stain" class="layer"></div>
+
+  <!-- 메모장 -->
+  <div id="memo">
+    <div class="mbar"><span></span><span></span><span></span><em>메모</em></div>
+    <div class="mbody"><span class="typed"></span><span class="caret"></span><div class="flow"></div></div>
+  </div>
+
+  <!-- 김 -->
+  <div id="steam" class="layer"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+  <!-- 안방 문 -->
+  <div id="hall" class="layer">
+    <div class="door"></div>
+    <span class="word w1">지루하다</span>
+    <span class="word w2">따분하다</span>
+  </div>
+
+  <!-- 보낸 메시지 -->
+  <div id="msg"><div class="bubble">나 카페 다녀올게.</div><div class="meta">수지에게 · 전송됨</div></div>
+
+  <!-- 손글씨 간판 -->
+  <div id="sanho" class="layer"></div>
+
+  <!-- 나무 트레이 -->
+  <div id="tray" class="layer"></div>
+
+  <!-- 파우더 향 -->
+  <canvas id="powder" class="layer"></canvas>
+
+  <!-- 포장마차 -->
+  <div id="night" class="layer">
+    <div class="glow"></div>
+    <div class="bulb"><i class="wire"></i><i class="lamp"></i></div>
+    <div class="ntable"></div>
+  </div>
+
+  <!-- 지연 -->
+  <figure id="pj"><img src="img/jiyeon.jpg" alt="목도리를 두른 지연"><figcaption>지연</figcaption></figure>
+
+  <!-- 손 -->
+  <div id="glyphs" class="layer"><span class="g me">손</span><span class="g you">손</span></div>
+
+  <!-- 마지막: 류 -->
+  <img id="ryu" src="img/ryu.jpg" alt="손바닥을 내려다보는 류">
+
+  <!-- 마지막: 표지 -->
+  <section id="cover" class="layer">
+    <img class="cbg" src="img/cover.jpg" alt="">
+    <h2 class="vt">주먹 쥔 손으로 쓰다듬지 못해서</h2>
+    <p class="tag">사랑은 증거를 남기지만,<br>증거는 사랑을 증명할 수 없다.</p>
+    <nav class="links" aria-label="책 구매와 우당로 링크">
+      <p class="lbl">책 구매하기</p>
+      <div class="row">
+        <a href="https://indiepub.kr/product/%EC%A3%BC%EB%A8%B9-%EC%A5%94-%EC%86%90%EC%9C%BC%EB%A1%9C-%EC%93%B0%EB%8B%A4%EB%93%AC%EC%A7%80-%EB%AA%BB%ED%95%B4%EC%84%9C/10160/category/88/display/1/" target="_blank" rel="noopener">인디펍</a>
+        <a href="https://product.kyobobook.co.kr/detail/S000221881212" target="_blank" rel="noopener">교보문고</a>
+        <a href="https://m.yes24.com/goods/detail/199895018" target="_blank" rel="noopener">YES24</a>
+        <a href="https://www.aladin.co.kr/m/mproduct.aspx?ItemId=406090166" target="_blank" rel="noopener">알라딘</a>
+      </div>
+      <p class="lbl">우당로</p>
+      <div class="row">
+        <a href="https://www.instagram.com/woodang_ro/" target="_blank" rel="noopener">인스타그램 @woodang_ro</a>
+        <a href="https://woodangro.kr/" target="_blank" rel="noopener">woodangro.kr</a>
+      </div>
+    </nav>
+    <div class="by"><b>안원빈 장편소설</b><img src="img/sign.png" alt="遇當路 우당로"></div>
+    <p class="rel">2026년 11월 13일 출간 · 인디펍</p>
+    <button id="again" type="button">처음부터 다시 읽기</button>
+  </section>
+
+  <!-- 핏줄 -->
+  <svg id="veins" class="layer" aria-hidden="true"></svg>
+
+  <div id="vig" class="layer"></div>
+
+  <!-- 문장 -->
+  <div id="caps" class="layer"></div>
+
+  <!-- 손 펴기 -->
+  <div id="hold">
+    <p id="holdLine">오른손 새끼손가락에<br>지연의 손가락이 스쳤다.</p>
+    <button id="holdBtn" type="button" aria-label="길게 눌러 손 펴기">
+      <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="track" cx="60" cy="60" r="54"/><circle class="ring" cx="60" cy="60" r="54"/></svg>
+      <span>꾹</span>
+    </button>
+    <p id="holdHint">길게 눌러 손을 펴 주세요<small>스페이스바를 눌러도 돼요</small></p>
+  </div>
+
+  <div id="flash" class="layer"></div>
+  <div id="grain" class="layer"></div>
+
+  <!-- 화면 표시 -->
+  <div id="head">류</div>
+  <div id="marker"><span class="ch">1장 배부른 줄도 모르고</span><span class="where"></span></div>
+  <div id="prog"><i></i></div>
+  <button id="snd" type="button" aria-label="소리 켜기"><i></i><i></i><i></i><i></i></button>
+  <div id="hint">스크롤<span></span></div>
+</div>
+
+<!-- 첫 화면 (책 속표지) -->
+<section id="gate">
+  <p class="gp">1장 미리 읽기</p>
+  <h1 class="gtitle">주먹 쥔 손으로 쓰다듬지 못해서</h1>
+  <div class="gauthor"><b>안원빈</b><img src="img/sign.png" alt="遇當路 우당로"></div>
+  <div class="genter">
+    <button type="button" data-sound="1">소리와 함께 읽기</button>
+    <button type="button" data-sound="0">소리 없이 읽기</button>
+    <p>이어폰을 끼고, 천천히 스크롤해 주세요.</p>
+  </div>
+</section>
+
+<div id="spacer"></div>
+
+<script src="story.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

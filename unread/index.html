@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1</title>
+<style>
+  :root { --paper:#f3ede3; --ink:#2b2622; --mute:#968b80; --line:#e2d8ca; --accent:#b5523b; --mine:#efe2c8; --badge:#d9643f; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; }
+  body { background:var(--paper); color:var(--ink); display:flex; align-items:center; justify-content:center; gap:44px; padding:20px;
+         font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif; }
+  .serif { font-family:'Noto Serif KR','Nanum Myeongjo','AppleMyungjo',serif; }
+
+  #narr { width:300px; min-height:340px; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  #narr .meta { font-size:12px; letter-spacing:.25em; color:var(--mute); }
+  #narr p { margin:0; font-size:16px; line-height:1.9; opacity:0; transition:opacity .9s; }
+  #narr p.on { opacity:1; }
+  #narr p.goal { color:var(--accent); font-size:14px; }
+  #narr p.react { color:var(--mute); font-size:14px; }
+  #narr button { align-self:flex-start; margin-top:8px; }
+
+  button { font:inherit; border:1px solid var(--ink); background:transparent; color:var(--ink); padding:7px 16px; border-radius:20px; cursor:pointer; font-size:13px; }
+  button:disabled { opacity:.3; cursor:default; }
+
+  #phone { width:340px; height:680px; background:#fff; border-radius:40px; border:10px solid #1f1c1a; position:relative; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 20px 50px rgba(50,30,10,.18); }
+  #status { height:34px; flex:none; display:flex; justify-content:space-between; align-items:center; padding:6px 22px 0; font-size:13px; font-weight:600; }
+  #status .who { font-weight:400; color:#999; font-size:11px; }
+  .screen { position:absolute; inset:34px 0 0 0; display:flex; flex-direction:column; background:#fff; transition:transform .3s ease; }
+  #chat { transform:translateX(100%); background:#f7f4ef; }
+  #chat.on { transform:none; }
+
+  .top { height:50px; flex:none; display:flex; align-items:center; padding:0 16px; font-weight:600; font-size:17px; border-bottom:1px solid #eee; gap:10px; background:#fff; }
+  .top .back { font-size:26px; font-weight:300; cursor:pointer; padding:0 6px 4px 0; }
+  .list { flex:1; overflow:auto; }
+  .row { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; }
+  .row:hover { background:#faf7f2; }
+  .av { width:44px; height:44px; border-radius:16px; background:#e8dccb; flex:none; display:flex; align-items:center; justify-content:center; font-size:15px; color:#7a6b5c; }
+  .row .mid { flex:1; min-width:0; }
+  .row .nm { font-size:15px; font-weight:600; }
+  .row .pv { font-size:13px; color:#888; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:3px; }
+  .row .rt { text-align:right; font-size:11px; color:#aaa; display:flex; flex-direction:column; align-items:flex-end; gap:5px; }
+  .badge { background:var(--badge); color:#fff; border-radius:10px; font-size:11px; min-width:20px; padding:1px 6px; text-align:center; font-weight:600; }
+
+  #msgs { flex:1; overflow:auto; padding:14px 12px; display:flex; flex-direction:column; gap:8px; }
+  .day { align-self:center; font-size:11px; color:#999; background:#ece6dc; padding:3px 10px; border-radius:10px; margin:6px 0; }
+  .m { display:flex; align-items:flex-end; gap:5px; max-width:86%; }
+  .m.them { align-self:flex-start; }
+  .m.me { align-self:flex-end; flex-direction:row-reverse; }
+  .b { padding:8px 12px; border-radius:16px; font-size:14px; line-height:1.45; background:#fff; word-break:keep-all; }
+  .m.me .b { background:var(--mine); }
+  .m.sys .b { background:transparent; border:1px solid #ddd; color:#888; font-size:12px; }
+  .side { display:flex; flex-direction:column; align-items:flex-end; font-size:10px; color:#aaa; gap:1px; white-space:nowrap; }
+  .m.them .side { align-items:flex-start; }
+  .one { color:var(--badge); font-weight:700; font-size:11px; }
+  .typing { align-self:flex-start; font-size:12px; color:#999; padding:2px 6px; }
+
+  #composer { flex:none; background:#fff; border-top:1px solid #eee; padding:8px 10px 14px; display:none; }
+  #composer.on { display:block; }
+  #chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+  .chip { font-size:12px; border:1px dashed #c9b9a4; color:#7a6b5c; padding:5px 10px; border-radius:14px; cursor:pointer; background:#fffdf9; }
+  .chip.canon { border-style:solid; }
+  .chip.off { opacity:.35; pointer-events:none; }
+  #inrow { display:flex; gap:8px; align-items:center; }
+  #input { flex:1; min-height:36px; border:1px solid #e3e3e3; border-radius:18px; padding:8px 12px; font-size:14px; color:var(--ink); }
+  #input:empty::before { content:'메시지 입력'; color:#bbb; }
+  #send { border:none; background:var(--badge); color:#fff; padding:8px 14px; }
+
+  #card { position:absolute; inset:0; background:rgba(243,237,227,.97); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; z-index:5; text-align:center; padding:30px; transition:opacity .6s; }
+  #card.hide { opacity:0; pointer-events:none; }
+  #card h2 { font-weight:500; font-size:24px; margin:0; }
+  #card .sub { color:var(--mute); font-size:13px; letter-spacing:.2em; }
+
+  #ending { position:fixed; inset:0; background:var(--paper); display:none; overflow:auto; padding:50px 20px; }
+  #ending.on { display:block; }
+  #ending .wrap { max-width:860px; margin:0 auto; }
+  #ending h2 { text-align:center; font-weight:500; font-size:22px; margin:0 0 6px; }
+  #ending .lead { text-align:center; color:var(--mute); font-size:13px; margin-bottom:34px; }
+  .cols { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .col h3 { font-weight:500; font-size:16px; border-bottom:1px solid var(--ink); padding-bottom:8px; margin:0 0 12px; }
+  .col .sent { font-size:14px; margin-bottom:12px; }
+  .col .sent b { font-weight:600; }
+  .col .gone { font-size:14px; color:var(--mute); text-decoration:line-through; text-decoration-color:rgba(150,139,128,.5); margin:4px 0; }
+  .col .note { font-size:12px; color:var(--mute); margin-top:12px; line-height:1.7; }
+  .close { text-align:center; margin-top:46px; font-size:16px; line-height:2.2; }
+  @media (max-width:760px){ body{flex-direction:column; gap:16px;} #narr{min-height:0;width:340px;} .cols{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div id="narr" class="serif"></div>
+
+<div id="phone">
+  <div id="status"><span id="clock">오후 1:00</span><span class="who" id="who"></span><span>▮▮▮ 72%</span></div>
+  <div class="screen" id="home">
+    <div class="top">채팅</div>
+    <div class="list" id="list"></div>
+  </div>
+  <div class="screen" id="chat">
+    <div class="top"><span class="back" id="back">‹</span><span id="chatName"></span></div>
+    <div id="msgs"></div>
+    <div id="composer">
+      <div id="chips"></div>
+      <div id="inrow"><div id="input"></div><button id="send" disabled>보내기</button></div>
+    </div>
+  </div>
+  <div id="card" class="serif"></div>
+</div>
+
+<div id="ending" class="serif"><div class="wrap" id="endwrap"></div></div>
+
+<script>
+/* ---------------- 데이터 ----------------
+   세 사람의 핸드폰을 차례로 잡는다. 무엇을 쓰고 지우든, 결국 보내지는 말은 하나다.
+   대신 플레이어가 무엇을 읽었는지, 얼마나 망설였는지는 다음 사람의 화면에 남는다. */
+const T = (h, m) => h * 60 + m;
+const MISSED = '📞 부재중 통화';
+
+const CHAPTERS = [
+  {
+    owner:'류', date:'삼월 어느 날 · 류의 집', start:T(13, 10),
+    intro:['지연에게서 연락이 왔다.', '생일에도, 크리스마스에도, 연초에도 연락 한 번 없던 사람이었다.', '세 시간 넘게 작은 화면 속에 머물렀다.'],
+    goal:'지연에게 답장을 해야 한다.',
+    threads:() => [
+      { id:'jy', name:'이지연', target:true, msgs:[
+        { day:'3월 14일' },
+        { f:'them', t:'오빠 뭐 하고 지내?', time:T(10, 5), unread:true } ] },
+      { id:'yn', name:'예나', msgs:[
+        { day:'어제' },
+        { f:'sys', t:MISSED, time:T(23, 12), unread:true },
+        { f:'sys', t:MISSED, time:T(23, 40), unread:true },
+        { day:'오늘' },
+        { f:'sys', t:MISSED, time:T(0, 31), unread:true },
+        { f:'sys', t:MISSED, time:T(8, 2), unread:true },
+        { f:'sys', t:MISSED, time:T(12, 47), unread:true } ] },
+      { id:'sj', name:'수지', msgs:[
+        { day:'12월 14일' },
+        { f:'them', t:'남은 건 버려줘도 돼', time:T(21, 3), read:true },
+        { f:'me', t:'응', time:T(21, 50), read:true } ] },
+    ],
+    drafts:['잘 지내. 너는?', '갑자기 무슨 일이야?', '보고 싶었어'],
+    canon:'오늘 저녁에 술 한잔할래?',
+    outro:['메시지를 보낸 뒤에 바스락 소리가 들렸다.', '책상 위에 누워 있던 또리와 눈이 마주쳤다.'],
+  },
+  {
+    owner:'지연', date:'같은 날 오후 · 카페 산호', start:null, /* 류가 보낸 시각 + 26분 */
+    intro:['마감까지 세 시간이 남았다.', '편지는 이번 주에도 오지 않았다.'],
+    goal:'류에게 답장을 해야 한다.',
+    threads:(S) => [
+      { id:'ryu', name:'류 오빠', target:true, msgs:[
+        { day:'3월 14일' },
+        { f:'me', t:'오빠 뭐 하고 지내?', time:T(10, 5), read:true },
+        { f:'them', t:CHAPTERS[0].canon, time:S.sentAt[0], unread:true } ] },
+      { id:'yw', name:'연우', msgs:[
+        { day:'오늘' },
+        { f:'them', t:'언니 오늘 저녁 어묵탕 할게', time:T(12, 10), unread:true } ] },
+      { id:'mj', name:'무준', msgs:[
+        { day:'8월 20일' },
+        { f:'them', t:'이번 편지는 좀 늦을 것 같아', time:T(2, 14), read:true },
+        { day:'9월 2일' },
+        { f:'me', t:'편지 잘 받았어. 다음 편지는 언제 와?', time:T(23, 58), read:false } ] },
+    ],
+    drafts:['왜, 무슨 일 있어?', '그동안 연락 못 해서 미안해', '무준이한테 답장이 안 와'],
+    canon:'좋아. 산호 앞으로 와',
+    outro:['핸드폰을 앞치마 주머니에 넣었다.', '무준의 창에 남은 1은 그대로였다.'],
+  },
+  {
+    owner:'연우', date:'같은 날 저녁 · 지연과 연우의 집', start:T(19, 36),
+    intro:['어묵탕이 끓는 동안 식탁에 숟가락과 젓가락을 두 벌 놓았다.', '언니는 아직이었다.'],
+    goal:'언니에게 답장을 해야 한다.',
+    threads:(S) => {
+      const readByJy = S.opened[1].has('yw');
+      const sis = [ { day:'오늘' }, { f:'me', t:'언니 오늘 저녁 어묵탕 할게', time:T(12, 10), read:readByJy } ];
+      if (readByJy) sis.push({ f:'them', t:'또 어묵탕이야?', time:S.openedAt[1].yw, read:true });
+      sis.push({ f:'them', t:'나 약속 생겨서 잠깐 나갔다 올게. 먼저 먹어', time:T(19, 31), unread:true });
+      return [
+        { id:'sis', name:'언니', target:true, msgs:sis },
+        { id:'mj', name:'무준 오빠', msgs:[
+          { day:'8월 3일' },
+          { f:'them', t:'연우야 나 잠깐 한국 들어왔어. 밥 한번 먹자', time:T(11, 20), read:true },
+          { f:'them', t:'지연이는 바쁠 것 같아서 따로 연락 안 했어', time:T(11, 21), read:true },
+          { f:'me', t:'응 오빠', time:T(11, 40), read:true } ] },
+      ];
+    },
+    drafts:['이번에는 또 누구야?', '무준 오빠, 여름에 한국 왔었어', '나 혼자 먹기 싫은데'],
+    canon:'응. 조심히 다녀와',
+    outro:['어묵탕은 풀어질 때까지 끓였다.', '언니는 쫀득한 걸 좋아하는데.'],
+  },
+];
+
+const REACT = ['보내기 전에, 손가락이 멈췄다.', '한 글자씩 지웠다.', '이건 아니었다.', '지웠다.'];
+
+/* ---------------- 상태 ---------------- */
+const S = { ch:0, now:0, threads:[], drafted:[[],[],[]], sentAt:[], opened:[new Set(),new Set(),new Set()], openedAt:[{},{},{}], firstOpen:[], busy:false, done:false, cur:null };
+
+const $ = id => document.getElementById(id);
+const fmt = m => { m = ((m % 1440) + 1440) % 1440; const h = Math.floor(m / 60), mm = String(m % 60).padStart(2, '0'); return (h < 12 ? '오전 ' : '오후 ') + ((h % 12) || 12) + ':' + mm; };
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => s.replace(/[&<>]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[c]));
+
+function tickClock(add){ S.now += add; $('clock').textContent = fmt(S.now); }
+
+/* ---------------- 내레이션 ---------------- */
+function narrClear(meta){ $('narr').innerHTML = meta ? `<div class="meta">${esc(meta)}</div>` : ''; }
+function narr(s, cls){
+  const p = document.createElement('p'); p.textContent = s; if (cls) p.className = cls;
+  $('narr').appendChild(p); requestAnimationFrame(() => requestAnimationFrame(() => p.classList.add('on')));
+}
+
+/* ---------------- 챕터 ---------------- */
+async function startChapter(i){
+  S.ch = i; const C = CHAPTERS[i];
+  S.now = C.start ?? (S.sentAt[0] + 26);
+  S.threads = C.threads(S);
+  S.done = false; S.cur = null;
+  $('who').textContent = C.owner + '의 핸드폰';
+  tickClock(0);
+  $('chat').classList.remove('on');
+  renderList();
+  const card = $('card');
+  card.innerHTML = `<div class="sub">${i + 1} / ${CHAPTERS.length}</div><h2>${esc(C.owner)}의 핸드폰</h2><div class="sub" style="letter-spacing:.05em">${esc(C.date)}</div><button style="margin-top:22px">화면 켜기</button>`;
+  card.classList.remove('hide');
+  narrClear(C.date);
+  card.querySelector('button').onclick = async () => {
+    card.classList.add('hide');
+    for (const s of C.intro) { narr(s); await wait(1500); }
+    narr(C.goal, 'goal');
+  };
+}
+
+function unreadOf(t){ return t.msgs.filter(m => m.unread).length; }
+function lastOf(t){ return [...t.msgs].reverse().find(m => m.t); }
+
+function renderList(){
+  const L = $('list'); L.innerHTML = '';
+  for (const t of S.threads) {
+    const last = lastOf(t), n = unreadOf(t);
+    const day = [...t.msgs].reverse().find(m => m.day)?.day;
+    const when = (!day || day === '오늘' || day === '3월 14일') ? fmt(last.time) : day;
+    const row = document.createElement('div'); row.className = 'row';
+    row.innerHTML = `<div class="av">${esc(t.name[0])}</div>
+      <div class="mid"><div class="nm">${esc(t.name)}</div><div class="pv">${esc(last.t)}</div></div>
+      <div class="rt"><span>${esc(when)}</span>${n ? `<span class="badge">${n}</span>` : ''}</div>`;
+    row.onclick = () => openThread(t.id);
+    L.appendChild(row);
+  }
+}
+
+function openThread(id){
+  if (S.busy) return;
+  const t = S.threads.find(x => x.id === id);
+  S.cur = t;
+  const fresh = unreadOf(t) > 0;
+  if (!S.opened[S.ch].has(id)) { S.opened[S.ch].add(id); S.openedAt[S.ch][id] = S.now; }
+  t.msgs.forEach(m => { if (m.unread) { m.unread = false; m.seen = true; } });
+  if (fresh) tickClock(2);
+  $('chatName').textContent = t.name;
+  renderMsgs();
+  const C = CHAPTERS[S.ch];
+  const comp = $('composer');
+  comp.classList.toggle('on', !!t.target && !S.done);
+  if (t.target && !S.done) renderChips();
+  $('chat').classList.add('on');
+  if (S.ch === 1 && id === 'mj') narr('1은 구월부터 그대로였다.', 'react');
+  if (S.ch === 0 && id === 'yn') narr('부재중 다섯 통. 답장은 하지 않았다.', 'react');
+  if (S.ch === 2 && id === 'mj') narr('언니에게는 말하지 않았다.', 'react');
+}
+$('back').onclick = () => { if (S.busy) return; $('chat').classList.remove('on'); renderList(); };
+
+function renderMsgs(){
+  const M = $('msgs'); M.innerHTML = '';
+  for (const m of S.cur.msgs) {
+    if (m.day) { M.insertAdjacentHTML('beforeend', `<div class="day">${esc(m.day)}</div>`); continue; }
+    const one = m.f === 'me' && m.read === false ? '<span class="one">1</span>' : '';
+    M.insertAdjacentHTML('beforeend',
+      `<div class="m ${m.f}"><div class="b">${esc(m.t)}</div><div class="side">${one}<span>${fmt(m.time)}</span></div></div>`);
+  }
+  M.scrollTop = M.scrollHeight;
+}
+
+function renderChips(){
+  const C = CHAPTERS[S.ch], box = $('chips'); box.innerHTML = '';
+  const all = [...C.drafts, C.canon];
+  for (const d of all) {
+    const c = document.createElement('span');
+    c.className = 'chip' + (d === C.canon ? ' canon' : '') + (S.drafted[S.ch].includes(d) ? ' off' : '');
+    c.textContent = d;
+    c.onclick = () => typeDraft(d);
+    box.appendChild(c);
+  }
+}
+
+/* ---------------- 쓰고, 지우고, 보내기 ---------------- */
+async function typeDraft(d){
+  if (S.busy) return;
+  S.busy = true;
+  const inp = $('input'); inp.textContent = '';
+  $('send').disabled = true;
+  document.querySelectorAll('.chip').forEach(c => c.classList.add('off'));
+  for (const ch of d) { inp.textContent += ch; await wait(65 + Math.random() * 60); }
+  S.busy = false;
+  $('send').disabled = false;
+  $('send').onclick = () => send(d);
+}
+
+async function send(d){
+  if (S.busy) return;
+  S.busy = true; $('send').disabled = true;
+  const C = CHAPTERS[S.ch], inp = $('input');
+  if (d !== C.canon) {
+    await wait(500);
+    while (inp.textContent.length) { inp.textContent = inp.textContent.slice(0, -1); await wait(45); }
+    S.drafted[S.ch].push(d);
+    narr(REACT[(S.drafted[S.ch].length - 1) % REACT.length], 'react');
+    tickClock(17 + Math.floor(Math.random() * 20));
+    S.busy = false;
+    renderChips();
+    return;
+  }
+  // 보내지는 단 하나의 말
+  inp.textContent = '';
+  S.sentAt[S.ch] = S.now;
+  S.cur.msgs.push({ f:'me', t:d, time:S.now, read:false });
+  renderMsgs();
+  S.done = true;
+  $('composer').classList.remove('on');
+  await wait(900);
+  for (const s of C.outro) { narr(s); await wait(1600); }
+  S.busy = false;
+  const b = document.createElement('button');
+  b.textContent = S.ch < CHAPTERS.length - 1 ? '화면 끄기' : '마지막으로';
+  b.onclick = () => { b.remove(); S.ch < CHAPTERS.length - 1 ? startChapter(S.ch + 1) : ending(); };
+  $('narr').appendChild(b);
+}
+
+/* ---------------- 끝 ---------------- */
+function ending(){
+  const lag = S.openedAt[1].ryu != null ? S.openedAt[1].ryu - S.sentAt[0] : null;
+  const notes = [
+    [ S.opened[0].has('yn') ? '예나의 부재중 다섯 통은 확인만 했다.' : '예나의 부재중 다섯 통은 열어보지도 않았다.',
+      lag != null ? `지연의 화면에서 1이 사라지기까지 ${lag}분이 걸렸다.` : '' ],
+    [ S.opened[1].has('yw') ? '연우의 어묵탕 이야기에는 “또 어묵탕이야?”라고만 했다.' : '연우의 메시지에는 1이 그대로 남았다.',
+      '무준에게 보낸 말의 1은, 끝까지 사라지지 않았다.' ],
+    [ '무준 오빠가 다녀간 일은 끝내 말하지 않았다.',
+      '언니의 답장은 오지 않았다.' ],
+  ];
+  const cols = CHAPTERS.map((C, i) => `
+    <div class="col">
+      <h3>${esc(C.owner)}</h3>
+      <div class="sent">보낸 말 · <b>${esc(C.canon)}</b> <span style="color:var(--mute);font-size:12px">${fmt(S.sentAt[i])}</span></div>
+      ${S.drafted[i].length ? S.drafted[i].map(d => `<div class="gone">${esc(d)}</div>`).join('') : '<div class="note">망설이지 않고 보냈다.</div>'}
+      <div class="note">${notes[i].filter(Boolean).map(esc).join('<br>')}</div>
+    </div>`).join('');
+  const total = S.drafted.flat().length;
+  $('endwrap').innerHTML = `
+    <h2>보내지 못한 말</h2>
+    <div class="lead">세 사람의 화면에 남은 것은 세 줄이었다. 지워진 말은 ${total}줄.</div>
+    <div class="cols">${cols}</div>
+    <div class="close">
+      상대의 화면에는 보낸 말만 남는다.<br>
+      사랑은 증거를 남기지만, 증거는 사랑을 증명할 수 없다.<br><br>
+      <button onclick="location.reload()">처음부터</button>
+    </div>`;
+  $('ending').classList.add('on');
+}
+
+/* ---------------- 시작 ---------------- */
+(function title(){
+  narrClear('');
+  narr('1', '');
+  $('narr').querySelector('p').style.cssText = 'font-size:56px;line-height:1;color:var(--badge)';
+  narr('세 사람의 핸드폰을 차례로 쥐게 됩니다.');
+  narr('무엇을 쓰고 지우든, 보내지는 말은 하나뿐입니다.', 'react');
+  narr('다만 무엇을 읽었는지는, 다음 사람의 화면에 남습니다.', 'react');
+  const b = document.createElement('button'); b.textContent = '시작';
+  b.onclick = () => { b.remove(); startChapter(0); };
+  $('narr').appendChild(b);
+  $('card').classList.add('hide');
+  $('who').textContent = '';
+})();
+</script>
+</body>
+</html>
