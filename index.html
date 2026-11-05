@@ -174,6 +174,26 @@ body.is-night .top .buy{background:#fff;color:var(--night)}
 .pill[aria-disabled="true"]{opacity:.5;pointer-events:none}
 .reading.is-target .player{box-shadow:0 0 0 2px var(--gold),0 30px 60px -30px rgba(0,0,0,.7)}
 
+/* 책을 펼치기 전에 (1장 미리 읽기 · 심리 테스트 · 읽지 않음) */
+.exps{display:grid;gap:18px}
+@media (min-width:760px){.exps{grid-template-columns:repeat(3,1fr);gap:22px}}
+.exp{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.05),0 26px 46px -32px rgba(0,0,0,.4);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
+.exp:hover{transform:translateY(-4px);box-shadow:0 1px 2px rgba(0,0,0,.05),0 34px 56px -30px rgba(0,0,0,.45)}
+.exp:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+.exp .vis{position:relative;aspect-ratio:16/10;overflow:hidden;background:#2a2a2a}
+.exp .vis img,.exp .vis svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.exp .vis .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,12,.1) 20%,rgba(12,12,12,.82))}
+.exp .vis .vcap{position:absolute;left:20px;bottom:16px;margin:0;text-shadow:0 1px 12px rgba(0,0,0,.5);color:#fff;font-family:var(--display);line-height:1.2}
+.exp .vis .vcap small{display:block;font-family:var(--ui);font-size:12px;letter-spacing:.14em;opacity:.8;margin-bottom:6px}
+.exp .vis .vcap span{font-size:clamp(22px,2.4vw,26px)}
+.exp .txt{display:flex;flex-direction:column;gap:8px;padding:20px 22px 22px;flex:1}
+.exp .meta{margin:0;font-family:var(--ui);font-size:12px;letter-spacing:.08em;color:var(--smoke)}
+.exp h3{margin:0;word-break:keep-all;text-wrap:balance;font-family:var(--display);font-weight:400;font-size:clamp(24px,2.6vw,28px);line-height:1.25}
+.exp p{margin:0;font-size:15.5px;line-height:1.75;color:#45423d;word-break:keep-all}
+.exp .go{margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:6px;font-family:var(--ui);font-size:14px;font-weight:600}
+.exp .go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;transition:transform .3s}
+.exp:hover .go svg{transform:translateX(3px)}
+
 /* 구매 */
 .buy-grid{display:grid;gap:clamp(32px,6vw,72px);align-items:center}
 @media (min-width:860px){.buy-grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
@@ -208,6 +228,13 @@ footer a:hover{color:var(--ink)}
 .dock a.cta .lbl{max-width:7em;opacity:1}
 .dock a.cta{color:#fff;margin-left:4px;padding:0 16px;background:rgba(255,255,255,.08)}
 .dock a.cta.on{background:var(--gold);color:#1b1a18}
+
+@media (max-width:440px){
+  .dock{gap:2px;padding:5px}
+  .dock a{padding:0 9px;height:42px;gap:6px;font-size:13px}
+  .dock a.on{padding:0 12px}
+  .dock a.cta{padding:0 12px;margin-left:2px}
+}
 
 /* 크게 읽기 */
 dialog.reader{width:min(640px,100% - 24px);max-height:min(88vh,900px);padding:0;border:0;border-radius:18px;background:var(--card);color:var(--ink);box-shadow:0 40px 100px -20px rgba(0,0,0,.5)}
@@ -303,6 +330,72 @@ dialog.reader::backdrop{background:rgba(11,22,51,.55);-webkit-backdrop-filter:bl
   </div>
 </section>
 
+<section class="sec" id="more" aria-labelledby="more-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">BEFORE THE BOOK · 3</p>
+      <h2 id="more-title">책을 펼치기 전에</h2>
+      <p>1장을 미리 읽고, 네 사람 가운데 나와 닮은 사람을 찾고, 세 사람의 핸드폰을 차례로 쥐어 보세요.</p>
+    </div>
+    <div class="exps">
+      <a class="exp" href="read/">
+        <div class="vis">
+          <img src="img/more-read.jpg" alt="" width="960" height="600" loading="lazy">
+          <div class="shade"></div>
+          <p class="vcap"><small>1장</small><span>배부른 줄도 모르고</span></p>
+        </div>
+        <div class="txt">
+          <p class="meta">스크롤 소설 · 이어폰 권장</p>
+          <h3>1장 미리 읽기</h3>
+          <p>오월 아침 식탁에서 시작하는 류의 하루를, 화면을 내리며 한 장면씩 읽어요.</p>
+          <span class="go">읽으러 가기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a class="exp" href="test/">
+        <div class="vis" style="background:#f3ede3">
+          <svg viewBox="0 0 320 200" aria-hidden="true" font-family="IBM Plex Sans KR, Apple SD Gothic Neo, sans-serif">
+            <rect width="320" height="200" fill="#f3ede3"/>
+            <rect x="62" y="38" width="196" height="124" rx="5" fill="#fbf8f2" stroke="#cdbfae"/>
+            <path d="M62 43 L160 104 L258 43" fill="none" stroke="#e5dbcb" stroke-width="1.4"/>
+            <g font-size="13" font-weight="600" fill="#fff" text-anchor="middle">
+              <circle cx="108" cy="72" r="17" fill="#6f7d58"/><text x="108" y="77">수</text>
+              <circle cx="214" cy="74" r="17" fill="#b5623b"/><text x="214" y="79">연</text>
+              <circle cx="96" cy="128" r="17" fill="#4f6273"/><text x="96" y="133">류</text>
+              <circle cx="206" cy="132" r="17" fill="#bf7f93"/><text x="206" y="137">지</text>
+            </g>
+          </svg>
+        </div>
+        <div class="txt">
+          <p class="meta">심리 테스트 · 약 2분</p>
+          <h3>당신은 어떤 손으로 사랑하나요?</h3>
+          <p>편지봉투에 ‘사랑’을 쓰고 여섯 장면에 답하면, 책 속 네 사람 가운데 나와 닮은 사람을 알려 줘요.</p>
+          <span class="go">테스트 하러 가기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a class="exp" href="unread/">
+        <div class="vis" style="background:#f3ede3">
+          <svg viewBox="0 0 320 200" aria-hidden="true" font-family="IBM Plex Sans KR, Apple SD Gothic Neo, sans-serif">
+            <rect width="320" height="200" fill="#f3ede3"/>
+            <text x="34" y="78" font-family="Noto Serif KR, Nanum Myeongjo, serif" font-size="58" fill="#b5523b">1</text>
+            <rect x="120" y="30" width="168" height="200" rx="26" fill="#fff" stroke="#1f1c1a" stroke-width="7"/>
+            <g fill="#e8dccb"><rect x="138" y="70" width="26" height="26" rx="9"/><rect x="138" y="110" width="26" height="26" rx="9"/><rect x="138" y="150" width="26" height="26" rx="9"/></g>
+            <g fill="#ebe5dc"><rect x="174" y="74" width="54" height="7" rx="3.5"/><rect x="174" y="114" width="44" height="7" rx="3.5"/><rect x="174" y="154" width="60" height="7" rx="3.5"/></g>
+            <g fill="#f3efe8"><rect x="174" y="86" width="82" height="6" rx="3"/><rect x="174" y="126" width="70" height="6" rx="3"/><rect x="174" y="166" width="78" height="6" rx="3"/></g>
+            <circle cx="266" cy="83" r="9" fill="#d9643f"/><text x="266" y="87" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+            <rect x="138" y="44" width="40" height="8" rx="4" fill="#2b2622"/>
+          </svg>
+        </div>
+        <div class="txt">
+          <p class="meta">짧은 게임 · 메신저</p>
+          <h3>읽지 않음</h3>
+          <p>세 사람의 핸드폰을 차례로 쥐게 돼요. 무엇을 쓰고 지우든, 보내지는 말은 하나뿐이에요.</p>
+          <span class="go">핸드폰 쥐어 보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="buy" aria-labelledby="buy-title">
   <div class="wrap buy-grid">
     <div class="book"><img src="img/cover.jpg" alt="『주먹 쥔 손으로 쓰다듬지 못해서』 표지" width="900" height="1280" loading="lazy"></div>
@@ -345,6 +438,8 @@ dialog.reader::backdrop{background:rgba(11,22,51,.55);-webkit-backdrop-filter:bl
     <svg viewBox="0 0 24 24"><rect x="7" y="3.5" width="11" height="15" rx="1.2"/><path d="M5 7v12.5a1.2 1.2 0 0 0 1.2 1.2H15"/></svg><span class="lbl">연초 카드</span></a>
   <a href="#readings" data-k="readings" aria-label="낭독">
     <svg viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg><span class="lbl">낭독</span></a>
+  <a href="#more" data-k="more" aria-label="책을 펼치기 전에">
+    <svg viewBox="0 0 24 24"><path d="M12 3.5l8 4-8 4-8-4 8-4zM4 12l8 4 8-4M4 16.5l8 4 8-4"/></svg><span class="lbl">미리 보기</span></a>
   <a href="#buy" data-k="buy" class="cta"><span class="lbl">구매하기</span></a>
 </nav>
 
@@ -692,7 +787,7 @@ function update() {
   setDock(k);
 }
 function sectionKey() {
-  const ids = ["cards", "readings", "buy"];
+  const ids = ["cards", "readings", "more", "buy"];
   let k = "cards";
   ids.forEach(id => { if ($("#" + id).getBoundingClientRect().top < vh * .5) k = id; });
   return k;
