@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /sairo/
 
 Sitemap: https://woodangro.kr/sitemap.xml
