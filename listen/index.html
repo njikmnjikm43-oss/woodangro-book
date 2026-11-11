@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>낭독 · 주먹 쥔 손으로 쓰다듬지 못해서</title>
+<meta name="description" content="우당로 장편소설 『주먹 쥔 손으로 쓰다듬지 못해서』 낭독. 안지우 낭독.">
+<meta property="og:title" content="낭독 · 주먹 쥔 손으로 쓰다듬지 못해서">
+<meta property="og:description" content="우당로 장편소설 『주먹 쥔 손으로 쓰다듬지 못해서』 낭독 · 안지우">
+<meta property="og:image" content="https://woodangro.kr/img/reading-1.jpg">
+<meta name="theme-color" content="#0b1633">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500&family=Song+Myung&display=swap">
+<style>
+:root{
+  --night:#0b1633;
+  --ink:#f5f4f1;
+  --smoke:#a9b0c4;
+  --rule:rgba(245,244,241,.16);
+  --gold:#b39256;
+  --display:"Song Myung","Noto Serif KR","Nanum Myeongjo",serif;
+  --body:"Gowun Batang","Noto Serif KR","Nanum Myeongjo",serif;
+  --ui:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:radial-gradient(120% 80% at 50% 0%,#16285a 0%,var(--night) 60%);background-color:var(--night);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;
+  min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:max(28px,env(safe-area-inset-top)) clamp(18px,5vw,40px) max(28px,env(safe-area-inset-bottom))}
+main{width:100%;max-width:760px;display:flex;flex-direction:column;align-items:center;gap:clamp(22px,4vh,34px)}
+header{text-align:center}
+.seal{display:block;height:22px;width:auto;margin:0 auto 22px;filter:invert(1) brightness(1.05);opacity:.9}
+.kicker{margin:0 0 12px;font-family:var(--ui);font-size:12px;letter-spacing:.24em;color:var(--smoke)}
+h1{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(28px,6vw,44px);line-height:1.3;letter-spacing:-.01em;word-break:keep-all}
+.by{margin:12px 0 0;font-size:16px;color:var(--smoke)}
+.by b{color:var(--ink);font-weight:400}
+
+.player{position:relative;width:100%;aspect-ratio:16/9;background:#050a18;border-radius:6px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.player button{all:unset;cursor:pointer;position:absolute;inset:0;display:block}
+.player img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;transition:opacity .3s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.player button:hover img{opacity:1;transform:scale(1.015)}
+.player .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:rgba(245,244,241,.92);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.player .play::before{content:"";margin-left:5px;border-left:18px solid var(--night);border-top:11px solid transparent;border-bottom:11px solid transparent}
+.player button:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player .soon{margin:0;position:absolute;left:0;right:0;bottom:0;padding:14px;text-align:center;font-family:var(--ui);font-size:13px;letter-spacing:.06em;color:var(--ink);background:linear-gradient(transparent,rgba(5,10,24,.85))}
+
+.go{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;background:var(--ink);color:var(--night);font-family:var(--ui);font-weight:500;font-size:16px;text-decoration:none;transition:transform .2s,background .2s}
+.go:hover{background:#fff;transform:translateY(-1px)}
+.go:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
+.note{margin:0;font-family:var(--ui);font-size:12px;color:var(--smoke);letter-spacing:.04em;text-align:center}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img class="seal" src="../img/logo.png" alt="遇當路">
+    <p class="kicker">낭독</p>
+    <h1>주먹 쥔 손으로<br>쓰다듬지 못해서</h1>
+    <p class="by">우당로 장편소설 · <b>안지우</b> 낭독</p>
+  </header>
+
+  <div class="player" id="player"></div>
+
+  <a class="go" href="https://woodangro.kr/">woodangro.kr 바로가기
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+  <p class="note">2026년 11월 13일 출간 · 인디펍</p>
+</main>
+<script>
+/* 유튜브 주소나 영상 ID를 여기에 넣으면 돼요 */
+const YOUTUBE = "";
+
+(() => {
+  const box = document.getElementById('player');
+  const m = YOUTUBE.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/) || YOUTUBE.match(/^([\w-]{11})$/);
+  const id = m && m[1];
+  if (!id) {
+    box.innerHTML = '<img src="../img/reading-1.jpg" alt=""><p class="soon">낭독 영상은 곧 공개돼요</p>';
+    return;
+  }
+  box.innerHTML = `<button type="button" aria-label="낭독 영상 재생"><img src="https://i.ytimg.com/vi/${id}/maxresdefault.jpg" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'"><span class="play"></span></button>`;
+  box.querySelector('button').addEventListener('click', () => {
+    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="낭독 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  }, { once: true });
+})();
+</script>
+</body>
+</html>
