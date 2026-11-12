@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>映畫館 · CINEMA — 주먹 쥔 손으로 쓰다듬지 못해서 낭독</title>
+<meta name="description" content="『주먹 쥔 손으로 쓰다듬지 못해서』 낭독 영상 상영관.">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+JP:wght@500;900&family=Noto+Sans+KR:wght@900&display=swap">
+<link rel="stylesheet" href="../hub.css">
+<style>
+html,body{height:100%;margin:0;background:#000;overflow:hidden}
+.hall{position:absolute;background:url(../img/hub/cinema.jpg) center/100% 100% no-repeat}
+.screen{position:absolute;left:21.3%;top:18.7%;width:52.6%;height:33.7%;display:flex;justify-content:center;align-items:stretch;background:#d9d9d6;box-shadow:0 0 6vw rgba(200,210,255,.18)}
+.screen .frame{position:relative;height:100%;aspect-ratio:16/9;background:#000}
+.screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.screen .poster{position:absolute;inset:0;display:grid;grid-template-columns:1fr auto;grid-template-rows:1fr auto;border:0;padding:0;cursor:pointer;background:var(--y);color:var(--k);text-align:left;overflow:hidden}
+.screen .poster .t{grid-column:1;grid-row:1;padding:4% 0 0 4%;font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:clamp(20px,5.2vw,96px);line-height:.86;color:var(--b)}
+.screen .poster .v{grid-column:2;grid-row:1/3;background:var(--r);color:#fff;writing-mode:vertical-rl;font-family:var(--han);font-weight:900;font-size:clamp(14px,2.6vw,46px);padding:.3em .15em;line-height:1.05}
+.screen .poster .p{grid-column:1;grid-row:2;background:var(--k);color:var(--y);font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:clamp(11px,1.5vw,26px);padding:.35em .6em;letter-spacing:.04em}
+.screen .poster:hover .p{background:var(--b);color:#fff}
+.sign{position:fixed;right:12px;top:12px;z-index:30;display:flex;box-shadow:6px 6px 0 rgba(0,0,0,.6)}
+.sign .en{background:var(--b);color:#fff;font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:clamp(22px,3.2vw,44px);line-height:1;padding:.12em .3em}
+.sign .han{background:var(--r);color:#fff;font-family:var(--han);font-weight:900;font-size:clamp(14px,1.8vw,24px);padding:.25em .35em;display:flex;align-items:center}
+.ticket{position:fixed;left:12px;bottom:12px;z-index:30;font-family:var(--jp);font-weight:500;font-size:12px;color:#ddd;max-width:60vw;line-height:1.5}
+.ticket b{font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:15px;color:var(--y);letter-spacing:.04em}
+</style>
+</head>
+<body>
+<a class="back" href="../">← 遇當路 HOME</a>
+<div class="sign" aria-hidden="true"><span class="en">CINEMA</span><span class="han">映畫館</span></div>
+<div class="hall" id="hall">
+  <div class="screen">
+    <div class="frame" id="frame">
+      <button class="poster" id="play" type="button" aria-label="낭독 영상 재생">
+        <span class="t">NOW<br>SHOWING<br>朗讀</span>
+        <span class="v">撫でられぬ手</span>
+        <span class="p">▶ PLAY 上映 — CLICK THE SCREEN</span>
+      </button>
+    </div>
+  </div>
+</div>
+<p class="ticket"><b>SCREEN 1 · 朗讀 READING</b><br>握った拳では撫でられなくて — 長編小説『주먹 쥔 손으로 쓰다듬지 못해서』より</p>
+<script>
+(() => {
+  const VIDEO = 'EZ1Y6_AgRxo', AR = 2400 / 1584, SX = .477, SY = .355;
+  const hall = document.getElementById('hall');
+  function place() {
+    const vw = innerWidth, vh = innerHeight;
+    let W = Math.max(vw, vh * AR);
+    if (W * .6 > vw) W = vw / .6;          // 스크린이 화면 밖으로 나가지 않게
+    const H = W / AR;
+    const left = Math.min(0, Math.max(vw - W, vw / 2 - W * SX));
+    const top = H >= vh ? Math.min(0, Math.max(vh - H, vh / 2 - H * SY)) : (vh - H) / 2;
+    Object.assign(hall.style, { width: W + 'px', height: H + 'px', left: left + 'px', top: top + 'px' });
+  }
+  place(); addEventListener('resize', place);
+  document.getElementById('play').addEventListener('click', () => {
+    document.getElementById('frame').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${VIDEO}?autoplay=1&rel=0&playsinline=1" title="낭독 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CARD · カード — 주먹 쥔 손으로 쓰다듬지 못해서</title>
+<meta name="description" content="연초 카드 열두 장. 섞고, 다섯 장을 펼치고, 한 장씩 읽기.">
+<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+JP:wght@500;900&family=Noto+Sans+KR:wght@900&family=Noto+Serif+KR:wght@400;700&display=swap">
+<link rel="stylesheet" href="../hub.css">
+<style>
+html,body{height:100%}
+body{background:#111 url(../img/hub/cards.jpg) center/cover fixed;color:#fff;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:rgba(10,10,10,.28);pointer-events:none}
+.room{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,4vh,40px);padding:80px 16px 60px}
+.title{display:flex;align-items:stretch;gap:0;box-shadow:8px 8px 0 var(--k)}
+.title .en{background:var(--b);color:#fff;padding:0 .2em;font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:clamp(42px,8vw,110px);line-height:.9;letter-spacing:-.01em;display:flex;align-items:center}
+.title .jp{background:var(--y);color:var(--k);font-family:var(--jp);font-weight:900;font-size:clamp(16px,2vw,26px);writing-mode:vertical-rl;padding:.4em .25em;letter-spacing:.06em}
+.title .han{background:var(--r);color:#fff;font-family:var(--han);font-weight:900;font-size:clamp(16px,2vw,26px);writing-mode:vertical-rl;padding:.4em .25em}
+.table{position:relative;width:min(1100px,96vw);height:clamp(220px,34vw,360px)}
+.pc{position:absolute;left:50%;top:50%;width:clamp(96px,15.5vw,190px);aspect-ratio:554/786;margin:calc(clamp(96px,15.5vw,190px) * -.709) 0 0 calc(clamp(96px,15.5vw,190px) * -.5);cursor:pointer;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.pc .in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .5s ease}
+.pc.up .in{transform:rotateY(180deg)}
+.pc .b,.pc .f{position:absolute;inset:0;border-radius:8px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.pc .b{background:repeating-linear-gradient(45deg,var(--b) 0 3px,transparent 3px 10px),repeating-linear-gradient(-45deg,var(--b) 0 3px,transparent 3px 10px),#fff;border:7px solid #fff}
+.pc .b::after{content:"遇";position:absolute;inset:22% 16%;display:grid;place-items:center;background:var(--y);border:3px solid var(--k);font-family:var(--han);font-weight:900;font-size:clamp(20px,3vw,40px);color:var(--k)}
+.pc .f{transform:rotateY(180deg);background:#fff}
+.pc .f img{width:100%;height:100%;object-fit:cover}
+.pc:hover{z-index:20}
+.pc.up:hover .in{transform:rotateY(180deg) translateY(-8px)}
+.shuffle{font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:clamp(26px,4vw,48px);line-height:1;letter-spacing:.02em;background:var(--r);color:#fff;border:0;padding:.18em .45em .12em;cursor:pointer;box-shadow:6px 6px 0 var(--k)}
+.shuffle small{font-family:var(--jp);font-size:.42em;margin-left:.5em;vertical-align:middle}
+.shuffle:hover{background:var(--y);color:var(--k)}
+.shuffle:disabled{opacity:.6;cursor:default}
+.hint{margin:0;font-family:var(--wide);font-weight:700;font-stretch:70%;font-size:14px;letter-spacing:.04em;background:var(--k);padding:.3em .6em}
+dialog{max-width:min(980px,94vw);max-height:92svh;padding:0;border:0;background:var(--y);color:var(--k);box-shadow:12px 12px 0 var(--b)}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+.read{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);max-height:92svh}
+.read .pic{background:var(--r);padding:20px;display:flex;align-items:flex-start}
+.read .pic img{width:100%;border-radius:6px;box-shadow:6px 6px 0 var(--k)}
+.read .txt{background:#fff;overflow:auto;padding:28px 30px 34px}
+.read .no{display:inline-block;margin:0;background:var(--b);color:#fff;font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:18px;padding:.15em .45em;letter-spacing:.04em}
+.read h2{margin:14px 0 18px;font-family:var(--han);font-weight:900;font-size:clamp(22px,2.6vw,30px);line-height:1.35;word-break:keep-all}
+.read p.t{margin:0 0 1em;font-family:"Noto Serif KR",serif;font-size:16px;line-height:1.9;word-break:keep-all}
+.read p.msg{font-family:var(--jp);font-weight:500;font-size:14px;background:#f2f2f2;border-left:4px solid var(--b);padding:.6em .8em}
+.x{position:absolute;right:10px;top:8px;font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:16px;background:var(--k);color:var(--y);border:0;padding:.2em .5em;cursor:pointer;z-index:2}
+@media (max-width:700px){
+  .read{grid-template-columns:1fr}.read .pic{justify-content:center;padding:16px}.read .pic img{max-width:180px}
+  .table{height:max(110vw,320px)}
+}
+</style>
+</head>
+<body>
+<a class="back" href="../">← 遇當路 HOME</a>
+<main class="room">
+  <h1 class="title" aria-label="CARD 카드"><span class="en">CARD</span><span class="jp">カード</span><span class="han">十二枚</span></h1>
+  <div class="table" id="table" aria-live="polite"></div>
+  <button class="shuffle" id="shuffle" type="button">SHUFFLE<small>シャッフル · 洗牌</small></button>
+  <p class="hint">TAP A CARD TO READ — 一枚ずつ読む</p>
+</main>
+<dialog id="dlg" aria-label="카드 읽기"><button class="x" type="button" data-close>CLOSE 閉</button><div class="read" id="read"></div></dialog>
+<script src="cards.js"></script>
+<script>
+(() => {
+  const pad = n => String(n).padStart(2, '0');
+  const table = document.getElementById('table');
+  const btn = document.getElementById('shuffle');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const els = [];
+  for (let i = 1; i <= 12; i++) {
+    const el = document.createElement('div');
+    el.className = 'pc'; el.dataset.no = i; el.tabIndex = -1; el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', `연초 카드 No.${pad(i)}`);
+    el.innerHTML = `<div class="in"><div class="b"></div><div class="f"><img src="../img/deck/card-${pad(i)}.jpg" alt="연초 카드 No.${pad(i)}" loading="lazy"></div></div>`;
+    table.appendChild(el); els.push(el);
+  }
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+  const mix = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const narrow = () => innerWidth <= 700;
+  function slot(k) {
+    const W = table.clientWidth, H = table.clientHeight, cw = els[0].offsetWidth, ch = els[0].offsetHeight;
+    if (narrow()) {           // 3 + 2
+      const row = k < 3 ? 0 : 1, col = k < 3 ? k - 1 : k - 3.5;
+      return [col * (cw + 12), (row - .5) * (ch + 16), 0];
+    }
+    const gap = Math.min((W - cw) / 4, cw + 22);
+    return [(k - 2) * gap, Math.abs(k - 2) * 6, (k - 2) * 3];
+  }
+  const set = (el, x, y, r, z) => { el.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg)`; el.style.zIndex = z; };
+  let hand = [], last = [], busy = false;
+
+  async function shuffle() {
+    if (busy) return; busy = true; btn.disabled = true;
+    // 1. 모두 덮고 가운데로
+    els.forEach(el => el.classList.remove('up'));
+    await wait(350);
+    els.forEach((el, i) => set(el, (Math.random() - .5) * 10, (Math.random() - .5) * 10, (Math.random() - .5) * 14, i));
+    await wait(550);
+    // 2. 리플: 두 더미로 갈랐다 합치기, 세 번
+    for (let r = 0; r < 3; r++) {
+      els.forEach((el, i) => set(el, (i % 2 ? 1 : -1) * (60 + Math.random() * 30), (Math.random() - .5) * 18, (i % 2 ? 1 : -1) * (8 + Math.random() * 6), i));
+      await wait(260);
+      mix(els).forEach((el, i) => set(el, (Math.random() - .5) * 8, -i * .8, (Math.random() - .5) * 8, i));
+      await wait(300);
+    }
+    // 3. 이전과 겹치지 않게 다섯 장 고르기
+    let pool = mix([...Array(12)].map((_, i) => i + 1));
+    const fresh = pool.filter(n => !last.includes(n));
+    hand = (fresh.length >= 5 ? fresh : pool).slice(0, 5).sort((a, b) => a - b);
+    last = hand;
+    const rest = els.filter(el => !hand.includes(+el.dataset.no));
+    rest.forEach((el, i) => set(el, 0, 0, 0, i));
+    rest.forEach(el => { el.style.opacity = 0; el.style.pointerEvents = 'none'; el.tabIndex = -1; });
+    // 4. 한 장씩 펼치고 뒤집기
+    for (let k = 0; k < 5; k++) {
+      const el = els[hand[k] - 1]; const [x, y, r] = slot(k);
+      el.style.opacity = 1; el.style.pointerEvents = ''; el.tabIndex = 0;
+      set(el, x, y, r, 30 + k);
+      await wait(140);
+    }
+    await wait(420);
+    for (let k = 0; k < 5; k++) { els[hand[k] - 1].classList.add('up'); await wait(110); }
+    busy = false; btn.disabled = false;
+  }
+  function layout() { hand.forEach((n, k) => { const [x, y, r] = slot(k); set(els[n - 1], x, y, r, 30 + k); }); }
+  addEventListener('resize', layout);
+
+  const dlg = document.getElementById('dlg'), read = document.getElementById('read');
+  function open(no) {
+    const c = (window.CARDS || [])[no - 1]; if (!c) return;
+    const body = (c.paras || []).map(x => typeof x === 'string' ? `<p class="t">${x}</p>` : `<p class="t msg">${x.from} · ${x.time}<br>${x.msg}</p>`).join('');
+    read.innerHTML = `<div class="pic"><img src="../img/deck/card-${pad(no)}.jpg" alt=""></div><div class="txt"><p class="no">No.${pad(no)} · CH.${c.ch} · ${c.who}</p><h2>${c.line}</h2>${body}</div>`;
+    dlg.showModal(); read.querySelector('.txt').scrollTop = 0;
+  }
+  table.addEventListener('click', e => { const p = e.target.closest('.pc.up'); if (p && !busy) open(+p.dataset.no); });
+  table.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.pc.up')) { e.preventDefault(); open(+e.target.dataset.no); } });
+  dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  btn.addEventListener('click', shuffle);
+  shuffle();
+})();
+</script>
+</body>
+</html>

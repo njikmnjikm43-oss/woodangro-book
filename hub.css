@@ -1,0 +1,12 @@
+:root{--y:#ffe500;--r:#e3161b;--b:#1432c8;--k:#111;--w:#fff;
+  --wide:"Archivo","Archivo Variable",Impact,sans-serif;
+  --jp:"Noto Sans JP","Noto Sans KR",sans-serif;
+  --han:"Noto Sans KR","Noto Sans JP",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--wide);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.fit{display:block;overflow:visible}
+.fit text{font-family:var(--wide);font-weight:900;font-stretch:62%;transition:fill .15s}
+.back{position:fixed;z-index:40;left:12px;top:12px;font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:15px;letter-spacing:.04em;text-decoration:none;background:var(--y);color:var(--k);padding:.3em .6em}
+.back:hover{background:var(--r);color:#fff}

@@ -4,407 +4,142 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>주먹 쥔 손으로 쓰다듬지 못해서 · 우당로(안원빈) 소설 | 인디펍</title>
-<meta name="description" content="우당로(안원빈)의 첫 소설 『주먹 쥔 손으로 쓰다듬지 못해서』. 인디펍, 2026년 11월 13일 출간. 카드 열두 장과 낭독, 구매 링크.">
+<meta name="description" content="우당로(안원빈)의 첫 소설 『주먹 쥔 손으로 쓰다듬지 못해서』. 인디펍, 2026년 11월 13일 출간. 연초 카드, 낭독 영화관, 듣기, 게임.">
 <meta name="naver-site-verification" content="25453786e24af0275c1d953f1a4188fe1e1834d0" />
 <meta name="google-site-verification" content="KRmct48asiPWwux0psbwPIJb9Qq7BjFTF3cZDMT28zU" />
 <link rel="canonical" href="https://woodangro.kr/">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Book", "name": "주먹 쥔 손으로 쓰다듬지 못해서", "author": {"@type": "Person", "name": "안원빈", "alternateName": "우당로", "sameAs": ["https://www.instagram.com/woodang_ro/"]}, "publisher": {"@type": "Organization", "name": "인디펍"}, "isbn": "9791167568205", "datePublished": "2026-11-13", "inLanguage": "ko", "bookFormat": "https://schema.org/Paperback", "image": "https://woodangro.kr/img/cover.jpg", "url": "https://woodangro.kr/", "description": "엇갈리는 네 사람의 시점을 따라 ‘함께 산다는 것’이 무엇인지 묻는 우당로의 첫 소설."}</script>
-<meta name="theme-color" content="#efe6d2">
+<meta name="theme-color" content="#111111">
 <meta property="og:title" content="주먹 쥔 손으로 쓰다듬지 못해서">
-<meta property="og:description" content="우당로의 첫 소설 · 연초 카드 열두 장과 낭독">
-<meta property="og:image" content="https://woodangro.kr/img/cover.jpg">
+<meta property="og:description" content="우당로의 첫 소설 · CARD · 映畫館 · LISTEN · FLASH GAME">
+<meta property="og:image" content="https://woodangro.kr/img/hub/main.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@500;900&family=Noto+Serif+KR:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+JP:wght@500;900&family=Noto+Sans+KR:wght@900&display=swap">
+<link rel="stylesheet" href="hub.css">
 <style>
-:root{
-  --paper:#efe6d2; --ink:#1b1a17; --red:#c4202a; --blue:#1d3f9a; --mute:#6f675a;
-  --stamp:"Black Han Sans","Noto Sans KR",sans-serif;
-  --han:"Noto Sans KR",sans-serif;
-  --body:"Noto Serif KR",serif;
-  --ui:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif;
-  --pw:clamp(54px,6.6vw,96px);
+html,body{height:100%}
+body{background:var(--k);overflow-x:hidden}
+.poster{position:relative;width:100vw;height:100svh;min-height:600px;display:grid;
+  grid-template-columns:16vw 1fr 3.6vw 17vw;
+  grid-template-rows:minmax(0,1fr) 25% 31%;
+  grid-template-areas:"L img y R" "L band band R" "bot bot bot bot";
+  background:var(--k)}
+.L{grid-area:L;background:var(--y);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1vh 0}
+.L span{font-family:var(--jp);font-weight:900;font-size:min(13vw,9.6svh);line-height:1.02;color:var(--k)}
+.img{grid-area:img;position:relative;overflow:hidden;background:var(--r)}
+.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.img .hdr{position:absolute;left:.4vw;top:.2vh;width:calc(100% - .8vw);height:12%}
+.y{grid-area:y;background:var(--y);display:flex;justify-content:center;padding:1.4vh 0}
+.y p{margin:0;writing-mode:vertical-rl;font-family:var(--jp);font-weight:900;font-size:min(1.5vw,1.9svh);line-height:1.25;letter-spacing:.04em;color:var(--k)}
+.R{grid-area:R;background:var(--r);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4vh;text-decoration:none}
+.R .big{font-family:var(--han);font-weight:900;font-size:min(14.5vw,17.5svh);line-height:1.02;display:flex;flex-direction:column;align-items:center}
+.R small{font-family:var(--wide);font-weight:900;font-stretch:62%;font-size:min(1.4vw,2svh);letter-spacing:.06em;color:var(--y)}
+.band{grid-area:band;position:relative;min-height:0;background:#fff;border-top:.6vh solid var(--r);border-bottom:.6vh solid var(--r);display:block;color:var(--b);padding:1.6vh .6vw 1.2vh}
+.band .tag{position:absolute;right:1.2vw;top:0;transform:translateY(-58%);background:var(--r);color:#fff;font-family:var(--jp);font-weight:900;font-size:min(2.2vw,3.4svh);padding:.3em .5em;line-height:1}
+.bot{grid-area:bot;display:grid;grid-template-columns:16vw 1fr 33.6vw;gap:0;background:var(--k)}
+.b1,.b2,.b3{position:relative;display:flex;flex-direction:column;min-height:0}
+.b1 .who{flex:1;padding:1.6vh .6vw .6vh;color:var(--b);display:block}
+.b1 .seal{height:44%;background:var(--r);display:grid;place-items:center;padding:1.2vh .8vw}
+.b1 .seal img{max-width:100%;max-height:100%;width:auto}
+.b2{padding:0 .6vw}
+.b2 .strip{background:#fff;color:var(--k);height:20%;padding:.6vh .4vw .4vh;margin-top:1.2vh}
+.b2 .listen{flex:1;background:var(--b);color:var(--k);display:block;padding:1.4vh .8vw 1vh;position:relative;text-decoration:none}
+.b2 .listen .jp{position:absolute;right:.8vw;top:1vh;font-family:var(--jp);font-weight:900;font-size:min(2vw,3svh);color:#fff;line-height:1}
+.b3 .game{flex:1;padding:1.6vh .6vw .6vh;color:var(--b);display:block}
+.b3 .buy{height:50%;background:var(--r);color:#fff;padding:1.2vh 1vw;display:flex;flex-direction:column;justify-content:space-between;font-family:var(--wide);font-stretch:70%;font-weight:700;font-size:min(1.25vw,1.9svh);line-height:1.18}
+.b3 .buy p{margin:0}
+.b3 .buy nav{display:flex;flex-wrap:wrap;gap:.2em 1em;font-weight:900;font-stretch:62%;font-size:1.25em;letter-spacing:.02em}
+.b3 .buy nav a{color:#fff;text-decoration:none;border-bottom:2px solid transparent}
+.b3 .buy nav a:hover{border-color:var(--y);color:var(--y)}
+.band,.who,.listen,.game,.strip{position:relative;min-height:0}
+.who,.listen,.game,.strip{overflow:hidden}
+.band>.fit,.who>.fit,.listen>.fit,.game>.fit,.strip>.fit{position:absolute;left:var(--px,.6vw);top:var(--pt,1.4vh);width:calc(100% - 2 * var(--px,.6vw));height:calc(100% - var(--pt,1.4vh) - var(--pb,1vh))}
+.strip{--px:.4vw;--pt:.6vh;--pb:.4vh}
+a.go{transition:filter .15s}
+a.go:hover{filter:brightness(1.12)}
+a.go:hover .fit text{fill:var(--r)}
+.R.go:hover .big{color:var(--y)}
+.music{position:absolute;left:.5vw;top:.7vh;z-index:3;max-width:15vw;flex-wrap:wrap;font-family:var(--wide);font-stretch:62%;font-weight:900;font-size:12px;letter-spacing:.04em;color:var(--y);background:var(--k);padding:.25em .5em;display:flex;gap:.2em .8em}
+.music button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.music button:hover{color:#fff}
+
+@media (max-aspect-ratio:4/5){
+  .poster{height:auto;min-height:0;grid-template-columns:1fr 1fr;grid-template-rows:auto 56vw auto auto auto;
+    grid-template-areas:"L L" "img img" "band band" "R y" "bot bot"}
+  .L{flex-direction:row;padding:2vw 0}
+  .L span{font-size:15vw}
+  .R{padding:3vw 0;flex-direction:column}
+  .R .big{flex-direction:row;font-size:20vw}
+  .R small{font-size:3.4vw}
+  .y{padding:3vw}
+  .y p{writing-mode:horizontal-tb;font-size:4.2vw;line-height:1.5}
+  .band{height:30vw;padding:2vw}
+  .band .tag{font-size:5vw}
+  .bot{grid-template-columns:1fr;}
+  .b1{flex-direction:row;height:30vw}.b1 .who{flex:1.2}.b1 .seal{height:auto;flex:1}
+  .b2{height:52vw;padding:2vw}.b2 .strip{margin-top:0}
+  .b2 .listen .jp{font-size:5vw}
+  .b3 .game{height:30vw;flex:none}
+  .b3 .buy{height:auto;gap:3vw;font-size:3.8vw;padding:4vw}
+  .music{position:relative;left:auto;top:auto;max-width:none;grid-column:1/-1;justify-self:end;margin:3vw;font-size:13px}
 }
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--ui);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--red);outline-offset:3px}
-img{display:block;max-width:100%}
-body::before{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .3 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.ink{filter:url(#rough)}
-.scene{position:relative}
-.stage{position:sticky;top:0;height:100svh;overflow:hidden}
-.layer{position:absolute;inset:0}
-.center{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3vh,30px);padding:24px}
-
-.mark{position:relative;text-shadow:0 0 14px var(--paper),0 0 4px var(--paper);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;pointer-events:none;z-index:2}
-.mark .top{font-family:var(--han);font-weight:900;font-size:12px;letter-spacing:.3em}
-.mark h1{margin:0;font-family:var(--stamp);font-weight:400;font-size:clamp(34px,6.4vw,78px);line-height:1.05}
-.mark .rowk{display:flex;gap:14px;align-items:center;font-family:var(--han);font-weight:900;font-size:13px;letter-spacing:.2em}
-.seal{display:inline-grid;place-items:center;border:4px solid currentColor;border-radius:18px;padding:10px 16px 8px;line-height:1}
-.seal.red{color:var(--red)}.seal.blue{color:var(--blue)}
-.seal b{font-family:var(--han);font-weight:900;font-size:clamp(26px,4vw,44px);letter-spacing:.06em}
-.seal small{font-family:var(--stamp);font-size:clamp(11px,1.3vw,15px);letter-spacing:.08em;margin-top:6px}
-.num{display:inline-grid;place-items:center;width:1.8em;height:1.8em;border:2px solid currentColor;border-radius:50%;font-family:var(--han);font-weight:900;font-size:14px;line-height:1}
-.vert{position:absolute;top:50%;writing-mode:vertical-rl;font-family:var(--stamp);font-size:clamp(16px,2.2vw,26px);letter-spacing:.12em;transform:translateY(-50%);pointer-events:none;z-index:2}
-.vert.l{left:clamp(10px,2vw,28px)}.vert.r{right:clamp(10px,2vw,28px)}
-
-/* 1. 쏟아지는 카드 */
-#s1{height:300vh}
-#pile{position:absolute;inset:0;z-index:3}
-.card{position:absolute;left:0;top:0;width:var(--pw);aspect-ratio:5/7;border-radius:7px;background:#f8f2e2;box-shadow:0 1px 0 rgba(0,0,0,.15),0 6px 14px rgba(60,40,10,.22);touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;will-change:transform;color:var(--blue)}
-.card.dragging{cursor:grabbing;box-shadow:0 1px 0 rgba(0,0,0,.15),0 18px 30px rgba(60,40,10,.3)}
-.card.red{color:var(--red)}
-.card::before{content:"";position:absolute;inset:5%;border:1.5px solid currentColor;border-radius:4px;opacity:.85}
-.card .c{position:absolute;font-family:var(--han);font-weight:900;line-height:.9;font-size:calc(var(--pw) * .2);text-align:center}
-.card .c i{display:block;font-style:normal;font-size:.8em}
-.card .c.tl{left:10%;top:9%}.card .c.br{right:10%;bottom:9%;transform:rotate(180deg)}
-.card .m{position:absolute;inset:0;display:grid;place-items:center;font-size:calc(var(--pw) * .44);line-height:1}
-.card .m.face{font-family:var(--han);font-weight:900;font-size:calc(var(--pw) * .3)}
-.card .m.face span{border:2px solid currentColor;border-radius:6px;padding:6% 10%}
-.card.back{color:var(--red);background:repeating-linear-gradient(45deg,var(--red) 0 2px,transparent 2px 7px),repeating-linear-gradient(-45deg,var(--red) 0 2px,transparent 2px 7px),#f8f2e2}
-.card.back::before{inset:8%;background:#f8f2e2;border-width:2px}
-.card.back .m{font-family:var(--han);font-weight:900;font-size:calc(var(--pw) * .34)}
-#shufL{z-index:5;opacity:0;pointer-events:none;background:var(--paper);display:grid;place-items:center}
-#shufL img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) sepia(.55) contrast(1.15) brightness(1.05);mix-blend-mode:multiply;opacity:.9}
-#shufL .seal{position:relative;background:var(--paper)}
-#shufL .seal b{font-size:clamp(40px,9vw,110px)}
-
-/* 2. 다섯 장 */
-#s2{height:340vh}
-.board{position:relative;width:min(1040px,92vw);display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(8px,1.8vw,22px);justify-items:center}
-.cell{width:100%;max-width:170px;display:flex;flex-direction:column;align-items:center;gap:10px}
-.cell .num{color:var(--red)}
-.pcw{width:100%}
-.pc{position:relative;width:100%;aspect-ratio:554/784;transform-style:preserve-3d;cursor:pointer;will-change:transform,opacity}
-.pc .in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-.pc.open .in{transform:rotateY(180deg)}
-.pc .b,.pc .f{position:absolute;inset:0;border-radius:6px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 6px 16px rgba(60,40,10,.25)}
-.pc .f{transform:rotateY(180deg);background:#fff}
-.pc .f img{width:100%;height:100%;object-fit:cover;filter:sepia(.25)}
-.pc .b{background:repeating-linear-gradient(45deg,var(--blue) 0 2px,transparent 2px 8px),repeating-linear-gradient(-45deg,var(--blue) 0 2px,transparent 2px 8px),#f8f2e2;border:6px solid #f8f2e2}
-.pc .b::after{content:"遇";position:absolute;inset:18% 14%;display:grid;place-items:center;background:#f8f2e2;border:2px solid var(--blue);border-radius:6px;color:var(--blue);font-family:var(--han);font-weight:900;font-size:clamp(18px,3vw,40px)}
-
-/* 3. 대당 */
-#s3{height:300vh}
-.machine{position:relative;display:flex;flex-direction:column;align-items:center;padding:clamp(14px,2vw,22px) clamp(14px,2.4vw,26px) clamp(18px,2.4vw,26px);border-radius:26px 26px 14px 14px;background:linear-gradient(#d23a2f,#a3151d);box-shadow:inset 0 0 0 4px #f3e6c8,inset 0 0 0 9px #a3151d,0 30px 50px rgba(60,20,10,.35)}
-.machine .crown{display:flex;align-items:center;gap:10px;margin-bottom:12px;color:#f8f2e2;font-family:var(--han);font-weight:900;letter-spacing:.24em;font-size:clamp(11px,1.4vw,14px)}
-.machine .crown .seal{color:#f8f2e2;padding:6px 10px 5px;border-radius:12px;border-width:3px}
-.machine .crown .seal b{font-size:clamp(16px,2.2vw,24px)}
-.reels{display:flex;gap:clamp(6px,1vw,10px);padding:10px;border-radius:12px;background:#f8f2e2;box-shadow:inset 0 0 0 3px var(--ink)}
-.reel{--h:clamp(70px,11.5vw,120px);width:calc(var(--h) * .82);height:var(--h);overflow:hidden;border-radius:6px;background:#fffaf0;box-shadow:inset 0 10px 12px -8px rgba(0,0,0,.35),inset 0 -10px 12px -8px rgba(0,0,0,.35)}
-.strip{display:flex;flex-direction:column;will-change:transform}
-.sym{height:var(--h);flex:none;display:grid;place-items:center;font-family:var(--han);font-weight:900;font-size:calc(var(--h) * .56);line-height:1;color:var(--blue)}
-.sym.seven{color:var(--red);font-family:var(--stamp);font-size:calc(var(--h) * .7)}
-.sym.r{color:var(--red)}
-.lamps{display:flex;gap:10px;margin-top:12px}
-.lamps i{width:12px;height:12px;border-radius:50%;background:#f3e6c8;opacity:.35}
-.win .lamps i{animation:lamp .3s steps(2) infinite;opacity:1;background:#ffe27a}
-.win .lamps i:nth-child(odd){animation-delay:.15s}
-@keyframes lamp{50%{opacity:.35}}
-.handle{position:absolute;right:calc(-1 * clamp(26px,3vw,36px));top:22%;width:clamp(22px,2.6vw,30px);height:46%;display:flex;flex-direction:column;align-items:center}
-.handle .arm{display:flex;flex-direction:column;align-items:center;flex:1;transform-origin:50% 100%}
-.handle .ball{width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#c9c9c9 45%,#7b7b7b)}
-.handle .rod{width:28%;flex:1;background:linear-gradient(90deg,#999,#eee,#888)}
-.big7{margin:0;font-family:var(--stamp);font-size:clamp(20px,3vw,32px);letter-spacing:.2em;color:var(--red);opacity:0;transition:opacity .3s}
-.win ~ .big7{opacity:1}
-.screen{position:absolute;left:50%;top:50%;width:min(940px,90vw);aspect-ratio:16/9;transform:translate(-50%,-46%) scale(.92);opacity:0;pointer-events:none;background:#000;border:6px solid var(--ink);border-radius:10px;box-shadow:12px 12px 0 var(--red);transition:opacity .5s,transform .7s cubic-bezier(.2,.8,.2,1)}
-.screen.on{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
-.screen iframe{width:100%;height:100%;border:0;display:block}
-
-/* 4. 책 */
-#book{min-height:72svh;padding:clamp(70px,14vh,150px) 24px 140px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px}
-#book .seal{margin-bottom:16px;transform:rotate(-3deg)}
-#book h2{margin:0;font-family:var(--stamp);font-weight:400;font-size:clamp(24px,3.4vw,38px)}
-#book p{margin:4px 0 0;color:var(--mute);font-size:14px}
-#book .row{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;font-size:15px;color:var(--ink);font-weight:500}
-#book a{text-decoration:none;border-bottom:1.5px solid transparent}
-#book a:hover{color:var(--red);border-color:var(--red)}
-
-dialog{max-width:min(920px,94vw);max-height:92svh;padding:0;border:3px solid var(--ink);border-radius:10px;background:var(--paper);color:var(--ink);box-shadow:10px 10px 0 var(--blue)}
-dialog::backdrop{background:rgba(40,30,15,.55)}
-.cardview{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:clamp(18px,3vw,32px);padding:clamp(18px,3vw,32px);max-height:88svh;overflow:auto}
-.cardview img{border-radius:6px;width:100%}
-.cardview .no{margin:0;font-family:var(--han);font-weight:900;font-size:13px;letter-spacing:.14em;color:var(--red)}
-.cardview h3{margin:8px 0 16px;font-family:var(--stamp);font-weight:400;font-size:clamp(22px,3vw,30px);line-height:1.3;word-break:keep-all}
-.cardview p.t{margin:0 0 1em;font-family:var(--body);font-size:16px;line-height:1.85;word-break:keep-all}
-.x{position:absolute;right:16px;top:12px;font-size:13px;font-weight:700;color:var(--mute)}
-.x:hover{color:var(--red)}
-@media (max-width:640px){.cardview{grid-template-columns:1fr}.cardview img{max-width:200px;margin:0 auto}}
-
-.player{position:fixed;z-index:50;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:baseline;gap:14px;font-size:13px;font-weight:700;white-space:nowrap}
-.player .t{max-width:50vw;overflow:hidden;text-overflow:ellipsis}
-.player.on .t::before{content:"♪ ";color:var(--red)}
-.player button{color:var(--mute);border-bottom:1.5px solid transparent}
-.player button:hover{color:var(--red);border-color:var(--red)}
-@media (max-width:760px){.vert{display:none}}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter></svg>
+<main class="poster">
+  <div class="L" aria-hidden="true"><span>撫</span><span>で</span><span>ら</span><span>れ</span><span>ぬ</span><span>手</span></div>
 
-<main>
-  <section class="scene" id="s1" aria-label="시작">
-    <div class="stage">
-      <div class="layer center" style="z-index:4;pointer-events:none">
-        <div class="mark ink" id="mark1">
-          <span class="top" style="color:var(--blue)">遇當路 遊技場</span>
-          <h1>주먹 쥔 손으로<br>쓰다듬지 못해서</h1>
-          <span class="rowk" style="color:var(--red)"><span class="num">遇</span><span>우당로 장편소설</span><span class="num">當</span></span>
-        </div>
+  <div class="img">
+    <img src="img/hub/main.jpg" alt="안은 두 사람을 그린 흑백 삽화를 빨강·노랑으로 바꾼 그림">
+    <svg class="fit hdr" viewBox="0 0 100 4" preserveAspectRatio="none" aria-hidden="true"><text x=".2" y="3.9" textLength="99.6" lengthAdjust="spacingAndGlyphs" font-size="5.4" fill="var(--b)">THE TWELVE CARDS OF A CLENCHED HAND</text></svg>
+  </div>
+
+  <div class="y"><p>十二枚のカードで読む、四人の視線が交わる長編小説。握った拳では、撫でられない。</p></div>
+
+  <a class="R go" href="cinema/" aria-label="映畫館 · 낭독 영상">
+    <span class="big"><span>映</span><span>畫</span><span>館</span></span>
+    <small>NOW SHOWING · 朗讀</small>
+  </a>
+
+  <a class="band go" href="card/" aria-label="CARD · 연초 카드">
+    <svg class="fit" viewBox="0 0 100 30" preserveAspectRatio="none"><text x="0" y="29.6" textLength="100" lengthAdjust="spacingAndGlyphs" font-size="41" fill="var(--b)">CARDS</text></svg>
+    <span class="tag">カード 十二枚</span>
+  </a>
+
+  <div class="bot">
+    <div class="b1">
+      <a class="who go" href="https://portfolio.woodangro.kr/" aria-label="우당로 포트폴리오">
+        <svg class="fit" viewBox="0 0 40 30" preserveAspectRatio="none"><text x="0" y="9.6" textLength="40" lengthAdjust="spacingAndGlyphs" font-size="13.4" fill="var(--b)">WOO-</text><text x="0" y="19.8" textLength="40" lengthAdjust="spacingAndGlyphs" font-size="13.4" fill="var(--b)">DANG-</text><text x="0" y="30" textLength="40" lengthAdjust="spacingAndGlyphs" font-size="13.4" fill="var(--b)">RO</text></svg>
+      </a>
+      <div class="seal"><img src="img/hub/logo.png" alt="遇當路 우당로"></div>
+    </div>
+    <div class="b2">
+      <div class="strip"><svg class="fit" viewBox="0 0 100 4" preserveAspectRatio="none" aria-hidden="true"><text x="0" y="3.93" textLength="100" lengthAdjust="spacingAndGlyphs" font-size="5.4" fill="var(--k)">SIDE A · SIDE B · ON TAPE WITH</text></svg></div>
+      <a class="listen go" href="listen/" aria-label="LISTEN · 우당로 리슨">
+        <svg class="fit" viewBox="0 0 100 30" preserveAspectRatio="none"><text x="0" y="29.6" textLength="100" lengthAdjust="spacingAndGlyphs" font-size="41" fill="var(--k)">LISTEN</text></svg>
+        <span class="jp">聴く</span>
+      </a>
+    </div>
+    <div class="b3">
+      <a class="game go" href="game/" aria-label="FLASH GAME · 게임">
+        <svg class="fit" viewBox="0 0 60 30" preserveAspectRatio="none"><text x="0" y="14.6" textLength="60" lengthAdjust="spacingAndGlyphs" font-size="20.2" fill="var(--b)">FLASH</text><text x="0" y="30" textLength="60" lengthAdjust="spacingAndGlyphs" font-size="20.2" fill="var(--b)">GAME</text></svg>
+      </a>
+      <div class="buy">
+        <p>A first novel by Woodangro. Four people, one table, twelve cards — out 13 November 2026 from Indiepub. 遇當路 長編小說.</p>
+        <nav aria-label="구매">
+          <a href="https://indiepub.kr/product/%EC%A3%BC%EB%A8%B9-%EC%A5%94-%EC%86%90%EC%9C%BC%EB%A1%9C-%EC%93%B0%EB%8B%A4%EB%93%AC%EC%A7%80-%EB%AA%BB%ED%95%B4%EC%84%9C/10160/category/88/display/1/" target="_blank" rel="noopener">BUY → INDIEPUB</a>
+          <a href="https://product.kyobobook.co.kr/detail/S000221881212" target="_blank" rel="noopener">KYOBO</a>
+          <a href="https://m.yes24.com/goods/detail/199895018" target="_blank" rel="noopener">YES24</a>
+          <a href="https://www.aladin.co.kr/m/mproduct.aspx?ItemId=406090166" target="_blank" rel="noopener">ALADIN</a>
+        </nav>
       </div>
-      <span class="vert l ink" style="color:var(--red)">ONE DECK · 十二枚</span>
-      <span class="vert r ink" style="color:var(--blue)">2026 · 11 · 13</span>
-      <div id="pile" aria-hidden="true"></div>
-      <div class="layer" id="shufL" aria-hidden="true"><img src="img/casino/shuffle.jpg" alt=""><span class="seal red ink"><b>SHUFFLE</b><small>切 · 混 · 配</small></span></div>
     </div>
-  </section>
-
-  <section class="scene" id="s2" aria-label="다섯 장">
-    <div class="stage">
-      <div class="layer center"><div class="board" id="board"></div></div>
-      <span class="vert l ink" style="color:var(--blue)">配札 · 五枚</span>
-      <span class="vert r ink" style="color:var(--red)" id="handNo">第 一 回</span>
-    </div>
-  </section>
-
-  <section class="scene" id="s3" aria-label="낭독">
-    <div class="stage">
-      <div class="layer center" id="slotL">
-        <div class="machine" id="machine">
-          <div class="crown"><span>FEVER</span><span class="seal"><b>大當</b></span><span>777</span></div>
-          <div class="reels" id="reels"></div>
-          <div class="lamps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <div class="handle" aria-hidden="true"><span class="arm" id="arm"><span class="ball"></span><span class="rod"></span></span></div>
-        </div>
-        <p class="big7 ink">大當 · 朗讀</p>
-      </div>
-      <span class="vert l ink" style="color:var(--red)">朗讀 · 安智友</span>
-      <div class="screen" id="screen"><div id="vid" style="width:100%;height:100%"></div></div>
-    </div>
-  </section>
-
-  <section id="book" aria-label="책">
-    <span class="seal blue ink"><b>遇當路</b><small>WOODANGRO</small></span>
-    <h2>주먹 쥔 손으로 쓰다듬지 못해서</h2>
-    <p>우당로 장편소설 · 인디펍 · 2026. 11. 13</p>
-    <p class="row"><a href="https://indiepub.kr/product/%EC%A3%BC%EB%A8%B9-%EC%A5%94-%EC%86%90%EC%9C%BC%EB%A1%9C-%EC%93%B0%EB%8B%A4%EB%93%AC%EC%A7%80-%EB%AA%BB%ED%95%B4%EC%84%9C/10160/category/88/display/1/" target="_blank" rel="noopener">인디펍</a><a href="https://product.kyobobook.co.kr/detail/S000221881212" target="_blank" rel="noopener">교보문고</a><a href="https://m.yes24.com/goods/detail/199895018" target="_blank" rel="noopener">YES24</a><a href="https://www.aladin.co.kr/m/mproduct.aspx?ItemId=406090166" target="_blank" rel="noopener">알라딘</a></p>
-    <p class="row"><a href="read/">1장</a><a href="listen/">듣기</a><a href="test/">테스트</a><a href="unread/">읽지 않음</a><a href="https://zine.woodangro.kr/">지면</a><a href="https://www.instagram.com/woodang_ro/" target="_blank" rel="noopener">인스타그램</a><a href="https://portfolio.woodangro.kr/">우당로</a></p>
-  </section>
+  </div>
+  <div class="music" id="music"><span id="pt">♪</span><button type="button" id="pp">PLAY 再生</button><button type="button" id="pn">NEXT 次</button></div>
 </main>
 
-<dialog id="cardDlg" aria-label="카드"><button class="x" type="button" data-close>닫기</button><div class="cardview" id="cardView"></div></dialog>
-
-<div class="player" id="player" role="region" aria-label="주먹 쥔 노래">
-  <span class="t" id="pt">주먹 쥔 노래</span>
-  <button type="button" id="pp">재생</button>
-  <button type="button" id="pn">다음</button>
-</div>
-<audio id="au" preload="none"></audio>
-
-<script>
-const CARDS = [{"no": 1, "ch": 1, "who": "류", "line": "사랑하는 사람과 살고 있다.", "paras": ["자리에서 일어나 쓰레기를 버리고 돌아오니, 앞자리는 비어 있었다. 대신 안방 쪽의 화장실 문이 닫히는 소리가 울렸고, 이어서 샤워기 물이 나오는 소리가 들렸다. 식탁 위에는 서로 다른 파스타 두 접시만 남겨져 있었다. 이럴 거면 청소 당번을 왜 정했는지. 나는 접시를 치우고, 식탁을 닦았다. 수지가 앉아 있던 자리에서는 연한 생화 향이 맡아졌다.", "나는 식탁으로 노트북을 가져와 앉았다. 메모장을 켜고 타자를 한 자씩 신중히 눌러 적었다. ‘사랑하는 사람과 살고 있다.’ 다음 문장은 손이 굳어서 써지지 않았다. 깜빡이는 커서를 바라보고 있다가 소름이 끼쳐서 노트북을 덮으려는데 수지가 화장실에서 나왔다. 문틈으로 김이 흘러나와 천장으로 올라가고, 짙은 생화 향이 맡아졌다. 수지는 곧바로 방에 들어갔고, 나는 다시 노트북으로 고개를 돌렸다. 커서는 여전히 느리게 깜빡이고 있었다."]}, {"no": 2, "ch": 1, "who": "류", "line": "주먹으로는 다독일 수도 쓰다듬을 수도 없는데.", "paras": ["“남동생이 있거든. 걔는 예쁨을 많이 받았어. 그런데 왤까, 나는 미움을 받았어. 어릴 때 기억이 하나 있는데, 엄마가 동생을 토닥거리면서 안아주고 있었어. 나는 문틈으로 그걸 보면서 스스로를 토닥거렸어. 그렇게 아끼는 아들이면 잘 키워야 할 텐데. 매일 바쁘다고만... 결국 동생을 내가 업어 키웠어.”", "술맛이 너무 쓰게 느껴졌다. 나는 어느새 주먹을 쥐고 있었다. 주먹으로는 다독일 수도 쓰다듬을 수도 없는데.", "“미국에 간 친구가 이제 내겐 마지막이야. 죽은 친구랑 우리는 셋이서 친구였어. 서로가 서로를 많이 아끼는 관계였는데. 그런데 이제는 미국에 가서 볼 수 없어. 금방 돌아오겠다고 했는데, 여자의 직감이라는 게 있잖아. 기약이 없는 기다림이 될 것 같아. 왜 이렇게 애처로운 걸까, 그냥 평범하면 좋겠는데.”"]}, {"no": 3, "ch": 2, "who": "류", "line": "어딘가 익숙한 베이비 파우더 향이 났다.", "paras": ["“왜 그렇게 뚱한 표정인데. 카메라 돌려달라고 해서 그래?”", "네가 매고 온 빨간 목도리. 그게 어딘가 익숙해서 그러는 건데. 수지는 지갑을 내 앞에 던지면서 말했다.", "마지막까지 말을 그렇게 해야 할까. 나는 카메라를 꺼내려고 가방에 넣었던 손을 그대로 꺼냈다. 그리고 테이블 위의 목도리를 들어서 냄새를 맡아봤다. 네게서 나던 생화 향과는 달랐다. 대신 어딘가 익숙한 베이비 파우더 향이 났다. 지연의 냄새.", "“향수 바꿨나 보네.”", "“뭐라는 거야. 이리 줘.”", "나는 조용히 목도리를 건넸다. 수지는 눈살을 찌푸렸고, 나는 자리에서 일어났다. 지갑을 손에 쥐고 가방을 챙겼다. 나는 카페를 나가기 위해 뒤로 돌았다. 드르륵. 뒤에서 의자 끄는 소리가 크게 울렸고, 얇은 손이 내 팔을 잡았다."]}, {"no": 4, "ch": 2, "who": "류", "line": "세상은 발과 손끝부터 얼어붙었다.", "paras": ["메시지를 확인하자마자 가게에 불이 꺼지고 지연이 나왔다. 지연은 가게 앞에 봉투를 하나 내려두고는 곧장 뒤로 돌아 골목으로 향해 걸었다. 나는 손을 흔들어봤지만 보지 못했는지 그냥 돌아섰다. 물어보고 싶어졌다. 주머니에서 전화기를 꺼내려고 손을 집어넣었다가, 그대로 굳어버렸다. 검은 코트를 입은 남자와 지연이 비슷한 코트를 입고 있었다. 그 남자는 지연에게 빨간 목도리를 둘러 주고 있었다. 나는 가로등 뒤로 몸을 숨겼다. 그리고 손에 쥐고 있던 곰인형마저 뒤로 숨겨야만 했다. 뒷모습 두 개가 사라질 때까지 골목 쪽을 바라봤다. 빨간색이 보이지 않을 때까지. 세상은 발과 손끝부터 얼어붙었다. 나는 담배를 하나 꺼내 물었다. 입에서 흘러나오는 연기는 꽤나 오래 골목을 맴돌다 사라졌다."]}, {"no": 5, "ch": 3, "who": "지연", "line": "서른 살의 사랑은 참 불안해.", "paras": ["“서른 살의 사랑은 참 불안해.”", "“응?”", "“다들 불안하거든, 이십 대에는 사랑만 하면 그만이었는데. 지금은 잘 맞으면 결혼까지 해야만 하니까. 사랑도, 사람도 참 많은 세상인데, 내 집 하나 없으니까 말이야.”", "아까부터 류가 술을 빨리 마시는 것 같긴 했는데, 이렇게 취한 줄은 몰랐다. 류는 말을 마치고 술잔을 탁 소리가 나게 내려놨다. 약불 위에서 끓지 않을 만큼만 데워지던 어묵탕의 국물이 내 손에 튀었고, 나는 그만 비명을 질렀다.", "“악!”", "주위의 시선이 한꺼번에 쏠렸다. 부끄러워 몸을 움츠리고 류를 쳐다봤지만, 류는 태평하게 숟가락을 거울 삼아 자신의 얼굴을 바라보고 있었다.", "“입에 넣었다가 뺀 숟가락에서는 특유의 비린내가 나. 멀쩡하던 두 개가 만나니까 더러워지는 것처럼, 서른 살에는 아무나 만나서는 안 되는 거야.”"]}, {"no": 6, "ch": 4, "who": "지연", "line": "아니, 쓰레기 달라고 내민 손이었어.", "paras": ["“네가 또리한테 츄르 줄래?”", "나는 류의 손에서 츄르를 넘겨받아 또리의 입 앞으로 가져다 대었다. 또리는 츄르보다 내 손을 먼저 핥고, 이어서 츄르를 핥았다. 혓바닥 돌기가 비닐을 핥는 소리만 들렸다. 너무 조용해서 뒤를 돌아보니 류가 나와 또리를 바라보고 있었다. 나는 다시 고개를 돌려 츄르를 먹는 또리의 머리를 긁어줬다. 츄르를 다 먹은 또리는 내 다리에 머리를 몇 번 비비고는 옷방으로 들어갔다. 또리의 꼬리를 마지막까지 눈으로 따라가던 내 앞으로 류의 손이 내밀어졌다. 손바닥에는 유독 핏줄이 많이 보였다. 무언가 달라고 내민 손이라면 무언가 줘야 했다. 그래서 나는 류의 손 위에 내 손을 포개었다. 류는 웃으면서 주저앉았다.", "“아니, 쓰레기 달라고 내민 손이었어.”"]}, {"no": 7, "ch": 4, "who": "류", "line": "세상은 손끝부터 따듯해지고 있었다.", "paras": ["그날도 비가 왔었다. 집 가는 길에 내 뒤를 자꾸만 따라오는 쫄딱 젖은 검은색 고양이. 지나가면서 자주 보던 고양이에게 이름을 붙여준 날이었다. 온통 젖은 채로 비를 피해 우산 아래로 들어오는 또리를 두고 갈 수 없었다. 혼자 살기에 집도 넓어졌겠다, 나는 또리를 그대로 안고 왔다. 새로운 가족을 데리고 돌아온 집은 조용해서, 빗방울이 창문을 두드리는 소리만 들렸다. 나는 안방 문을 닫고 담배를 챙겨 베란다로 나왔다. 문을 열었더니 비가 조금 그친 게 보였다. 나는 연초 한 대를 꺼내서 불을 붙였다. 한 모금 하고 나서는 가만히 있었다. 그저 연초가 타는 것만 지켜봤다. 토독토독. 세상은 손끝부터 따듯해지고 있었다. 담배가 다 타기도 전에 연초의 불이 꺼졌다. 하늘은 아까보다 더 밝아져 있었다."]}, {"no": 8, "ch": 5, "who": "연우", "line": "언니의 손이 무척이나 따듯해서 고개가 내려갔다.", "paras": ["언니가 아니었다면, 무준 오빠가 없었다면 내가 어떤 꼴을 당했을지. 조용히 상상해봤다. 언니는 그런 나를 뚫어져라 쳐다보며 한참 동안 입을 우물거렸다. 입안에 고인 침 소리가 방 안에 울릴 정도로 조용해지자, 언니는 침을 삼키고는 입을 열었다.", "“연우야, 그냥 나랑 같이 살래?”", "언니는 앞에 앉으며 내 손을 쥐었다.", "“어차피 이사도 갈 예정이었고, 둘이 같이 살면 더 큰 집에서 살 수 있잖아. 연우가 나랑 같이 살겠다면 관리비는 내가 낼게. 그래도 집값은 반반이다?”", "따듯했다. 언니의 손이 무척이나 따듯해서 고개가 내려갔다. 언니는 나를 안아줬다. 역시나 따듯했다."]}, {"no": 9, "ch": 6, "who": "류", "line": "그냥, 그냥 잘했다고.", "paras": ["지연이 들어오고서야 문이 닫혔다. 방 안으로 베이비 파우더 향기가 퍼졌다. 지연은 신발을 벗어 신발장에 넣고는 두 손을 꼭 쥔 채로 들어왔다. 또리는 어느새 지연의 종아리에 얼굴을 비비고 있었다. 캐리어를 거실 벽면에 두고 돌아봤을 때 또리는 지연의 발아래에 배를 까고 누워 있었다. 나는 식탁에 앉아 둘이 함께 있는 모습을 보면서 숨소리를 낮췄다. 집 안에는 또리의 그르릉 소리와 손톱으로 털을 긁어주는 소리만 들렸다. 한참을 그렇게 있었다. 얼마나 지났을까 지연은 고개를 들지 않은 채로 말했다.", "“연우랑 싸웠어.”", "“잘했어.”", "“무슨 일인지 알고 잘했다고 하는 거야.”", "“그냥, 그냥 잘했다고.”"]}, {"no": 10, "ch": 6, "who": "류", "line": "함께 산다는 것은.", "paras": ["“뭐 보고 있어?”", "지연은 대답 없이 고개만 저었다. 노트북 화면에는 ‘사랑하는 사람과 살고 있다.’라고 떠 있었다. 저건 일 년 전쯤 쓴 글이었는데. 지연은 더 말이 없었고, 나도 말이 없었다. 물컵을 쥔 손이 흔들렸다. 또리는 어디선가 자고 있는지 거실이 조용해졌다.", "“이 사람 누구야?”", "한참 동안 말이 없던 지연은 내 핸드폰을 손가락으로 가리키며 말했다. 나는 핸드폰을 집어 들었다.", {"from": "예나", "time": "15분 전", "msg": "오빠 오늘 뭐 해?"}, "“아는 동생이야.”", "우리는 함께 나가서 산호로 향했다. 지연은 커피 머신을 켰고, 나는 계단을 빗자루로 쓸었다. 돌아오면 지연이 타놓은 커피가 있다. 나는 그걸 들고 글을 쓰러 자리로 돌아온다. 나는 노트북을 켰다. ‘사랑하는 사람과 살고 있다.’라고 적혀 있던 문장을 지우고 새로 적기 시작했다. ‘함께 산다는 것은.’"]}, {"no": 11, "ch": 7, "who": "지연", "line": "약속해.", "paras": ["연우는 숨을 크게 내쉬더니 나를 꽉 껴안았다. 숨이 막혔다. 한참을 안고 있던 연우는 내 어깨에 양손을 짚고 앞에 섰다. 연우의 두 눈이 붉었다. 눈부터 턱까지 물길이 길게 이어져 있었다. 연우는 말없이 나를 쳐다보다 내게 새끼손가락을 내밀며 말했다.", "“약속해.”", "연우의 손가락이 무척 하얗게 보였다. 나도 새끼손가락을 가져다 대어 엮었다. 그리고 서로의 엄지를 맞대고 나서야 연우는 미소를 지었다. 연우는 내 손을 끌고 소파로 가서 나를 앉게 했다. 잘 돌아왔다고 말하는 연우를 팔에 힘을 줘서 꽉 끌어안았다. 숨이 막힐 정도로. 탁. 탁. 연우가 내 등을 손바닥으로 내리치며 풀어달라고 말했다. 그제야 우리는 서로를 마주 보고 웃을 수 있었다.", "“돌아왔어.”", "“돌아와줘서 고마워.”"]}, {"no": 12, "ch": 7, "who": "류", "line": "연기가 꽤나 오랫동안 골목을 맴돌았다.", "paras": ["공연이 끝났다. 나가는 사람이 몰리기 전에 미리 나와서 클럽 입구 옆에 있는 골목으로 들어갔다. 담배를 하나 꺼내 물고 불을 붙였다. 연기가 꽤나 오랫동안 골목을 맴돌았다. 공연장에서 사람들이 하나둘씩 나오기 시작했다. 밴드 멤버들은 각자 사람들에게 둘러싸여 인사를 하고 있었다. 수국을 들고 있던 여자는 지연에게 꽃을 쥐어주더니 무리를 떠났다. 그렇게 갈 사람들이 모두 가고, 남은 사람들끼리 이야기를 하는데 뒤풀이라는 말이 들렸다. 단체로 술을 마시러 가는 게 아닐까 싶었다. 나는 지연에게 인사를 하고 집으로 가려고 했다. 그때 반짝이는 시계를 가진 남자와 지연이 이야기를 나누고 있었다. 지연의 눈이 보였다. 동그랗고, 크게 뜬 두 눈이."]}];
-const SONGS = [
-  ['Folded in Halves','listen/audio/track-01.mp3'],['가을 화분','listen/audio/track-02.mp3'],['두 접시 나란히 두자','listen/audio/track-03.mp3'],
-  ['가을 화분 ver 2','listen/audio/track-04.mp3'],['Folded in Halves ver 2','listen/audio/track-05.mp3'],['끓지 않는 국물','listen/audio/track-06.mp3'],['하얀 봉투','listen/audio/track-07.mp3']
-];
-const VIDEO = 'EZ1Y6_AgRxo';
-
-(() => {
-  const $ = s => document.querySelector(s);
-  const pad = n => String(n).padStart(2, '0');
-  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const seg = (p, a, b) => clamp((p - a) / (b - a));
-  const ease = t => 1 - Math.pow(1 - t, 3);
-  const rnd = (a, b) => a + Math.random() * (b - a);
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const prog = el => { const r = el.getBoundingClientRect(); return clamp(-r.top / (r.height - innerHeight)); };
-
-  /* 노래: 들어오면 바로 재생 (막히면 첫 터치·클릭 때) */
-  const au = $('#au'), player = $('#player');
-  let si = 0, wantMusic = true, started = false, videoOn = false;
-  au.volume = .6;
-  function setSong(i) { si = (i + SONGS.length) % SONGS.length; au.src = SONGS[si][1]; $('#pt').textContent = SONGS[si][0]; }
-  function playMusic() { if (!au.src) setSong(0); return au.play().then(() => { started = true; }).catch(() => {}); }
-  au.addEventListener('ended', () => { setSong(si + 1); au.play().catch(() => {}); });
-  au.addEventListener('play', () => { player.classList.add('on'); $('#pp').textContent = '멈춤'; });
-  au.addEventListener('pause', () => { player.classList.remove('on'); $('#pp').textContent = '재생'; });
-  $('#pp').addEventListener('click', e => { e.stopPropagation(); if (au.paused) { wantMusic = true; playMusic(); } else { wantMusic = false; au.pause(); } });
-  $('#pn').addEventListener('click', e => { e.stopPropagation(); setSong(si + 1); wantMusic = true; au.play().catch(() => {}); });
-  setSong(0); playMusic();
-  const kick = () => { if (!started && wantMusic && !videoOn) playMusic(); };
-  ['pointerdown', 'keydown', 'touchend'].forEach(ev => addEventListener(ev, kick, { passive: true }));
-
-  /* 1. 후두둑 떨어지는 카드 — 끌어서 옮기고 던질 수 있어요 */
-  const pile = $('#pile');
-  const SUITS = [['♠', 0], ['♥', 1], ['♦', 1], ['♣', 0]];
-  const RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-  const FACE = { J: '遇', Q: '當', K: '路' };
-  const count = innerWidth < 700 ? 22 : 44;
-  const cards = [];
-  let zTop = 10;
-  for (let i = 0; i < count; i++) {
-    const back = Math.random() < .2;
-    const [s, red] = SUITS[i % 4];
-    const r = RANKS[Math.floor(Math.random() * RANKS.length)];
-    const el = document.createElement('div');
-    el.className = 'card ink' + (back ? ' back' : red ? ' red' : '');
-    el.innerHTML = back ? '<span class="m">遇</span>'
-      : `<span class="c tl">${r}<i>${s}</i></span><span class="m${FACE[r] ? ' face' : ''}">${FACE[r] ? `<span>${FACE[r]}</span>` : s}</span><span class="c br">${r}<i>${s}</i></span>`;
-    pile.appendChild(el);
-    cards.push({ el, x: 0, y: 0, r: rnd(-40, 40), tx: 0, ty: 0, vx: 0, vy: 0, vr: 0, falling: true, delay: rnd(0, 1300) + i * 18, drag: false, dir: rnd(-1, 1) });
-  }
-  function place() {
-    const W = pile.clientWidth, H = pile.clientHeight, cw = cards[0].el.offsetWidth, ch = cards[0].el.offsetHeight;
-    cards.forEach(c => {
-      const gx = (Math.random() + Math.random()) / 2, gy = (Math.random() + Math.random() + Math.random()) / 3;
-      c.tx = gx * (W - cw); c.ty = .1 * H + gy * (H * .82 - ch);
-      c.x = c.tx + rnd(-60, 60); c.y = -ch - rnd(40, 500);
-    });
-  }
-  place();
-  let sweep = 0;
-  function draw(c) {
-    const sx = sweep * c.dir * 260, sy = sweep * innerHeight * 1.2, sr = sweep * c.dir * 120;
-    c.el.style.transform = `translate(${c.x + sx}px, ${c.y + sy}px) rotate(${c.r + sr}deg)`;
-  }
-  const t0 = performance.now();
-  let last = t0, running = true, dragging = 0;
-  function physics(now) {
-    const dt = Math.min(32, now - last) / 16.67; last = now;
-    const W = pile.clientWidth, H = pile.clientHeight;
-    let moving = false;
-    for (const c of cards) {
-      if (c.drag) { draw(c); continue; }
-      if (c.falling) {
-        if (now - t0 < c.delay) { draw(c); moving = true; continue; }
-        if (c.vr === 0) c.vr = rnd(-3, 3);
-        c.vy += 1.25 * dt; c.y += c.vy * dt; c.r += c.vr * dt; c.x += (c.tx - c.x) * .04 * dt;
-        if (c.y >= c.ty) { c.y = c.ty; if (c.vy > 6) { c.vy *= -.22; c.vr *= .4; } else { c.falling = false; c.vy = 0; c.vr = 0; } }
-        moving = true;
-      } else if (Math.abs(c.vx) + Math.abs(c.vy) + Math.abs(c.vr) > .05) {
-        c.x += c.vx * dt; c.y += c.vy * dt; c.r += c.vr * dt;
-        const f = Math.pow(.9, dt); c.vx *= f; c.vy *= f; c.vr *= f;
-        const cw = c.el.offsetWidth, ch = c.el.offsetHeight;
-        if (c.x < -cw * .3) { c.x = -cw * .3; c.vx = Math.abs(c.vx) * .5; }
-        if (c.x > W - cw * .7) { c.x = W - cw * .7; c.vx = -Math.abs(c.vx) * .5; }
-        if (c.y < -ch * .3) { c.y = -ch * .3; c.vy = Math.abs(c.vy) * .5; }
-        if (c.y > H - ch * .7) { c.y = H - ch * .7; c.vy = -Math.abs(c.vy) * .5; }
-        moving = true;
-      }
-      draw(c);
-    }
-    if (moving || dragging) requestAnimationFrame(physics); else running = false;
-  }
-  const wake = () => { if (!running) { running = true; last = performance.now(); requestAnimationFrame(physics); } };
-  if (reduce) cards.forEach(c => { c.falling = false; c.x = c.tx; c.y = c.ty; draw(c); });
-  requestAnimationFrame(physics);
-
-  cards.forEach(c => {
-    let ox, oy, lx, ly, lt;
-    c.el.addEventListener('pointerdown', e => {
-      e.preventDefault(); c.el.setPointerCapture(e.pointerId);
-      c.drag = true; c.falling = false; dragging++; c.el.classList.add('dragging'); c.el.style.zIndex = ++zTop;
-      ox = e.clientX - c.x; oy = e.clientY - c.y; lx = e.clientX; ly = e.clientY; lt = performance.now(); c.vx = c.vy = c.vr = 0; wake();
-    });
-    c.el.addEventListener('pointermove', e => {
-      if (!c.drag) return;
-      const now = performance.now(), k = Math.max(1, now - lt) / 16.67;
-      c.vx = (e.clientX - lx) / k; c.vy = (e.clientY - ly) / k; c.vr = c.vx * .15;
-      c.x = e.clientX - ox; c.y = e.clientY - oy; c.r += c.vx * .08;
-      lx = e.clientX; ly = e.clientY; lt = now;
-    });
-    const up = () => { if (!c.drag) return; c.drag = false; dragging--; c.el.classList.remove('dragging'); wake(); };
-    c.el.addEventListener('pointerup', up); c.el.addEventListener('pointercancel', up);
-  });
-
-  function s1(p) {
-    sweep = ease(seg(p, .3, .58));
-    cards.forEach(draw);
-    pile.style.pointerEvents = sweep > .05 ? 'none' : '';
-    $('#mark1').style.opacity = 1 - seg(p, .35, .5);
-    const sh = $('#shufL');
-    sh.style.opacity = seg(p, .5, .62) * (1 - seg(p, .9, 1));
-    sh.querySelector('img').style.transform = `scale(${1.15 - .15 * seg(p, .5, 1)})`;
-    sh.querySelector('.seal').style.transform = `rotate(${-6 + 12 * seg(p, .5, 1)}deg) scale(${.9 + .2 * ease(seg(p, .5, .7))})`;
-  }
-
-  /* 2. 다섯 장 → 내리면 셔플 → 다른 다섯 장 */
-  const board = $('#board');
-  board.innerHTML = [1, 2, 3, 4, 5].map(n => `<div class="cell"><span class="num">${n}</span><div class="pcw"></div></div>`).join('');
-  const cells = [...board.querySelectorAll('.cell')];
-  const mix = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-  const deck = mix([...Array(12)].map((_, i) => i + 1));
-  const hands = [deck.slice(0, 5).sort((a, b) => a - b), deck.slice(5, 10).sort((a, b) => a - b)];
-  const cardEl = no => `<div class="pc" data-no="${no}"><div class="in"><div class="b"></div><div class="f"><img src="img/deck/card-${pad(no)}.jpg" alt="연초 카드 No.${pad(no)}" loading="lazy"></div></div></div>`;
-  let shown = -1;
-  function setHand(h) {
-    if (shown === h) return; shown = h;
-    cells.forEach((c, i) => c.querySelector('.pcw').innerHTML = cardEl(hands[h][i]));
-    $('#handNo').textContent = h ? '第 二 回' : '第 一 回';
-  }
-  setHand(0);
-  function s2(p) {
-    const h = p < .56 ? 0 : 1; setHand(h);
-    const dealA = h ? .6 : .03, flipA = h ? .74 : .2;
-    const g = h ? 0 : ease(seg(p, .46, .56));
-    cells.forEach((c, i) => {
-      const pc = c.querySelector('.pc'); if (!pc) return;
-      const d = ease(seg(p, dealA + i * .03, dealA + i * .03 + .09));
-      pc.style.transform = `translate(${(1 - d) * (2 - i) * 110 + g * (2 - i) * 100}%, ${(1 - d) * -90}%) rotate(${(1 - d) * (i * 16 - 32) + g * (i - 2) * 8}deg) scale(${.6 + .4 * d - .15 * g})`;
-      pc.style.opacity = d * (h ? 1 : 1 - seg(p, .54, .56));
-      pc.classList.toggle('open', p > flipA + i * .02 && !(h === 0 && p > .45));
-    });
-  }
-  board.addEventListener('click', e => {
-    const p = e.target.closest('.pc.open'); if (!p) return;
-    const c = CARDS[+p.dataset.no - 1]; if (!c) return;
-    const body = (c.paras || []).map(x => typeof x === 'string' ? `<p class="t">${x}</p>` : `<p class="t">[${x.from} · ${x.time}] ${x.msg}</p>`).join('');
-    $('#cardView').innerHTML = `<img src="img/deck/card-${pad(c.no)}.jpg" alt=""><div><p class="no">No.${pad(c.no)} · ${c.ch}장 · ${c.who}</p><h3>${c.line}</h3>${body}</div>`;
-    $('#cardDlg').showModal();
-  });
-  $('#cardDlg [data-close]').addEventListener('click', () => $('#cardDlg').close());
-  $('#cardDlg').addEventListener('click', e => { if (e.target.id === 'cardDlg') $('#cardDlg').close(); });
-
-  /* 3. 대당: 내리면 핸들이 당겨지고 777 → 낭독 */
-  const SYM = [['7', 'seven'], ['遇', ''], ['♥', 'r'], ['當', ''], ['♣', ''], ['路', 'r'], ['♦', 'r'], ['福', ''], ['♠', '']];
-  const N = 30;
-  $('#reels').innerHTML = [0, 1, 2].map(k => {
-    let h = ''; for (let i = 0; i < N; i++) { const s = i === N - 1 ? SYM[0] : SYM[(i * 4 + k * 3 + 1) % SYM.length]; h += `<div class="sym ${s[1]}">${s[0]}</div>`; }
-    return `<div class="reel"><div class="strip">${h}</div></div>`;
-  }).join('');
-  const strips = [...document.querySelectorAll('.strip')];
-  let musicWas = false;
-  function startVideo() {
-    if (videoOn) return; videoOn = true;
-    musicWas = !au.paused; au.pause();
-    const active = navigator.userActivation ? navigator.userActivation.hasBeenActive : started;
-    $('#vid').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${VIDEO}?autoplay=1&rel=0&playsinline=1${active ? '' : '&mute=1'}" title="낭독 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-  }
-  function stopVideo() { if (!videoOn) return; videoOn = false; $('#vid').innerHTML = ''; if (musicWas && wantMusic) au.play().catch(() => {}); }
-  function s3(p) {
-    $('#arm').style.transform = `scaleY(${1 - 1.4 * Math.sin(Math.PI * seg(p, .05, .2))})`;
-    const h = strips[0].firstElementChild.offsetHeight;
-    strips.forEach((s, k) => { s.style.transform = `translateY(-${ease(seg(p, .1, .42 + k * .06)) * (N - 1) * h}px)`; });
-    $('#machine').classList.toggle('win', p > .55);
-    const show = p > .62;
-    $('#screen').classList.toggle('on', show);
-    $('#slotL').style.opacity = show ? .12 : 1;
-    if (show) startVideo(); else if (p < .5) stopVideo();
-  }
-  new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) stopVideo(); })).observe($('#s3'));
-
-  const S1 = $('#s1'), S2 = $('#s2'), S3 = $('#s3');
-  let ticking = false;
-  const frame = () => { ticking = false; s1(prog(S1)); s2(prog(S2)); s3(prog(S3)); };
-  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
-  addEventListener('resize', frame);
-  frame();
-
-  if (/^#(reading|slot)/.test(location.hash)) setTimeout(() => scrollTo(0, S3.offsetTop + (S3.offsetHeight - innerHeight) * .7), 60);
-})();
-</script>
+<script src="hub-fit.js"></script>
+<script src="hub-music.js"></script>
 </body>
 </html>
