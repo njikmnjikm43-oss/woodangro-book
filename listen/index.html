@@ -3,88 +3,326 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>낭독 · 주먹 쥔 손으로 쓰다듬지 못해서</title>
-<meta name="description" content="우당로 장편소설 『주먹 쥔 손으로 쓰다듬지 못해서』 낭독. 안지우 낭독.">
-<meta property="og:title" content="낭독 · 주먹 쥔 손으로 쓰다듬지 못해서">
-<meta property="og:description" content="우당로 장편소설 『주먹 쥔 손으로 쓰다듬지 못해서』 낭독 · 안지우">
-<meta property="og:image" content="https://woodangro.kr/img/reading-1.jpg">
-<meta name="theme-color" content="#0b1633">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500&family=Song+Myung&display=swap">
+<title>듣기 · 주먹 쥔 손으로 쓰다듬지 못해서</title>
+<meta name="description" content="카세트를 넣어 듣는 『주먹 쥔 손으로 쓰다듬지 못해서』 — 안지우 낭독과 주먹 쥔 노래 일곱 곡.">
+<meta property="og:title" content="듣기 · 주먹 쥔 손으로 쓰다듬지 못해서">
+<meta property="og:description" content="카세트를 넣어 듣는 낭독과 노래">
+<meta property="og:image" content="https://woodangro.kr/listen/img/radio.webp">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
-  --night:#0b1633;
-  --ink:#f5f4f1;
-  --smoke:#a9b0c4;
-  --rule:rgba(245,244,241,.16);
-  --gold:#b39256;
-  --display:"Song Myung","Noto Serif KR","Nanum Myeongjo",serif;
-  --body:"Gowun Batang","Noto Serif KR","Nanum Myeongjo",serif;
-  --ui:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  color-scheme:dark;
+  --bg:#fff; --ink:#111; --yellow:#ffd400;
+  --font:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%}
-body{background:radial-gradient(120% 80% at 50% 0%,#16285a 0%,var(--night) 60%);background-color:var(--night);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;
-  min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:max(28px,env(safe-area-inset-top)) clamp(18px,5vw,40px) max(28px,env(safe-area-inset-bottom))}
-main{width:100%;max-width:760px;display:flex;flex-direction:column;align-items:center;gap:clamp(22px,4vh,34px)}
-header{text-align:center}
-.seal{display:block;height:22px;width:auto;margin:0 auto 22px;filter:invert(1) brightness(1.05);opacity:.9}
-.kicker{margin:0 0 12px;font-family:var(--ui);font-size:12px;letter-spacing:.24em;color:var(--smoke)}
-h1{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(28px,6vw,44px);line-height:1.3;letter-spacing:-.01em;word-break:keep-all}
-.by{margin:12px 0 0;font-size:16px;color:var(--smoke)}
-.by b{color:var(--ink);font-weight:400}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;min-height:100svh;
+  padding:max(24px,env(safe-area-inset-top)) clamp(16px,4vw,48px) max(28px,env(safe-area-inset-bottom))}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
 
-.player{position:relative;width:100%;aspect-ratio:16/9;background:#050a18;border-radius:6px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
-.player button{all:unset;cursor:pointer;position:absolute;inset:0;display:block}
-.player img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;transition:opacity .3s,transform .8s cubic-bezier(.2,.7,.2,1)}
-.player button:hover img{opacity:1;transform:scale(1.015)}
-.player .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:rgba(245,244,241,.92);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-.player .play::before{content:"";margin-left:5px;border-left:18px solid var(--night);border-top:11px solid transparent;border-bottom:11px solid transparent}
-.player button:focus-visible{outline:2px solid var(--gold);outline-offset:-4px}
-.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.player .soon{margin:0;position:absolute;left:0;right:0;bottom:0;padding:14px;text-align:center;font-family:var(--ui);font-size:13px;letter-spacing:.06em;color:var(--ink);background:linear-gradient(transparent,rgba(5,10,24,.85))}
+header{max-width:1200px;margin:0 auto clamp(16px,4vh,40px);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.kicker{margin:0 0 6px;font-size:13px;font-weight:600;letter-spacing:.16em}
+h1{margin:0;font-size:clamp(24px,3.4vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.2;word-break:keep-all}
+.how{margin:0;font-size:14px;font-weight:500}
+.how mark{background:var(--yellow);color:var(--ink);padding:1px 4px}
 
-.go{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;background:var(--ink);color:var(--night);font-family:var(--ui);font-weight:500;font-size:16px;text-decoration:none;transition:transform .2s,background .2s}
-.go:hover{background:#fff;transform:translateY(-1px)}
-.go:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
-.note{margin:0;font-family:var(--ui);font-size:12px;color:var(--smoke);letter-spacing:.04em;text-align:center}
+.stage{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,24vw,300px);gap:clamp(20px,4vw,64px);align-items:center}
+@media (max-width:760px){.stage{grid-template-columns:1fr}}
+
+/* 라디오 */
+.radio{position:relative;width:100%;aspect-ratio:900/605;user-select:none;-webkit-user-select:none}
+.radio > img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.radio.over{filter:drop-shadow(0 0 0 var(--yellow)) drop-shadow(0 0 18px rgba(255,212,0,.9))}
+.lcd{position:absolute;left:4.2%;top:11.6%;width:32.6%;height:16%;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:0 3%;color:var(--yellow);font-weight:600;line-height:1.25;pointer-events:none}
+.lcd .l1{font-size:clamp(9px,1.25vw,15px);letter-spacing:.08em;opacity:.85;white-space:nowrap}
+.lcd .l2{font-size:clamp(12px,1.9vw,22px);white-space:nowrap;letter-spacing:-.01em}
+.lcd .l2 span{display:inline-block}
+.lcd .l2.run span{animation:marq 9s linear infinite}
+@keyframes marq{0%,15%{transform:translateX(0)}85%,100%{transform:translateX(var(--shift,0))}}
+.lcd .l3{font-size:clamp(9px,1.2vw,14px);font-variant-numeric:tabular-nums;opacity:.9}
+
+.keys{position:absolute;left:10.4%;top:1.9%;width:34.6%;height:6.6%;display:grid;grid-template-columns:repeat(6,1fr)}
+.keys button{position:relative;border-radius:2px;transition:transform .08s,background .15s}
+.keys button:hover{background:rgba(255,212,0,.25)}
+.keys button.down{transform:translateY(3px);background:rgba(255,212,0,.35)}
+.keys button span{position:absolute;left:50%;top:-1.5em;transform:translateX(-50%);font-size:clamp(9px,1vw,12px);font-weight:700;white-space:nowrap;color:var(--ink);opacity:0;transition:opacity .2s}
+.radio:hover .keys button span,.keys button:focus-visible span{opacity:1}
+
+.slot{position:absolute;left:13.1%;top:44.2%;width:25.9%;height:17.4%;border-radius:4px;overflow:hidden}
+.slot img{position:absolute;left:50%;top:50%;width:112%;transform:translate(-50%,-50%);opacity:0;transition:opacity .3s}
+.slot.full img{opacity:.92}
+.slot::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.45),rgba(255,255,255,0) 40%,rgba(0,0,0,.12));pointer-events:none}
+.slot .hub{position:absolute;top:50%;width:13%;aspect-ratio:1;margin-top:-6.5%;border-radius:50%;opacity:0;
+  background:conic-gradient(#111 0 12%,transparent 0 33%,#111 0 45%,transparent 0 66%,#111 0 78%,transparent 0);mix-blend-mode:multiply}
+.slot .hub.a{left:24%}.slot .hub.b{right:24%}
+.slot.full .hub{opacity:.55}
+.playing .slot .hub{animation:spin 1.6s linear infinite}
+@keyframes spin{to{transform:rotate(-360deg)}}
+.slot .hint{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(10px,1.3vw,15px);font-weight:700;color:var(--ink);background:rgba(255,212,0,.85);opacity:0;transition:opacity .2s}
+.radio.over .slot .hint{opacity:1}
+
+.eject{position:absolute;left:6.6%;top:32.2%;width:40%;height:9.6%}
+.eject:hover{background:rgba(255,212,0,.22)}
+.cone{position:absolute;left:51.4%;top:37.2%;width:36.4%;aspect-ratio:1;border-radius:50%;pointer-events:none;box-shadow:0 0 0 0 rgba(255,212,0,0)}
+.playing .cone{animation:beat .9s ease-in-out infinite}
+@keyframes beat{50%{box-shadow:0 0 0 6px rgba(255,212,0,.55)}}
+
+/* 카세트 */
+.rack{display:flex;flex-direction:column;gap:clamp(18px,3vh,32px)}
+@media (max-width:760px){.rack{flex-direction:row;justify-content:center}}
+.tape{position:relative;display:block;width:100%;touch-action:none;transition:transform .2s,opacity .25s}
+.tape:hover{transform:translateY(-4px) rotate(-1.5deg)}
+.tape img{display:block;width:100%;height:auto;pointer-events:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.18))}
+.tape .lbl{position:absolute;left:12%;right:12%;top:12%;font-weight:700;color:var(--ink);text-align:left;line-height:1.15;pointer-events:none}
+.tape .lbl b{display:block;font-size:clamp(11px,1.35vw,16px);letter-spacing:-.02em}
+.tape .lbl small{display:block;font-size:clamp(9px,.95vw,12px);font-weight:500}
+.tape.white .lbl{top:8%;left:22%}
+.tape.gone{opacity:.12;transform:none;pointer-events:none}
+.tape .tag{display:block;margin-top:8px;font-size:13px;font-weight:600;text-align:center}
+.flyer{position:fixed;z-index:50;pointer-events:none;transform-origin:0 0;will-change:transform}
+.flyer img{display:block;width:100%;height:auto}
+
+/* 아래 조작부 */
+.deck{max-width:1200px;margin:clamp(20px,4vh,40px) auto 0;display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,24vw,300px);gap:clamp(20px,4vw,64px)}
+@media (max-width:760px){.deck{grid-template-columns:1fr}}
+.ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ctrl button.b{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center}
+.ctrl button.b:hover{background:var(--yellow)}
+.ctrl button.b.main{width:56px;height:56px;background:var(--ink);color:#fff}
+.ctrl button.b.main:hover{background:var(--yellow);color:var(--ink)}
+.ctrl svg{width:18px;height:18px;fill:currentColor}
+.ctrl button:disabled{opacity:.25;pointer-events:none}
+.bar{flex:1 1 200px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:6px;border-radius:3px;background:linear-gradient(var(--yellow),var(--yellow)) 0/var(--p,0%) 100% no-repeat,#e8e8e8;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--ink);border:0}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--ink);border:0}
+
+.list{margin:18px 0 0;padding:0;list-style:none;border-top:2px solid var(--ink)}
+.list li button{width:100%;display:grid;grid-template-columns:2.4em 1fr auto;gap:12px;align-items:center;padding:12px 6px;border-bottom:1px solid #e3e3e3;text-align:left;font-size:16px;font-weight:500}
+.list li button:hover{background:#fff6c2}
+.list li button[aria-current="true"]{background:var(--yellow);font-weight:700}
+.list .n,.list .d{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.empty{margin:18px 0 0;font-size:15px;font-weight:500;line-height:1.6}
+
+.side{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+.go{display:flex;justify-content:center;align-items:center;gap:8px;padding:16px 20px;border-radius:999px;background:var(--ink);color:#fff;font-weight:700;font-size:16px;text-decoration:none}
+.go:hover{background:var(--yellow);color:var(--ink)}
+.sub{display:flex;justify-content:center;padding:12px;border-radius:999px;border:2px solid var(--ink);font-weight:600;font-size:14px;text-decoration:none}
+.sub:hover{background:var(--yellow)}
+.meta{margin:4px 0 0;font-size:13px;font-weight:500;text-align:center}
+@media (prefers-reduced-motion:reduce){.playing .slot .hub,.playing .cone,.lcd .l2.run span{animation:none}}
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <img class="seal" src="../img/logo.png" alt="遇當路">
-    <p class="kicker">낭독</p>
+<header>
+  <div>
+    <p class="kicker">LISTEN · 우당로</p>
     <h1>주먹 쥔 손으로<br>쓰다듬지 못해서</h1>
-    <p class="by">우당로 장편소설 · <b>안지우</b> 낭독</p>
-  </header>
+  </div>
+  <p class="how">카세트를 <mark>끌어다 넣거나</mark> 눌러 보세요.</p>
+</header>
 
-  <div class="player" id="player"></div>
+<main>
+<section class="stage">
+  <div class="radio" id="radio">
+    <img src="img/radio.webp" alt="카세트 라디오" width="900" height="605">
+    <div class="lcd" aria-live="polite"><div class="l1" id="l1">TAPE —</div><div class="l2" id="l2"><span>카세트를 넣어 주세요</span></div><div class="l3" id="l3">00:00 / 00:00</div></div>
+    <div class="keys" role="group" aria-label="라디오 버튼">
+      <button type="button" data-k="rew" aria-label="이전·되감기"><span>◀◀</span></button>
+      <button type="button" data-k="ff" aria-label="다음 곡"><span>▶▶</span></button>
+      <button type="button" data-k="play" aria-label="재생"><span>▶</span></button>
+      <button type="button" data-k="pause" aria-label="일시정지"><span>❚❚</span></button>
+      <button type="button" data-k="stop" aria-label="정지"><span>■</span></button>
+      <button type="button" data-k="eject" aria-label="꺼내기"><span>⏏</span></button>
+    </div>
+    <div class="slot" id="slot"><img alt=""><i class="hub a"></i><i class="hub b"></i><span class="hint">여기에 넣기</span></div>
+    <button type="button" class="eject" id="ejectBtn" aria-label="카세트 꺼내기"></button>
+    <i class="cone" aria-hidden="true"></i>
+  </div>
 
-  <a class="go" href="https://woodangro.kr/">woodangro.kr 바로가기
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
-  <p class="note">2026년 11월 13일 출간 · 인디펍</p>
+  <div class="rack" id="rack" aria-label="카세트">
+    <button type="button" class="tape yellow" data-tape="reading" aria-label="낭독 카세트 넣기">
+      <img src="img/tape-yellow.webp" alt="" width="358" height="232">
+      <span class="lbl"><b>낭독</b><small>안지우 · 4:17</small></span>
+      <span class="tag">A · 낭독</span>
+    </button>
+    <button type="button" class="tape white" data-tape="songs" aria-label="노래 카세트 넣기">
+      <img src="img/tape-white.webp" alt="" width="309" height="205">
+      <span class="lbl"><b>주먹 쥔 노래</b><small>7곡</small></span>
+      <span class="tag">B · 플레이리스트</span>
+    </button>
+  </div>
+</section>
+
+<section class="deck">
+  <div>
+    <div class="ctrl">
+      <button type="button" class="b" data-k="eject" aria-label="꺼내기" disabled><svg viewBox="0 0 24 24"><path d="M12 5l7 8H5zM5 16h14v3H5z"/></svg></button>
+      <button type="button" class="b" data-k="rew" aria-label="이전" disabled><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+      <button type="button" class="b main" data-k="toggle" aria-label="재생" disabled><svg viewBox="0 0 24 24" id="tg"><path d="M7 4l13 8-13 8z"/></svg></button>
+      <button type="button" class="b" data-k="ff" aria-label="다음" disabled><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></svg></button>
+      <div class="bar"><span id="cur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" aria-label="재생 위치" disabled><span id="dur">0:00</span></div>
+    </div>
+    <ol class="list" id="list" hidden></ol>
+    <p class="empty" id="empty">노란 카세트는 낭독, 하얀 카세트는 노래 일곱 곡이에요.</p>
+  </div>
+  <div class="side">
+    <a class="go" href="https://woodangro.kr/">woodangro.kr 바로가기 →</a>
+    <a class="sub" href="https://youtu.be/EZ1Y6_AgRxo" target="_blank" rel="noopener">낭독 영상으로 보기 ↗</a>
+    <p class="meta">2026년 11월 13일 출간 · 인디펍</p>
+  </div>
+</section>
 </main>
-<script>
-/* 유튜브 주소나 영상 ID를 여기에 넣으면 돼요 */
-const YOUTUBE = "https://youtu.be/EZ1Y6_AgRxo";
 
+<audio id="au" preload="none"></audio>
+<script>
 (() => {
-  const box = document.getElementById('player');
-  const m = YOUTUBE.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/) || YOUTUBE.match(/^([\w-]{11})$/);
-  const id = m && m[1];
-  if (!id) {
-    box.innerHTML = '<img src="../img/reading-1.jpg" alt=""><p class="soon">낭독 영상은 곧 공개돼요</p>';
-    return;
+  const TAPES = {
+    reading: { label: 'A · 낭독', img: 'img/tape-yellow.webp', tracks: [{ t: '낭독 — 주먹 쥔 손으로 쓰다듬지 못해서', s: 'audio/reading.mp3', d: 257 }] },
+    songs: { label: 'B · 주먹 쥔 노래', img: 'img/tape-white.webp', tracks: [
+      { t: '폴딘 해븐', s: 'audio/track-01.mp3', d: 211 },
+      { t: '화분 가응', s: 'audio/track-02.mp3', d: 200 },
+      { t: '두 접시 나란히 두자', s: 'audio/track-03.mp3', d: 172 },
+      { t: '가을 화분', s: 'audio/track-04.mp3', d: 203 },
+      { t: 'Folded in Halves', s: 'audio/track-05.mp3', d: 243 },
+      { t: '끓지 않는 국물', s: 'audio/track-06.mp3', d: 132 },
+      { t: '하얀 봉투', s: 'audio/track-07.mp3', d: 183 },
+    ] },
+  };
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const au = $('#au'), radio = $('#radio'), slot = $('#slot'), list = $('#list'), seek = $('#seek');
+  const l1 = $('#l1'), l2 = $('#l2'), l3 = $('#l3');
+  let tape = null, idx = 0, busy = false;
+  const fmt = s => { s = Math.max(0, Math.floor(s || 0)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  const fmt2 = s => { s = Math.max(0, Math.floor(s || 0)); return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
+
+  function lcd(a, b) {
+    l1.textContent = a;
+    l2.innerHTML = '<span></span>'; l2.firstChild.textContent = b;
+    requestAnimationFrame(() => {
+      const over = l2.firstChild.scrollWidth - l2.clientWidth;
+      l2.classList.toggle('run', over > 4);
+      l2.style.setProperty('--shift', `-${over + 8}px`);
+    });
   }
-  box.innerHTML = `<button type="button" aria-label="낭독 영상 재생"><img src="https://i.ytimg.com/vi/${id}/maxresdefault.jpg" alt="" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'"><span class="play"></span></button>`;
-  box.querySelector('button').addEventListener('click', () => {
-    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="낭독 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-  }, { once: true });
+  function enable(on) { $$('.ctrl button, #seek').forEach(b => b.disabled = !on); }
+  function renderList() {
+    if (!tape || tape === 'reading') { list.hidden = true; return; }
+    list.hidden = false;
+    list.innerHTML = TAPES.songs.tracks.map((x, i) => `<li><button type="button" data-i="${i}" aria-current="${i === idx}"><span class="n">${String(i + 1).padStart(2, '0')}</span><span>${x.t}</span><span class="d">${fmt(x.d)}</span></button></li>`).join('');
+  }
+  list.addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (b) load(+b.dataset.i, true); });
+
+  function load(i, play) {
+    const T = TAPES[tape]; idx = (i + T.tracks.length) % T.tracks.length;
+    const x = T.tracks[idx];
+    au.src = x.s; au.load();
+    lcd(T.label + (T.tracks.length > 1 ? `  ${String(idx + 1).padStart(2, '0')}/${String(T.tracks.length).padStart(2, '0')}` : ''), x.t);
+    renderList();
+    if ('mediaSession' in navigator) navigator.mediaSession.metadata = new MediaMetadata({ title: x.t, artist: '우당로', album: '주먹 쥔 손으로 쓰다듬지 못해서' });
+    if (play) au.play().catch(() => {});
+  }
+
+  /* 넣기 · 꺼내기 */
+  function fly(fromEl, toEl, src, done) {
+    const a = fromEl.getBoundingClientRect(), b = toEl.getBoundingClientRect();
+    const f = document.createElement('div'); f.className = 'flyer';
+    f.style.cssText = `left:${a.left}px;top:${a.top}px;width:${a.width}px`;
+    f.innerHTML = `<img src="${src}" alt="">`; document.body.appendChild(f);
+    const sx = b.width * 1.12 / a.width;
+    const tx = b.left + b.width / 2 - (a.left + a.width * sx / 2), ty = b.top + b.height / 2 - (a.top + f.offsetHeight * sx / 2);
+    const anim = f.animate([{ transform: 'none' }, { transform: `translate(${tx}px,${ty - 30}px) scale(${sx * 1.05})`, offset: .7 }, { transform: `translate(${tx}px,${ty}px) scale(${sx})` }],
+      { duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 650, easing: 'cubic-bezier(.3,.7,.2,1)' });
+    anim.onfinish = () => { f.remove(); done && done(); };
+  }
+  function insert(key, fromEl) {
+    if (busy) return;
+    if (tape === key) { au.paused ? au.play() : null; return; }
+    const go = () => {
+      busy = true;
+      const el = fromEl || document.querySelector(`.tape[data-tape="${key}"]`);
+      el.classList.add('gone');
+      fly(el, slot, TAPES[key].img, () => {
+        busy = false; tape = key;
+        slot.querySelector('img').src = TAPES[key].img; slot.classList.add('full');
+        enable(true); $('#empty').hidden = true;
+        load(0, true);
+      });
+    };
+    if (tape) eject(go); else go();
+  }
+  function eject(after) {
+    if (!tape) { after && after(); return; }
+    const old = tape; au.pause(); au.removeAttribute('src'); au.load();
+    radio.classList.remove('playing'); slot.classList.remove('full'); tape = null;
+    const el = document.querySelector(`.tape[data-tape="${old}"]`);
+    busy = true;
+    fly(slot, el, TAPES[old].img, () => { el.classList.remove('gone'); busy = false; after && after(); });
+    lcd('TAPE —', '카세트를 넣어 주세요'); l3.textContent = '00:00 / 00:00';
+    enable(false); list.hidden = true; $('#empty').hidden = false; seek.value = 0; seek.style.setProperty('--p', '0%');
+  }
+
+  function key(k, btn) {
+    if (btn) { btn.classList.add('down'); setTimeout(() => btn.classList.remove('down'), 160); }
+    if (k === 'eject') return eject();
+    if (!tape) { lcd('TAPE —', '카세트를 먼저 넣어 주세요'); return; }
+    if (k === 'play') au.play().catch(() => {});
+    if (k === 'pause') au.pause();
+    if (k === 'toggle') au.paused ? au.play().catch(() => {}) : au.pause();
+    if (k === 'stop') { au.pause(); au.currentTime = 0; }
+    if (k === 'ff') { if (TAPES[tape].tracks.length > 1) load(idx + 1, true); else au.currentTime = Math.min(au.duration || 0, au.currentTime + 10); }
+    if (k === 'rew') { if (au.currentTime > 3 || TAPES[tape].tracks.length === 1) au.currentTime = Math.max(0, au.currentTime - (TAPES[tape].tracks.length === 1 ? 10 : 999)); else load(idx - 1, true); }
+  }
+  $$('[data-k]').forEach(b => b.addEventListener('click', () => key(b.dataset.k, b.closest('.keys') ? b : null)));
+  $('#ejectBtn').addEventListener('click', () => eject());
+
+  au.addEventListener('play', () => { radio.classList.add('playing'); $('#tg').innerHTML = '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>'; $('[data-k="toggle"]').setAttribute('aria-label', '일시정지'); });
+  au.addEventListener('pause', () => { radio.classList.remove('playing'); $('#tg').innerHTML = '<path d="M7 4l13 8-13 8z"/>'; $('[data-k="toggle"]').setAttribute('aria-label', '재생'); });
+  au.addEventListener('ended', () => { if (tape === 'songs') load(idx + 1, idx + 1 < TAPES.songs.tracks.length); });
+  au.addEventListener('timeupdate', () => {
+    const d = au.duration || (tape ? TAPES[tape].tracks[idx].d : 0), c = au.currentTime;
+    $('#cur').textContent = fmt(c); $('#dur').textContent = fmt(d); l3.textContent = `${fmt2(c)} / ${fmt2(d)}`;
+    if (!seek.matches(':active')) { const p = d ? c / d * 1000 : 0; seek.value = p; seek.style.setProperty('--p', p / 10 + '%'); }
+  });
+  seek.addEventListener('input', () => { const d = au.duration || 0; seek.style.setProperty('--p', seek.value / 10 + '%'); if (d) au.currentTime = seek.value / 1000 * d; });
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.setActionHandler('previoustrack', () => key('rew'));
+    navigator.mediaSession.setActionHandler('nexttrack', () => key('ff'));
+  }
+
+  /* 끌어다 넣기 */
+  $$('.tape').forEach(el => {
+    let sx, sy, ghost = null, moved = false;
+    el.addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; moved = false; el.setPointerCapture(e.pointerId); });
+    el.addEventListener('pointermove', e => {
+      if (sx === undefined) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      if (!moved && Math.hypot(dx, dy) < 8) return;
+      if (!moved) {
+        moved = true; const r = el.getBoundingClientRect();
+        ghost = document.createElement('div'); ghost.className = 'flyer';
+        ghost.style.cssText = `left:${r.left}px;top:${r.top}px;width:${r.width}px`;
+        ghost.innerHTML = `<img src="${TAPES[el.dataset.tape].img}" alt="">`; document.body.appendChild(ghost);
+        el.style.opacity = .15;
+      }
+      ghost.style.transform = `translate(${dx}px,${dy}px) rotate(${Math.max(-8, Math.min(8, dx / 30))}deg)`;
+      const rr = radio.getBoundingClientRect();
+      radio.classList.toggle('over', e.clientX > rr.left && e.clientX < rr.right && e.clientY > rr.top && e.clientY < rr.bottom);
+    });
+    const up = e => {
+      if (sx === undefined) return; sx = undefined;
+      const hit = radio.classList.contains('over'); radio.classList.remove('over');
+      if (ghost) { ghost.remove(); ghost = null; el.style.opacity = ''; }
+      if (!moved || hit) insert(el.dataset.tape, el);
+    };
+    el.addEventListener('pointerup', up);
+    el.addEventListener('pointercancel', () => { sx = undefined; if (ghost) { ghost.remove(); ghost = null; el.style.opacity = ''; } radio.classList.remove('over'); });
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); insert(el.dataset.tape, el); } });
+    el.addEventListener('click', e => e.preventDefault());
+  });
 })();
 </script>
 </body>
