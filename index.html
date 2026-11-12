@@ -25,8 +25,8 @@ body{background:var(--k);overflow-x:hidden}
   grid-template-rows:minmax(0,1fr) 25% 31%;
   grid-template-areas:"L img y R" "L band band R" "bot bot bot bot";
   background:var(--k)}
-.L{grid-area:L;background:var(--y);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1vh 0}
-.L span{font-family:var(--jp);font-weight:900;font-size:min(13vw,9.6svh);line-height:1.02;color:var(--k)}
+.L{grid-area:L;position:relative;background:var(--y);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1vh 0}
+.L>span{font-family:var(--jp);font-weight:900;font-size:min(13vw,9.6svh);line-height:1.02;color:var(--k)}
 .img{grid-area:img;position:relative;overflow:hidden;background:var(--r)}
 .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
 .img .hdr{position:absolute;left:.4vw;top:.2vh;width:calc(100% - .8vw);height:12%}
@@ -60,15 +60,17 @@ a.go{transition:filter .15s}
 a.go:hover{filter:brightness(1.12)}
 a.go:hover .fit text{fill:var(--r)}
 .R.go:hover .big{color:var(--y)}
-.music{position:absolute;left:.5vw;top:.7vh;z-index:3;max-width:15vw;flex-wrap:wrap;font-family:var(--wide);font-stretch:62%;font-weight:900;font-size:12px;letter-spacing:.04em;color:var(--y);background:var(--k);padding:.25em .5em;display:flex;gap:.2em .8em}
+.music{position:absolute;left:.5vw;bottom:.7vh;z-index:3;max-width:15vw;flex-wrap:wrap;font-family:var(--wide);font-stretch:62%;font-weight:900;font-size:12px;letter-spacing:.04em;color:var(--y);background:var(--k);padding:.25em .5em;display:flex;gap:.2em .8em}
 .music button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
 .music button:hover{color:#fff}
+.insta{position:absolute;left:.5vw;top:.7vh;z-index:3;font-family:var(--wide);font-stretch:62%;font-weight:900;font-size:clamp(13px,1.15vw,17px);letter-spacing:.04em;color:#fff;background:var(--r);padding:.2em .5em;text-decoration:none;line-height:1.1}
+.insta:hover{background:var(--b)}
 
 @media (max-aspect-ratio:4/5){
   .poster{height:auto;min-height:0;grid-template-columns:1fr 1fr;grid-template-rows:auto 56vw auto auto auto;
     grid-template-areas:"L L" "img img" "band band" "R y" "bot bot"}
   .L{flex-direction:row;padding:2vw 0}
-  .L span{font-size:15vw}
+  .L>span{font-size:15vw}
   .R{padding:3vw 0;flex-direction:column}
   .R .big{flex-direction:row;font-size:20vw}
   .R small{font-size:3.4vw}
@@ -82,13 +84,15 @@ a.go:hover .fit text{fill:var(--r)}
   .b2 .listen .jp{font-size:5vw}
   .b3 .game{height:30vw;flex:none}
   .b3 .buy{height:auto;gap:3vw;font-size:3.8vw;padding:4vw}
-  .music{position:relative;left:auto;top:auto;max-width:none;grid-column:1/-1;justify-self:end;margin:3vw;font-size:13px}
+  .L{padding:9vw 0 11vw}
+  .insta{left:2vw;top:2vw;font-size:13px}
+  .music{left:auto;right:2vw;bottom:2vw;max-width:none;font-size:12px}
 }
 </style>
 </head>
 <body>
 <main class="poster">
-  <div class="L" aria-hidden="true"><span>撫</span><span>で</span><span>ら</span><span>れ</span><span>ぬ</span><span>手</span></div>
+  <div class="L"><a class="insta" href="https://www.instagram.com/woodang_ro/" target="_blank" rel="noopener">INSTAGRAM @woodang_ro</a><span aria-hidden="true">撫</span><span aria-hidden="true">で</span><span aria-hidden="true">ら</span><span aria-hidden="true">れ</span><span aria-hidden="true">ぬ</span><span aria-hidden="true">手</span><div class="music" id="music"><span id="pt">♪</span><button type="button" id="pp">PLAY 再生</button><button type="button" id="pn">NEXT 次</button></div></div>
 
   <div class="img">
     <img src="img/hub/main.jpg" alt="안은 두 사람을 그린 흑백 삽화를 빨강·노랑으로 바꾼 그림">
@@ -136,7 +140,6 @@ a.go:hover .fit text{fill:var(--r)}
       </div>
     </div>
   </div>
-  <div class="music" id="music"><span id="pt">♪</span><button type="button" id="pp">PLAY 再生</button><button type="button" id="pn">NEXT 次</button></div>
 </main>
 
 <script src="hub-fit.js"></script>
