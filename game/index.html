@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+JP:wght@500;900&family=Noto+Sans+KR:wght@900&family=DotGothic16&display=swap">
 <link rel="stylesheet" href="../hub.css">
 <style>
+.view{position:fixed;inset:0;overflow:hidden}
 html,body{height:100%;margin:0;background:#86a1ad;overflow:hidden}
 .desk{position:absolute;background:url(../img/hub/game.jpg) center/100% 100% no-repeat}
 .crt{position:absolute;left:39.6%;top:17.6%;width:27%;height:34.6%;border-radius:2.2% / 3%;overflow:hidden;background:#0d1a17;color:#d7ffe8;font-family:"DotGothic16",var(--jp);padding:4% 5%;display:flex;flex-direction:column;gap:3%;font-size:clamp(9px,1.1vw,20px);line-height:1.25;text-shadow:0 0 6px rgba(140,255,200,.55)}
@@ -45,7 +46,7 @@ html,body{height:100%;margin:0;background:#86a1ad;overflow:hidden}
 <body>
 <a class="back" href="../">← 遇當路 HOME</a>
 <div class="sign" aria-hidden="true"><span class="en">FLASH GAME</span><span class="jp">ゲーム</span></div>
-<div class="desk" id="desk">
+<div class="view" id="view"><div class="desk" id="desk">
   <div class="crt" role="navigation" aria-label="게임 선택">
     <h1>SELECT GAME</h1>
     <div class="sub">ゲームを選んでください · 遊戲選擇</div>
@@ -55,7 +56,7 @@ html,body{height:100%;margin:0;background:#86a1ad;overflow:hidden}
     </ul>
     <div class="ins">INSERT TICKET <span class="blink">■</span></div>
   </div>
-</div>
+</div></div>
 <div class="tickets">
   <a class="tk" href="../test/" aria-label="심리테스트">
     <span class="top">THE CLENCHED HAND GENERATION</span><span class="blk"></span><span class="bars"></span>
@@ -71,7 +72,7 @@ html,body{height:100%;margin:0;background:#86a1ad;overflow:hidden}
   const AR = 2400 / 1435, SX = .531, SY = .35;
   const desk = document.getElementById('desk');
   function place() {
-    const vw = innerWidth, vh = innerHeight;
+    const v = document.getElementById('view'), vw = v.clientWidth, vh = v.clientHeight;
     let W = Math.max(vw, vh * AR);
     if (W * .36 > vw) W = vw / .36;
     const H = W / AR;

@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+JP:wght@500;900&family=Noto+Sans+KR:wght@900&display=swap">
 <link rel="stylesheet" href="../hub.css">
 <style>
+.view{position:fixed;inset:0;overflow:hidden}
 html,body{height:100%;margin:0;background:#000;overflow:hidden}
 .hall{position:absolute;background:url(../img/hub/cinema.jpg) center/100% 100% no-repeat}
 .screen{position:absolute;left:21.3%;top:18.7%;width:52.6%;height:33.7%;display:flex;justify-content:center;align-items:stretch;background:#d9d9d6;box-shadow:0 0 6vw rgba(200,210,255,.18)}
@@ -31,7 +32,7 @@ html,body{height:100%;margin:0;background:#000;overflow:hidden}
 <body>
 <a class="back" href="../">← 遇當路 HOME</a>
 <div class="sign" aria-hidden="true"><span class="en">CINEMA</span><span class="han">映畫館</span></div>
-<div class="hall" id="hall">
+<div class="view" id="view"><div class="hall" id="hall">
   <div class="screen">
     <div class="frame" id="frame">
       <button class="poster" id="play" type="button" aria-label="낭독 영상 재생">
@@ -41,14 +42,14 @@ html,body{height:100%;margin:0;background:#000;overflow:hidden}
       </button>
     </div>
   </div>
-</div>
+</div></div>
 <p class="ticket"><b>SCREEN 1 · 朗讀 READING</b><br>握った拳では撫でられなくて — 長編小説『주먹 쥔 손으로 쓰다듬지 못해서』より</p>
 <script>
 (() => {
   const VIDEO = 'EZ1Y6_AgRxo', AR = 2400 / 1584, SX = .477, SY = .355;
   const hall = document.getElementById('hall');
   function place() {
-    const vw = innerWidth, vh = innerHeight;
+    const v = document.getElementById('view'), vw = v.clientWidth, vh = v.clientHeight;
     let W = Math.max(vw, vh * AR);
     if (W * .6 > vw) W = vw / .6;          // 스크린이 화면 밖으로 나가지 않게
     const H = W / AR;
