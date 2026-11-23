@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ask. — 우당로</title>
+<meta name="description" content="초원 한가운데 컴퓨터 한 대. 무엇이든 물어보세요.">
+<meta property="og:title" content="ask.">
+<meta property="og:description" content="초원 한가운데 컴퓨터 한 대. 무엇이든 물어보세요.">
+<meta property="og:image" content="https://woodangro.kr/ask/poster.jpg">
+<meta property="og:url" content="https://woodangro.kr/ask/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: 말없는 초원, 한가운데 컴퓨터 한 대
+   IDEA: 오래된 운영체제의 시스템 메시지 창
+   PICTURE: 화면 전체를 덮는 바람 부는 풀밭 영상
+   COLOUR and TYPE: 풀빛 그대로, 창은 회색 베벨 + 남색 제목줄 / IBM Plex Mono, Archivo Black
+   LAYOUT: 풀스크린 영상, 우상단 언어 전환 하나, 클릭 시 가운데 창 */
+:root{color-scheme:light}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0;height:100%;overflow:hidden;background:#6f7a2c}
+body{font:15px/1.5 "IBM Plex Mono","Noto Sans KR",monospace}
+.field{position:fixed;inset:0}
+.field img,.field video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hot{position:absolute;background:none;border:0;padding:0;cursor:pointer;border-radius:6px}
+.hot:focus-visible{outline:1px dashed rgba(255,255,255,.8);outline-offset:6px}
+.lang{position:fixed;top:max(14px,env(safe-area-inset-top));right:16px;z-index:3;display:flex;gap:2px;font:600 12px "IBM Plex Mono",monospace}
+.lang button{all:unset;cursor:pointer;padding:8px 6px;color:rgba(255,255,255,.55);text-shadow:0 1px 2px rgba(0,0,0,.35);letter-spacing:.04em}
+.lang button[aria-pressed=true]{color:#fff}
+.lang button:focus-visible{outline:1px solid #fff}
+.lang span{color:rgba(255,255,255,.35);padding:8px 0}
+/* system window */
+.win{position:fixed;z-index:5;left:50%;top:50%;width:min(460px,calc(100vw - 24px));transform:translate(-50%,-50%);
+ background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:inset -1px -1px #808080,inset 1px 1px #dfdfdf,4px 6px 0 rgba(0,0,0,.18);display:none}
+.win.on{display:block;animation:pop .14s steps(2)}
+@keyframes pop{from{transform:translate(-50%,-48%) scale(.96)}to{transform:translate(-50%,-50%)}}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#000a8c;color:#fff;margin:3px;padding:4px 4px 4px 10px;font-weight:600;cursor:move;user-select:none;touch-action:none}
+.x{all:unset;width:24px;height:22px;display:grid;place-items:center;background:#c0c0c0;color:#000;cursor:pointer;
+ border:2px solid;border-color:#fff #404040 #404040 #fff;font:600 15px/1 "IBM Plex Mono",monospace}
+.x:active{border-color:#404040 #fff #fff #404040}
+.log{margin:10px 12px 0;height:min(240px,40vh);overflow-y:auto;padding:10px 12px;background:#c0c0c0;font-size:14px}
+.log p{margin:0 0 10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.log .me{color:#303030}
+.log .me::before{content:"> "}
+.log .sys{color:#000}
+.log .big{font:clamp(26px,7vw,36px)/1 "Archivo Black",sans-serif;letter-spacing:-.02em;margin:4px 0 6px}
+.log .big span+span{margin-left:.7em}
+.log .dots::after{content:"";animation:dots 1s steps(4) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+.in{margin:8px 12px 0;display:flex}
+.in input{flex:1;font:16px "IBM Plex Mono","Noto Sans KR",monospace;padding:6px 8px;background:#fff;color:#000;border:2px solid;border-color:#404040 #fff #fff #404040;outline:0;border-radius:0}
+.btns{display:flex;justify-content:center;gap:14px;padding:16px 12px 18px}
+.btn{all:unset;min-width:108px;height:34px;text-align:center;line-height:30px;cursor:pointer;background:#c0c0c0;color:#000;
+ border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:inset -1px -1px #808080;font:15px "IBM Plex Mono","Noto Sans KR",monospace}
+.btn:active{border-color:#404040 #fff #fff #404040;box-shadow:inset 1px 1px #808080}
+.btn:focus-visible{outline:1px dotted #000;outline-offset:-6px}
+@media(prefers-reduced-motion:reduce){.win.on{animation:none}}
+</style>
+</head>
+<body>
+<div class="field" id="field">
+ <video id="vid" muted loop playsinline autoplay preload="auto" poster="poster.jpg"><source type="video/webm" src="field.webm"><source type="video/mp4" src="field.mp4"></video>
+ <button class="hot" id="hot" type="button" aria-haspopup="dialog"></button>
+</div>
+
+<div class="lang" role="group" aria-label="Language">
+ <button type="button" data-l="ko" aria-pressed="true">KO</button><span>/</span><button type="button" data-l="en" aria-pressed="false">EN</button>
+</div>
+
+<div class="win" id="win" role="dialog" aria-modal="false" aria-labelledby="ttl">
+ <div class="bar" id="bar"><span id="ttl">System message</span><button class="x" id="x" type="button" aria-label="Close">×</button></div>
+ <div class="log" id="log" aria-live="polite"></div>
+ <form class="in" id="form" autocomplete="off"><input id="q" maxlength="80"></form>
+ <div class="btns"><button class="btn" id="ok" type="button">Ok</button><button class="btn" id="cancel" type="button">Cancel</button></div>
+</div>
+
+<script>
+{
+// machine position in the source frame (fractions of width/height)
+const SRC={w:2752,h:1536},BOX={x0:.425,x1:.648,y0:.535,y1:.845};
+const T={
+ ko:{hot:"컴퓨터에게 묻기",ph:"질문을 적어주세요",ok:"확인",cancel:"취소",hello:"무엇이든 물어보세요.",empty:"질문이 비어 있습니다."},
+ en:{hot:"Ask the computer",ph:"Type your question",ok:"Ok",cancel:"Cancel",hello:"Ask anything.",empty:"The question is empty."}
+};
+let lang=(navigator.language||"ko").slice(0,2)==="ko"?"ko":"en";try{lang=localStorage.getItem("ask-lang")||lang}catch(e){}
+const $=id=>document.getElementById(id);
+const field=$("field"),hot=$("hot"),win=$("win"),log=$("log"),q=$("q"),vid=$("vid");
+let busy=false,greeted=false;
+
+function place(){
+ const W=innerWidth,H=innerHeight,s=Math.max(W/SRC.w,H/SRC.h),dw=SRC.w*s,dh=SRC.h*s,ox=(W-dw)/2,oy=(H-dh)/2;
+ const pad=Math.max(0,22-(BOX.x1-BOX.x0)*dw/2);
+ hot.style.left=ox+BOX.x0*dw-pad+"px";hot.style.top=oy+BOX.y0*dh-pad+"px";
+ hot.style.width=(BOX.x1-BOX.x0)*dw+pad*2+"px";hot.style.height=(BOX.y1-BOX.y0)*dh+pad*2+"px";
+}
+addEventListener("resize",place);place();
+
+const items=[];
+function setLang(l){lang=T[l]?l:"ko";document.documentElement.lang=lang;try{localStorage.setItem("ask-lang",lang)}catch(e){}
+ document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===lang));
+ const t=T[lang];hot.setAttribute("aria-label",t.hot);q.placeholder=t.ph;$("ok").textContent=t.ok;$("cancel").textContent=t.cancel;render();}
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.l)));
+setLang(lang);
+
+function render(){const t=T[lang];log.innerHTML="";
+ for(const it of items){const p=document.createElement("p");
+  if(it.k==="me"){p.className="me";p.textContent=it.text}
+  else if(it.k==="wait"){p.className="sys dots"}
+  else if(it.k==="ans"){const r=ANS[it.i],a=[r[0],r[1],lang==="ko"?r[2]:r[3]];p.className="sys";const big=document.createElement("div");big.className="big";
+   a.slice(0,2).forEach(x=>{const sp=document.createElement("span");sp.textContent=x;big.appendChild(sp)});p.appendChild(big);p.appendChild(document.createTextNode(a[2]))}
+  else{p.className="sys";p.textContent=t[it.k]}
+  log.appendChild(p)}
+ log.scrollTop=log.scrollHeight}
+function open(){win.classList.add("on");if(!greeted){items.push({k:"hello"});greeted=true;render()}setTimeout(()=>q.focus(),30)}
+function close(){win.classList.remove("on");hot.focus()}
+const ANS={
+ yes:["ye","s","그래.","Yes."],no:["n","o","아니.","No."],maybe:["may","be","어쩌면.","Maybe."],likely:["lik","ely","아마 그럴 거야.","Most likely."],
+ doubt:["dou","bt","글쎄, 아닐 것 같아.","Doubtful."],sure:["su","re","물론이지.","Of course."],never:["nev","er","절대 아니야.","Never."],unclear:["fo","g","아직 안개 속이야.","Still in the fog."],
+ soon:["so","on","곧.","Soon."],notyet:["not","yet","아직은 아니야.","Not yet."],today:["to","day","오늘.","Today."],later:["la","ter","나중에.","Later."],
+ season:["next","season","다음 계절에.","Next season."],someday:["some","day","언젠가.","Someday."],now:["n","ow","지금.","Right now."],wait:["wa","it","조금 기다려.","Wait a little."],
+ go:["g","o","가도 돼.","Go ahead."],stop:["st","op","멈춰.","Stop."],tryit:["tr","y","해봐.","Try it."],rest:["re","st","먼저 쉬어.","Rest first."],
+ letgo:["let","go","놓아줘.","Let it go."],begin:["beg","in","시작해.","Begin."],slow:["slo","w","천천히.","Slowly."],alone:["al","one","혼자 해봐.","Do it alone."],
+ ask:["as","k","직접 물어봐.","Ask them directly."],same:["sa","me","같은 마음이야.","They feel the same."],honest:["hon","est","솔직하게 말해.","Be honest."],distance:["dist","ance","거리를 둬.","Keep your distance."]
+};
+const POOLS={
+ time:["soon","notyet","today","later","season","someday","now","wait"],
+ heart:["yes","no","maybe","same","ask","honest","letgo","distance","notyet","wait"],
+ act:["go","wait","stop","tryit","rest","letgo","begin","slow","alone","notyet"],
+ yn:["yes","no","maybe","likely","doubt","sure","never","unclear","soon","notyet"]
+};
+const RULES=[
+ ["time",/언제|몇\s*(시|일|월|년|번)|얼마나|며칠|몇\s*달|when|how long|how soon|what time/i],
+ ["heart",/사랑|좋아하|좋아해|마음|연락|고백|헤어|재회|그\s?사람|걔|그\s?애|썸|연애|love|like me|crush|text me|call me|feel/i],
+ ["act",/할까|해야|갈까|말까|살까|볼까|그만|시작|도전|해도\s*(돼|될)|괜찮을까|should|shall|try|quit|start|stop|go to/i]
+];
+function hash(str){let h=2166136261;for(const c of str){h^=c.codePointAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function pick(q){const norm=q.toLowerCase().replace(/[\s?!.,~…]+/g,"");
+ const kind=(RULES.find(([,re])=>re.test(q))||["yn"])[0],pool=POOLS[kind];
+ const d=new Date(),day=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
+ return pool[hash(norm+"|"+day)%pool.length]}
+function ask(){if(busy)return;const v=q.value.trim();if(!v){items.push({k:"empty"});render();return}
+ busy=true;items.push({k:"me",text:v});const w={k:"wait"};items.push(w);q.value="";render();
+ setTimeout(()=>{items.splice(items.indexOf(w),1,{k:"ans",i:pick(v)});render();busy=false},1100);}
+hot.addEventListener("click",open);
+$("x").addEventListener("click",close);$("cancel").addEventListener("click",close);
+$("ok").addEventListener("click",ask);$("form").addEventListener("submit",e=>{e.preventDefault();ask()});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&win.classList.contains("on"))close()});
+
+// drag the window by its title bar
+{const bar=$("bar");let d=null;
+ bar.addEventListener("pointerdown",e=>{if(e.target.closest(".x"))return;const r=win.getBoundingClientRect();d={dx:e.clientX-r.left,dy:e.clientY-r.top};bar.setPointerCapture(e.pointerId)});
+ bar.addEventListener("pointermove",e=>{if(!d)return;const x=Math.min(Math.max(e.clientX-d.dx,0),innerWidth-win.offsetWidth),y=Math.min(Math.max(e.clientY-d.dy,0),innerHeight-40);
+  win.style.left=x+"px";win.style.top=y+"px";win.style.transform="none"});
+ bar.addEventListener("pointerup",()=>{d=null});}
+
+// video fades in once it can play; still image stays if it can't
+
+const tryPlay=()=>{if(!vid.paused)return;const p=vid.play();if(p)p.catch(()=>{})};
+vid.muted=true;
+tryPlay();
+addEventListener("pointerdown",tryPlay);document.addEventListener("visibilitychange",tryPlay);vid.addEventListener("canplay",tryPlay);
+}
+</script>
+</body>
+</html>
