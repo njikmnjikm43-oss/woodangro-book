@@ -25,7 +25,7 @@ body{background:var(--k);overflow-x:hidden}
   grid-template-rows:minmax(0,1fr) 25% 31%;
   grid-template-areas:"L img y R" "L band band R" "bot bot bot bot";
   background:var(--k)}
-.L{grid-area:L;position:relative;background:var(--y);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8.5vh 0 6vh}
+.L{grid-area:L;position:relative;background:var(--y);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(1.5vh + 7.2em) 0 6vh}
 .L>span{font-family:var(--jp);font-weight:900;font-size:min(13vw,8.4svh);line-height:1.02;color:var(--k)}
 .img{grid-area:img;position:relative;overflow:hidden;background:var(--r)}
 .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
@@ -86,7 +86,7 @@ a.go:hover .fit text{fill:var(--r)}
   .b2 .listen .jp{font-size:5vw}
   .b3 .game{height:30vw;flex:none}
   .b3 .buy{height:auto;gap:3vw;font-size:3.8vw;padding:4vw}
-  .L{padding:9vw 0 11vw}
+  .L{padding:calc(2vw + 52px) 0 11vw}
   .links{left:2vw;right:2vw;top:2vw;flex-direction:row;flex-wrap:wrap;font-size:13px}
   .music{left:auto;right:2vw;bottom:2vw;max-width:none;font-size:12px}
 }
