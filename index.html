@@ -67,6 +67,8 @@ a.go:hover .fit text{fill:var(--r)}
 .insta:hover{background:var(--b)}
 .insta.zine{top:calc(.7vh + 1.75em);background:var(--b)}
 .insta.zine:hover{background:var(--r)}
+.insta.ask{top:calc(.7vh + 3.5em);background:var(--r)}
+.insta.ask:hover{background:var(--b)}
 
 @media (max-aspect-ratio:4/5){
   .poster{height:auto;min-height:0;grid-template-columns:1fr 1fr;grid-template-rows:auto 56vw auto auto auto;
@@ -89,13 +91,14 @@ a.go:hover .fit text{fill:var(--r)}
   .L{padding:9vw 0 11vw}
   .insta{left:2vw;top:2vw;font-size:13px}
   .insta.zine{left:auto;right:2vw;top:2vw}
+  .insta.ask{left:auto;right:2vw;top:calc(2vw + 2em)}
   .music{left:auto;right:2vw;bottom:2vw;max-width:none;font-size:12px}
 }
 </style>
 </head>
 <body>
 <main class="poster">
-  <div class="L"><a class="insta" href="https://www.instagram.com/woodang_ro/" target="_blank" rel="noopener">INSTAGRAM @woodang_ro</a><a class="insta zine" href="https://zine.woodangro.kr/">ZINE 紙面 →</a><span aria-hidden="true">撫</span><span aria-hidden="true">で</span><span aria-hidden="true">ら</span><span aria-hidden="true">れ</span><span aria-hidden="true">ぬ</span><span aria-hidden="true">手</span><div class="music" id="music"><span id="pt">♪</span><button type="button" id="pp">PLAY 再生</button><button type="button" id="pn">NEXT 次</button></div></div>
+  <div class="L"><a class="insta" href="https://www.instagram.com/woodang_ro/" target="_blank" rel="noopener">INSTAGRAM @woodang_ro</a><a class="insta zine" href="https://zine.woodangro.kr/">ZINE 紙面 →</a><a class="insta ask" href="ask/">ASK 問 →</a><span aria-hidden="true">撫</span><span aria-hidden="true">で</span><span aria-hidden="true">ら</span><span aria-hidden="true">れ</span><span aria-hidden="true">ぬ</span><span aria-hidden="true">手</span><div class="music" id="music"><span id="pt">♪</span><button type="button" id="pp">PLAY 再生</button><button type="button" id="pn">NEXT 次</button></div></div>
 
   <div class="img">
     <img src="img/hub/main.jpg" alt="안은 두 사람을 그린 흑백 삽화를 빨강·노랑으로 바꾼 그림">
